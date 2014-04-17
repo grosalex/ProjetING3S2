@@ -8,7 +8,7 @@ public class Window extends JFrame{
 	private JPanel left_panel=new JPanel();
 	private JPanel rightJPanel=new JPanel();
 	private JSplitPane main_split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,left_panel,rightJPanel);
-	private Menue menue = new Menue();
+	private Menu menue = new Menu();
 	public Window(){
 		this.setTitle("Projet ING3 Semestre 2");
 		this.setSize(800,600);		
