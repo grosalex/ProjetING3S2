@@ -1,0 +1,17 @@
+package View;
+
+import javax.activation.MailcapCommandMap;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class PopupAddDoctor extends PopupAddPerson{
+	protected JLabel label_speciality = new JLabel("speciality:");
+	protected JTextField speciality = new JTextField();
+	public PopupAddDoctor() {
+		this.main_panel.add(label_speciality);
+		this.main_panel.add(speciality);
+		
+		this.main_panel.add(second_panel);
+		this.add(this.main_panel);
+	}
+}

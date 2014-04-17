@@ -38,8 +38,8 @@ public class Menu extends JMenuBar{
 		this.add_doctor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Popup add_popup = new Popup();
-				add_popup.setVisible(true);
+				PopupAddDoctor add_doctor = new PopupAddDoctor();
+				add_doctor.setVisible(true);
 				
 			}
 		});
@@ -47,16 +47,15 @@ public class Menu extends JMenuBar{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Stub de la méthode généré automatiquement
-				
+				PopupAddNurse add_nurse = new PopupAddNurse();
+				add_nurse.setVisible(true);
 			}
 		});
 		this.add_patient.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Stub de la méthode généré automatiquement
-				
+				PopupAddPatient add_patient = new PopupAddPatient();
+				add_patient.setVisible(true);
 			}
 		});
 		
@@ -72,8 +71,8 @@ public class Menu extends JMenuBar{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Stub de la méthode généré automatiquement
-				
+				PopupResearch research=new PopupResearch();
+				research.setVisible(true);
 			}
 		});
 		this.history.addActionListener(new ActionListener() {
