@@ -16,6 +16,13 @@ public class Menu extends JMenuBar{
 	private JMenuItem add_patient = new JMenuItem("patient");
 	private JMenuItem add_appointment = new JMenuItem("appointment");
 	private JMenuItem research = new JMenuItem("research (readonly)");
+	private JMenu request = new JMenu("available request");
+	
+	private JMenuItem maaf = new JMenuItem("MAAF");
+	private JMenuItem night_nurse = new JMenuItem("Nurse working at night");
+	private JMenuItem service_description = new JMenuItem("service description");
+//	private JMenuItem 
+	/// TODO faire le menu deroulant qui va bien pour les requetes
 	private JMenuItem history = new JMenuItem("history");
 	private JMenuItem personal_research =  new JMenuItem("personal research");
 	
@@ -113,12 +120,22 @@ public class Menu extends JMenuBar{
 				
 			}
 		});
+		this.request.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Stub de la méthode généré automatiquement
+				
+			}
+		});
+		
 		this.add.add(add_doctor);
 		this.add.add(add_nurse);
 		this.add.add(add_patient);
 		this.add.add(add_appointment);
 		this.file.add(add);
 		this.file.add(research);
+		this.file.add(request);
 		this.file.add(history);
 		this.file.add(personal_research);
 		this.file.add(exit);

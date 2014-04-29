@@ -27,6 +27,10 @@ public class RendezVous {
 		return patient;
 	}
 
+	/**
+	 * Fonction qui historisera un rdv
+	 * @return la commande à exécuter dans le contrôleur
+	 */
 	public String historise() {
 		return "UPDATE rdv "
 				+ "SET present=FALSE "
