@@ -13,6 +13,13 @@ public class Recherche {
      */
     public ArrayList<String> requetes = new ArrayList<String>();
 
+    /**
+     * constructeur
+     */
+    public Recherche(Connexion c)
+    {
+    	this.c=c;
+    }
 	
 	
 	/** methode pour chercher tous les types de donnees avec tous les champs initials des tables*/
