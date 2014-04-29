@@ -1,16 +1,16 @@
 package model;
 
-// =================== Classe d'ajout des différents champs dans la BD ===============
+// =================== Classe d'ajout des diffï¿½rents champs dans la BD ===============
 // Produit par Mr Marques William    Chef de Projet
 //                Bruneau Alexandre
-//                Bertrand Kévin
+//                Bertrand Kï¿½vin
 //                Bao Huanley
 //====================================================================================
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
-// ATTENTION : J'ai fait les diiférentes classes d'ajout , il ne manque plus que les listes
-// (j'ai déjà fait celle des personnes , je continuerai a faire les autres dans l'aprem et demain
-// Il me faudrait juste quelques précisions sur les rdv . 
+// ATTENTION : J'ai fait les diifï¿½rentes classes d'ajout , il ne manque plus que les listes
+// (j'ai dï¿½jï¿½ fait celle des personnes , je continuerai a faire les autres dans l'aprem et demain
+// Il me faudrait juste quelques prï¿½cisions sur les rdv . 
 
 // Dites moi ce que vous en pensez
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,14 +27,14 @@ import java.util.LinkedList;
 // creer l'objet personne et docteur avant . 
 
 /**
- * Classe qui regroupe les différentes méthodes d'ajout
+ * Classe qui regroupe les diffï¿½rentes mï¿½thodes d'ajout
  * @author BERTRAND , BRUNEAU , BAO , MARQUES
  *
  */
 public class Add {
 	Connection con=null;
 	Statement stmt = null;
-	// Pour créer l'obj connection pour notre exemple , a ne pas reporter
+	// Pour crï¿½er l'obj connection pour notre exemple , a ne pas reporter
 	public Add() {
 		try {
 			con = DriverManager.getConnection("");
@@ -78,7 +78,7 @@ public class Add {
 	
 	
 	/**
-	 * Méthode qui ajoute les champs d'une infirmiere dans la table infirmiere extends personne
+	 * Mï¿½thode qui ajoute les champs d'une infirmiere dans la table infirmiere extends personne
 	 * @param infirmier
 	 * @throws SQLException
 	 */
@@ -112,10 +112,10 @@ public class Add {
 	}
 	// A ne pas oublier dans personne , la collonne ID soit de type automatique
 	// ID MEDIUMINT NOT NULL AUTO_INCREMENT
-	// iD clé primaire faire le lien entre personne et doctor , ou NUMERO ??
+	// iD clï¿½ primaire faire le lien entre personne et doctor , ou NUMERO ??
 	
 	/**
-	 * Méthode qui ajoute les champs d'un membre du personnel dans la table personnel extends personne 
+	 * Mï¿½thode qui ajoute les champs d'un membre du personnel dans la table personnel extends personne 
 	 * @param personnel
 	 * @throws SQLException
 	 */
@@ -147,7 +147,7 @@ public class Add {
 	}
 	
 	/**
-	 * Méthode qui ajoute une personne dans la BD personne
+	 * Mï¿½thode qui ajoute une personne dans la BD personne
 	 * @param personne
 	 * @throws SQLException
 	 */
@@ -165,7 +165,7 @@ public class Add {
 			
 			// Insertion de la ligne dans la table.
 			int id = preparedStatement.executeUpdate();
-			personne.setID(id); // on a l'ID de la table personne , à vérifier.
+			personne.setID(id); // on a l'ID de la table personne , ï¿½ vï¿½rifier.
 			
 		}catch (SQLException e){
 			// A voir si on lance ou nouvelle exception
@@ -184,11 +184,11 @@ public class Add {
 	// Je continuerai demain pour faire la liste des docteurs , infirmiers , personnel
 	// Pour l'instant je ne fais que celle la. 
 	/**
-	 * Méthode qui renvoie la liste des personnes
+	 * Mï¿½thode qui renvoie la liste des personnes
 	 * @return personnes
 	 * @throws SQLException
 	 */
-	public LinkedList<Personne> selectAllPersonne() throws SQLException{
+	public Object [][] selectAllPersonne() throws SQLException{
 	LinkedList<Personne> personnes=new LinkedList<Personne>();
 	Statement statement=null;
 	try {
@@ -212,7 +212,15 @@ public class Add {
 			statement.close();
 		}
 	}
-	return personnes; // acces a toute la liste .
+	Object [][] data=new Object[personnes.size()][4];
+
+	for(int i=0;i<personnes.size();i++){
+		data[i][0]=personnes.get(i).getNom();
+		data[i][1]=personnes.get(i).getPrenom();
+		data[i][2]=personnes.get(i).getAdresse();
+		data[i][3]=personnes.get(i).getTelephone();
+	}
+	return data; // acces a toute la liste .
 	}
 	
 }

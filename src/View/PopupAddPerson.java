@@ -1,4 +1,4 @@
-package View;
+	package View;
 
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
@@ -21,11 +21,11 @@ public class PopupAddPerson extends JDialog{
 	private JLabel label_phone = new JLabel("Phone:");
 	private JLabel label_address = new JLabel("address:");
 
-	private JTextField surname= new JTextField();
-	private JTextField name = new JTextField();
-	private JTextField phone = new JTextField();
-	private JTextField address = new JTextField();
-	private JButton cancel = new JButton("cancel");
+	protected JTextField surname= new JTextField();
+	protected JTextField name = new JTextField();
+	protected JTextField phone = new JTextField();
+	protected JTextField address = new JTextField();
+	protected JButton cancel = new JButton("cancel");
 	protected JButton save = new JButton("save");
 	
 	public PopupAddPerson(){
