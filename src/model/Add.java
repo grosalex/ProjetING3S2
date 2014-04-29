@@ -37,7 +37,7 @@ public class Add {
 	// Pour cr�er l'obj connection pour notre exemple , a ne pas reporter
 	public Add() {
 		try {
-			con = DriverManager.getConnection("");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3305/abruneau","abruneau-rw","SQ3EdSFm");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
