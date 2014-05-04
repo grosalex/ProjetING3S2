@@ -20,9 +20,8 @@ public class PopupAddDoctor extends PopupAddPerson{
 		this.save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Add addition = new Add();
 				try{
-					addition.addDoctor(new Doctor(surname.getText(), name.getText(), phone.getText(), address.getText(), speciality.getText()));
+					Add.addDoctor(new Doctor(surname.getText(), name.getText(), phone.getText(), address.getText(), speciality.getText()));
 					
 				}catch(SQLException e){
 					System.out.println("SQL ISSU AT THE DOCTOR'S ADDITION");
