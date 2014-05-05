@@ -88,7 +88,7 @@ public class Connexion {
     }
 
     /**
-     * Méthode privée qui ajoute la requete de MAJ en parametre dans son ArrayList
+     * Méthode privee qui ajoute la requete de MAJ en parametre dans son ArrayList
      */
     private void ajouterRequeteMaj(String requete) {
         requetesMaj.add(requete);
@@ -180,16 +180,10 @@ public class Connexion {
     public void executeUpdate(String requeteMaj) throws SQLException {
         stmt.executeUpdate(requeteMaj);
     }
-
     // Recupere la connexion sql unique 
     public Connection getSqlConnection() {
     	return conn;
     }
-    // recupere l'instance .
-   public static Connexion getInstance1() {
-	   return instance;
-   }
-
     // recupere l'instance .
    public static Connexion getInstance() {
 	   return instance;

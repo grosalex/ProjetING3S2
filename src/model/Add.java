@@ -16,8 +16,6 @@ package model;
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,24 +32,10 @@ import connexion.Connexion;
  *
  */
 public class Add {
-	static Connection con=null;
-	Statement stmt = null;
-	// Pour crï¿½er l'obj connection pour notre exemple , a ne pas reporter
-	public Add(Connexion co) {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			try {
-				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/projet", "root", "1234");
-				stmt = con.createStatement();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		
+	
+	// ce cons ne peut etre appleé
+	
+	private Add() {
 	}
 	/**
 	 * Methode qui ajoute les champs d'un docteur dans la BD docteur
@@ -227,8 +211,8 @@ public class Add {
 	LinkedList<Personne> personnes=new LinkedList<Personne>();
 	Statement statement=null;
 	try {
-		 statement = con.createStatement();
-		 ResultSet result = statement.executeQuery("SELECT NOM,PRENOM,ADRESSE,TELEPHONE FROM DOCTEUR"); // pour docteur on fait une jointure
+		 statement = Connexion.getInstance().getSqlConnection().createStatement();
+		 ResultSet result = statement.executeQuery("SELECT ID,NOM,PRENOM,ADRESSE,TELEPHONE FROM PERSONNE"); // pour docteur on fait une jointure
 		 while (result.next()){
 			 int id=result.getInt("ID");
 			 String nom=result.getString("NOM");

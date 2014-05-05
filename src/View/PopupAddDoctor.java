@@ -20,7 +20,6 @@ public class PopupAddDoctor extends PopupAddPerson{
 		this.save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
 				try{
 					Add.addDoctor(new Doctor(surname.getText(), name.getText(), phone.getText(), address.getText(), speciality.getText()));
 					
