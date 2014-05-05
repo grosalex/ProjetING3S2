@@ -34,6 +34,8 @@ public class Connexion {
      * ArrayList public pour les requêtes de MAJ
      */
     public ArrayList<String> requetesMaj = new ArrayList<String>(); // liste des requêtes de MAJ
+    // permet de garder une ref � l'objet creer par constructeur 
+    private static Connexion instance;
 
     /**
      * Constructeur avec 4 paramètres : username et password ECE, login et password de la BDD
@@ -61,6 +63,8 @@ public class Connexion {
             remplirRequetes();
             remplirRequetesMaj();
         }
+        instance = this;
+        // initialise 
     }
 
     /**
@@ -177,11 +181,17 @@ public class Connexion {
         stmt.executeUpdate(requeteMaj);
     }
 
-	public Statement getStmt() {
-		return stmt;
-	}
+    // Recupere la connexion sql unique 
+    public Connection getSqlConnection() {
+    	return conn;
+    }
+    // recupere l'instance .
+   public static Connexion getInstance1() {
+	   return instance;
+   }
 
-	public Connection getConn() {
-		return conn;
-	}
+    // recupere l'instance .
+   public static Connexion getInstance() {
+	   return instance;
+   }
 }

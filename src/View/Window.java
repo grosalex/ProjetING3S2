@@ -51,7 +51,7 @@ public class Window extends JFrame{
 		String [] title= {"Nom","Prenom","Adresse","Telephone"}; 
 		Object [][] data = null;
 		try{
-			data = (new Add(ma_connection).selectAllPersonne());
+		 data = Add.selectAllPersonne();
 		}catch(SQLException e){
 			System.out.println("problem de sql");
 		}
