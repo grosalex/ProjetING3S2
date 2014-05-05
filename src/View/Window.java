@@ -1,5 +1,7 @@
 package View;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
@@ -21,14 +23,16 @@ public class Window extends JFrame{
 	private JTable main_table= null;
 	//private Connexion ma_connection= null;
 	public Window(){
-		
+
 		///Connection
 		try{
-			new Connexion("abruneau", "ab[0AB05", "abruneau-rw", "SQ3EdSFm");
-		}catch(SQLException e){
+			try {
+				new Connexion("abruneau", "ab[0AB05", "abruneau-rw", "SQ3EdSFm");
+			} catch(ClassNotFoundException e){
+				e.printStackTrace();
+			}
+		} catch(SQLException e){
 			System.out.println("Sql excption at connection");
-		}catch(ClassNotFoundException e){
-			e.printStackTrace();
 		}
 		this.setTitle("Projet ING3 Semestre 2");
 		this.setSize(800,600);		
@@ -36,7 +40,7 @@ public class Window extends JFrame{
 		//String [] title= {"Nom","Prenom","Adresse","Telephone"}; 
 		LinkedList<Personne> data = null;
 		try{
-		 data = Add.selectAllPersonne();
+			data = Add.selectAllPersonne();
 		}catch(SQLException e){
 			System.out.println("problem de sql");
 		}
@@ -46,12 +50,20 @@ public class Window extends JFrame{
 		this.add(main_split);
 		this.main_split.setResizeWeight(0.33);
 
-		
+
 		this.setVisible(true);
-	}
-	
-class MaTableModel extends DefaultTableModel {
 		
+		// pour fermer la fenetre
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent evt) {
+                System.exit(0); // tout fermer												System.exit(0); // tout fermer
+            }
+        });
+	}
+
+	class MaTableModel extends DefaultTableModel {
+
 		private LinkedList<Personne> list;
 		private LinkedList<String> colonnes = new LinkedList<String>();
 		public MaTableModel(LinkedList<Personne> list){
@@ -61,29 +73,29 @@ class MaTableModel extends DefaultTableModel {
 			colonnes.add("Téléphone");
 			colonnes.add("Adresse");
 		}
-		
+
 		@Override
 		public int getColumnCount() {
 			return colonnes.size();
 		}
-		
+
 		@Override
 		public String getColumnName(int index) {
 			return colonnes.get(index);
 		}
-		
+
 		@Override
 		public int getRowCount() {
 			if(list == null)
 				return 0;
 			return list.size();
 		}
-		
+
 		@Override
 		public boolean isCellEditable(int ligne, int colonne) {
 			return false;
 		}
-		
+
 		@Override
 		public Object getValueAt(int ligne, int colonne) {
 			Personne personne = list.get(ligne);
@@ -99,7 +111,7 @@ class MaTableModel extends DefaultTableModel {
 			}
 			return null;
 		}
-		
+
 	}
 
 }
