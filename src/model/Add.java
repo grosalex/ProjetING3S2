@@ -24,6 +24,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 
+import connexion.Connexion;
+
 // creer l'objet personne et docteur avant . 
 
 /**
@@ -35,13 +37,21 @@ public class Add {
 	Connection con=null;
 	Statement stmt = null;
 	// Pour cr�er l'obj connection pour notre exemple , a ne pas reporter
-	public Add() {
+	public Add(Connexion co) {
 		try {
-			con = DriverManager.getConnection("");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			Class.forName("com.mysql.jdbc.Driver");
+			try {
+				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/projet", "root", "1234");
+				stmt = con.createStatement();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 	// tu dois recup l'exception et afficher un message impossible de creer un docteur
 	/**
@@ -193,7 +203,7 @@ public class Add {
 	Statement statement=null;
 	try {
 		 statement = con.createStatement();
-		 ResultSet result = statement.executeQuery("SELECT NOM,PRENOM,ADRESSE,TELEPHONE FROM PERSONNE"); // pour docteur on fait une jointure
+		 ResultSet result = statement.executeQuery("SELECT NOM,PRENOM,ADRESSE,TELEPHONE FROM DOCTEUR"); // pour docteur on fait une jointure
 		 while (result.next()){
 			 String nom=result.getString("NOM");
 			 String prenom=result.getString("PRENOM");

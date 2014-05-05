@@ -176,4 +176,12 @@ public class Connexion {
     public void executeUpdate(String requeteMaj) throws SQLException {
         stmt.executeUpdate(requeteMaj);
     }
+
+	public Statement getStmt() {
+		return stmt;
+	}
+
+	public Connection getConn() {
+		return conn;
+	}
 }
