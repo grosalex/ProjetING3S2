@@ -3,17 +3,9 @@ package model;
 // =================== Classe d'ajout des differents champs dans la BD ===============
 // Produit par Mr Marques William    Chef de Projet
 //                Bruneau Alexandre
-//                Bertrand Kï¿½vin
+//                Bertrand Kevin
 //                Bao Huanley
 //====================================================================================
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-// ATTENTION : J'ai fait les diifï¿½rentes classes d'ajout , il ne manque plus que les listes
-// (j'ai dï¿½jï¿½ fait celle des personnes , je continuerai a faire les autres dans l'aprem et demain
-// Il me faudrait juste quelques prï¿½cisions sur les rdv . 
-
-// Dites moi ce que vous en pensez
-/////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 import java.sql.PreparedStatement;
@@ -32,23 +24,10 @@ import connexion.Connexion;
  *
  */
 public class Add {
-/*<<<<<<< HEAD
-	Connection con=null;
-	Statement stmt = null;
-	// Pour crï¿½er l'obj connection pour notre exemple , a ne pas reporter
-	public Add() {
-		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3305/abruneau","abruneau-rw","SQ3EdSFm");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-=======
 	
-	// ce cons ne peut etre appleï¿½
-	*/
+	// ce cons ne peut etre appleé
+	
 	private Add() {
-//>>>>>>> 2e4eeda77db9f0fdb7f5539540a194962d004c1b
 	}
 	/**
 	 * Methode qui ajoute les champs d'un docteur dans la BD docteur
@@ -56,7 +35,7 @@ public class Add {
 	 * @throws SQLException
 	 */
 	public static void addDoctor(Doctor doctor) throws SQLException {
-		addPersonne(doctor);
+		addEmploye(doctor,"doctor");
 		PreparedStatement preparedStatement=null;
 		String insertSQL= "INSERT INTO DOCTOR " 
 						+ "(ID_PERSONNE, SPECIALITE) VALUES"
@@ -89,7 +68,7 @@ public class Add {
 	 * @throws SQLException
 	 */
 	public static void addPatient(Patient patient) throws SQLException {
-		addPersonne(patient);
+		addPatient(patient);
 		PreparedStatement preparedStatement=null;
 		String insertSQL= "INSERT INTO PATIENT " 
 						+ "(ID_PERSONNE, MUTUELLE) VALUES"
@@ -121,7 +100,7 @@ public class Add {
 	 * @throws SQLException
 	 */
 	public static void addNurse(Infirmier infirmier) throws SQLException {
-		addPersonne(infirmier);
+		addEmploye(infirmier,"nurse");
 		PreparedStatement preparedStatement=null;
 		String insertSQL= "INSERT INTO INFIRMIER " 
 						+ "(ID_PERSONNE, CODE_SERVICE,ROTATION,SALAIRE) VALUES"
@@ -155,7 +134,7 @@ public class Add {
 	 * @throws SQLException
 	 */
 	public static void addPersonnel(Personnel personnel) throws SQLException {
-		addPersonne(personnel);
+		addEmploye(personnel,"employe");
 		PreparedStatement preparedStatement=null;
 		String insertSQL= "INSERT INTO PERSONNEL " 
 						+ "(ID_PERSONNE, METIER) VALUES"
@@ -186,13 +165,54 @@ public class Add {
 	 * @param personne
 	 * @throws SQLException
 	 */
-	public static void addPersonne(Personne personne) throws SQLException {
+	public static void addEmploye(Personne personne, String type) throws SQLException {
 		PreparedStatement preparedStatement=null;
-		String insertSQL= "INSERT INTO PERSONNE " 
+		String insertSQL="";
+		if (type=="doctor")
+		insertSQL= "INSERT INTO DOCTEUR"
 						+ "(NOM,PRENOM,TELEPHONE,ADRESSE) VALUES"
 						+ "(?,?,?,?)";
+		
+		else if(type=="nurse") {
+		insertSQL= "INSERT INTO INFIRMIER"
+					+ "(NOM,PRENOM,TELEPHONE,ADRESSE) VALUES"
+					+ "(?,?,?,?)";
+		}
+		else if(type=="employe")
+			insertSQL= "INSERT INTO EMPLOYEE"
+					+ "(NOM,PRENOM,TELEPHONE,ADRESSE) VALUES"
+					+ "(?,?,?,?)";
 		try{
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); // 
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement.setString(0, personne.getNom());
+			preparedStatement.setString(1, personne.getPrenom());
+			preparedStatement.setString(2, personne.getTelephone());
+			preparedStatement.setString(3, personne.getAdresse());
+			
+			// Insertion de la ligne dans la table.
+			int id = preparedStatement.executeUpdate();
+			personne.setID(id); // on a l'ID de la table personne , ï¿½ vï¿½rifier.
+			
+		}catch (SQLException e){
+			// A voir si on lance ou nouvelle exception
+			System.out.println(e.getMessage());
+		}
+		// meme en cas de pb on passe dans le finally
+		finally{
+			if (preparedStatement!=null){
+				preparedStatement.close();
+			}
+		}
+		
+	}
+	public static void addPatient(Personne personne) throws SQLException {
+		PreparedStatement preparedStatement=null;
+		String insertSQL= "INSERT INTO MALADE"
+						+ "(NOM,PRENOM,TELEPHONE,ADRESSE) VALUES"
+						+ "(?,?,?,?)";
+		
+		try{
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
 			preparedStatement.setString(0, personne.getNom());
 			preparedStatement.setString(1, personne.getPrenom());
 			preparedStatement.setString(2, personne.getTelephone());
@@ -225,7 +245,7 @@ public class Add {
 	Statement statement=null;
 	try {
 		 statement = Connexion.getInstance().getSqlConnection().createStatement();
-		 ResultSet result = statement.executeQuery("SELECT ID,NOM,PRENOM,ADRESSE,TELEPHONE FROM PERSONNE"); // pour docteur on fait une jointure
+		 ResultSet result = statement.executeQuery("SELECT ID,NOM,PRENOM,ADRESSE,TELEPHONE FROM DOCTOR AND INFIRMIER WHERE DOCTOR_ID=INFIRMIER_ID"); // pour docteur on fait une jointure
 		 while (result.next()){
 			 int id=result.getInt("ID");
 			 String nom=result.getString("NOM");
