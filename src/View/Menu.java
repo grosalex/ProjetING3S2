@@ -89,6 +89,14 @@ public class Menu extends JMenuBar{
 				research.setVisible(true);
 			}
 		});
+		
+		///TODO listener des requetes de huan lee
+		this.maaf.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		this.history.addActionListener(new ActionListener() {
 			
 			@Override

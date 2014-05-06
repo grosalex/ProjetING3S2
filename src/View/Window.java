@@ -9,6 +9,7 @@ import java.util.LinkedList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTable;
@@ -58,7 +59,7 @@ public class Window extends JFrame{
 	    String  title[] = {"Pseudo", "Age", "Taille"};
 	    this.rightJPanel.setLayout(new BorderLayout());
 		this.main_table = new Table(data, title);
-		this.rightJPanel.add(main_table,BorderLayout.CENTER);
+		this.rightJPanel.add(new JScrollPane(main_table),BorderLayout.CENTER);
 		this.main_split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,left_panel,rightJPanel);
 		this.add(main_split);
 		this.main_split.setResizeWeight(0.33);

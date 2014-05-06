@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 // Objet Personne 
 public class Personne {
 private String nom;
@@ -13,7 +15,7 @@ public Personne(String nom,String prenom,String telephone,String adresse ){
 	this.telephone=telephone;
 	this.adresse=adresse;
 }
-// sert à lire le contenu
+// sert ï¿½ lire le contenu
 public String getNom(){
 	return nom;
 }
@@ -45,4 +47,5 @@ public void setTelephone(String telephone){
 public void setID(int ID){
 	this.ID=ID;
 }
+
 }
