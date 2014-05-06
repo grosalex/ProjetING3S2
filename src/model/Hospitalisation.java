@@ -22,4 +22,20 @@ public class Hospitalisation {
 				+ " AND lit=" + lit.getId();
 	}
 
+	public Service getService() {
+		return service;
+	}
+
+	public Chambre getChambre() {
+		return chambre;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public Lit getLit() {
+		return lit;
+	}
+
 }
