@@ -4,3 +4,13 @@
 /connexion
 /MaTableDialog$MaTableModel.class
 /MaTableDialog$MaTableModel1.class
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+

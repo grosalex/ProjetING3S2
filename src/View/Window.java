@@ -29,7 +29,11 @@ public class Window extends JFrame{
 	private Table main_table= null;
 	public Window(){
 
-		try{
+		this.setTitle("Projet ING3 Semestre 2");
+		this.setSize(800,600);		
+		this.setJMenuBar(menue);
+		
+/*		try{
 			try {
 				new Connexion("abruneau", "ab[0AB05", "abruneau-rw", "SQ3EdSFm");
 			} catch(ClassNotFoundException e){
@@ -38,18 +42,17 @@ public class Window extends JFrame{
 		} catch(SQLException e){
 			System.out.println("Sql excption at connection");
 		}
-		this.setTitle("Projet ING3 Semestre 2");
-		this.setSize(800,600);		
-		this.setJMenuBar(menue);
-		
+*/
 /*		LinkedList<Personne> data = null;
 		try{
 			data = Add.selectAllPersonne();
 		}catch(SQLException e){
 			System.out.println("problem de sql");
 		}
-		*/
+*/
 //		this.main_table = new JTable(new MaTableModel(data));
+		
+		new PopupConnection().setAlwaysOnTop(true);
 	    Object[][] data = {
 	    	      {"Cysboy", "28 ans", "1.80 m"},
 	    	      {"BZHHydde", "28 ans", "1.80 m"},
