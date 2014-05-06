@@ -9,8 +9,9 @@ public class Recherche {
 	private Connexion c;
 	
     /**
-     * ArrayList public pour les requï¿½tes de sï¿½lection
+     * ArrayList public pour les requêtes de sélection
      */
+	
     public ArrayList<String> requetes = new ArrayList<String>();
 
     /**
@@ -20,6 +21,84 @@ public class Recherche {
     {
     	this.c=c;
     }
+    
+    /** methode pour executer une requete*/
+    
+    public ArrayList resultatrequete(String requete) throws SQLException
+    {
+    	ArrayList<String> liste = new ArrayList<String>();
+    	liste=c.remplirChampsRequete(requete);
+    	return liste;
+    }
+    
+    /** methode pour chercher un docteur ou un infirmier avec les champs des tables docteur+employe ou infirmier+employe */
+    public ArrayList chercherdocinf(ArrayList donnee,int type ) throws SQLException {
+           
+          /** ArrayList public pour les noms des champs*/
+           ArrayList<String> champs1 = new ArrayList<String>();
+           ArrayList<String> champs = new ArrayList<String>(); 
+
+        
+            /** determiner le type de donnees qu'on cherche */
+                
+           if(type==0)     
+               nomtable="docteur"; 
+           champs=c.remplirChampsTable("docteur");
+           champs1=c.remplirChampsTable("employe");
+           champs.addAll(champs1);
+                       
+           if(type==1)     
+               nomtable="infirmier";
+           champs=c.remplirChampsTable("infirmier");
+           champs1=c.remplirChampsTable("employe");
+           champs.addAll(champs1);
+                         
+            
+ 
+      //creer deux nouvelleS listes pour mettre les donnees sans espaces
+       
+       ArrayList<String> donneef;
+       donneef = new ArrayList<String>();
+      
+       ArrayList<String> champsf;
+       champsf = new ArrayList<String>();
+        
+       //eliminer les espaces dans les donnees
+       for(int i=0;i<donnee.size();i++)
+       {
+           if(!" ".equals(donnee.get(i)))
+           {
+               donneef.add((String) donnee.get(i));
+               champsf.add(champs.get(i));
+           }
+       }
+        
+        
+        
+        //determiner les conditions
+        
+        String condition =" ";
+        for(int i=0;i<donneef.size();i++)
+        {
+           condition=condition.concat(champsf.get(i)).concat("=").concat(donneef.get(i)).concat(" AND ");
+        }
+        condition=condition.substring(0,condition.length()-5);
+        
+        /** requete finale */
+        String sql="SELECT "+nomtable+"* FROM "+nomtable+" n, employe e WHERE e.numero=n.numero AND "+condition+";";
+       
+       /**creation d'une liste pour mettre le resultat de la requete*/
+       ArrayList<String> liste;
+       liste = new ArrayList<String>();
+       
+       /**récupérer le résultat de la requête*/
+
+           liste=c.remplirChampsRequete(sql);
+      
+         
+      return liste;  
+    }
+    
 	
 	
 	/** methode pour chercher tous les types de donnees avec tous les champs initials des tables*/
@@ -121,14 +200,14 @@ public class Recherche {
     
     
     /**
-     * Mï¿½thode privï¿½e qui ajoute la requete de selection en parametre dans son ArrayList
+     * Méthode privée qui ajoute la requete de selection en parametre dans son ArrayList
      */
     private void ajouterRequete(String requete) {
         requetes.add(requete);
     }
 
     /**
-     * Mï¿½thode privï¿½e qui initialise la liste des requetes de selection
+     * Méthode privée qui initialise la liste des requetes de selection
      */
     private void remplirRequetes() {
         ajouterRequete("SELECT prenom, nom FROM malade WHERE mutuelle='MAAF' ORDER BY nom;");
@@ -143,8 +222,10 @@ public class Recherche {
         ajouterRequete("SELECT e.prenom,e.nom FROM employe e,docteur d1 WHERE e.numero=d1.numero AND d1.numero NOT IN(SELECT d2.numero FROM docteur d2 WHERE EXISTS(SELECT* FROM docteur d,soigne s, hospitalisation h WHERE d.numero=s.no_numero AND s.no_malade=h.no_malade AND d.numero=d2.numero))ORDER BY e.nom;");
     
     }
+	
+	
+	
+	
 }
-	
-	
-	
+
 
