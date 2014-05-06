@@ -19,7 +19,6 @@ public class Recherche {
     public Recherche(Connexion c)
     {
     	this.c=c;
-    	this.remplirRequetes();
     }
 	
 	
@@ -147,8 +146,8 @@ public class Recherche {
         ajouterRequete("SELECT e.prenom,e.nom FROM employe e,docteur d1 WHERE e.numero=d1.numero AND d1.numero NOT IN(SELECT d2.numero FROM docteur d2 WHERE EXISTS(SELECT* FROM docteur d,soigne s, hospitalisation h WHERE d.numero=s.no_numero AND s.no_malade=h.no_malade AND d.numero=d2.numero))ORDER BY e.nom;");
     
     }
-	
-	
-	
-	
 }
+	
+	
+	
+

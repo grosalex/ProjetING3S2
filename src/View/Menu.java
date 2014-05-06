@@ -21,7 +21,14 @@ public class Menu extends JMenuBar{
 	private JMenuItem maaf = new JMenuItem("MAAF");
 	private JMenuItem night_nurse = new JMenuItem("Nurse working at night");
 	private JMenuItem service_description = new JMenuItem("service description");
-//	private JMenuItem 
+	private JMenuItem bed_in_building = new JMenuItem("Bed in building");
+	private JMenuItem nurse_salary_per_service = new JMenuItem("nurse salary per service");
+	private JMenuItem bed_average_in_service = new JMenuItem("bed avarage in service");
+	private JMenuItem bed_average_in_room = new JMenuItem("bed average in room");
+	private JMenuItem R7 = new JMenuItem("R7");
+	private JMenuItem R8 = new JMenuItem("R8");
+	private JMenuItem R9 = new JMenuItem("R9");
+	private JMenuItem R10 = new JMenuItem("R10");
 	/// TODO faire le menu deroulant qui va bien pour les requetes
 	private JMenuItem history = new JMenuItem("history");
 	private JMenuItem personal_research =  new JMenuItem("personal research");
@@ -135,6 +142,31 @@ public class Menu extends JMenuBar{
 		this.add.add(add_appointment);
 		this.file.add(add);
 		this.file.add(research);
+		/*
+		 * private JMenuItem maaf = new JMenuItem("MAAF");
+	private JMenuItem night_nurse = new JMenuItem("Nurse working at night");
+	private JMenuItem service_description = new JMenuItem("service description");
+	private JMenuItem bed_in_building = new JMenuItem("Bed in building");
+	private JMenuItem nurse_salary_per_service = new JMenuItem("nurse salary per service");
+	private JMenuItem bed_average_in_service = new JMenuItem("bed avarage in service");
+	private JMenuItem bed_average_in_room = new JMenuItem("bed average in room");
+	private JMenuItem R7 = new JMenuItem("R7");
+	private JMenuItem R8 = new JMenuItem("R8");
+	private JMenuItem R9 = new JMenuItem("R9");
+	private JMenuItem R10 = new JMenuItem("R10");
+		 */
+		this.request.add(maaf);
+		this.request.add(night_nurse);
+		this.request.add(service_description);
+		this.request.add(bed_in_building);
+		this.request.add(nurse_salary_per_service);
+		this.request.add(bed_average_in_service);
+		this.request.add(bed_average_in_room);
+		this.request.add(R7);
+		this.request.add(R8);
+		this.request.add(R9);
+		this.request.add(R10);
+		
 		this.file.add(request);
 		this.file.add(history);
 		this.file.add(personal_research);
