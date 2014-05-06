@@ -16,7 +16,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Recherche.Recherche;
-import model.Add;
 import model.Personne;
 import connexion.Connexion;
 
