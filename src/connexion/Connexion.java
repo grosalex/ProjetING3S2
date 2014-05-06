@@ -34,7 +34,7 @@ public class Connexion {
 	 * ArrayList public pour les requêtes de MAJ
 	 */
 	public ArrayList<String> requetesMaj = new ArrayList<String>(); // liste des requêtes de MAJ
-	// permet de garder une ref � l'objet creer par constructeur 
+	// permet de garder une ref � l'objet creer par constructeur 
 	private static Connexion instance;
 
 	/**
@@ -183,16 +183,17 @@ public class Connexion {
 		nbCol = rsetMeta.getColumnCount();
 		rset.last();
 		nbLigne = rset.getRow()+1;
-		rset.beforeFirst();
-		data = new String[nbLigne][nbCol];
+		rset.first();
+		data = new Object[nbLigne][nbCol];
 
-		for(int i=0;i<nbCol;i++) {
+		for(int i=1;i<nbCol;i++) {
 			data[0][i] = rsetMeta.getColumnLabel(i);
 		}
 
 		do {
-			for(int i=0;i<nbCol;i++) {
-				j++;
+			j++;
+			for(int i=1;i<nbCol-1;i++) {
+				
 				data[j][i] = rset.getObject(i);
 			}	
 		}while(rset.next());

@@ -27,10 +27,7 @@ public class Recherche {
     {
         /** ArrayList public pour les noms des champs*/
        ArrayList<String> champs = new ArrayList<String>(); 
-        
-      
-       
-        
+     
         //determiner le type de donnees qu'on cherche
             switch(type)
            { case 0: nomtable="docteur";

@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 import connexion.Connexion;
 
-public class PopupConnection extends JDialog{
+public class ConnectionPanel extends JPanel{
 	//username pwd db username dbpws
 	private JLabel label_username=new JLabel("Ece username :");
 	private JLabel label_password = new JLabel("password :");
@@ -32,7 +32,7 @@ public class PopupConnection extends JDialog{
 	private JButton local = new JButton("Local connection");
 	private JButton connect = new JButton("Connect");
 	
-	public PopupConnection(){
+	public ConnectionPanel(){
 		this.setSize(600,300);
 		this.main.setLayout(new BoxLayout(this.main, BoxLayout.PAGE_AXIS));
 		this.second.setLayout(new BoxLayout(this.second, BoxLayout.LINE_AXIS));
@@ -77,6 +77,6 @@ public class PopupConnection extends JDialog{
 		this.add(main);
 		this.setVisible(true);
 	}
-
+		
 	
 }
