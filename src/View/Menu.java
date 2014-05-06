@@ -43,7 +43,6 @@ public class Menu extends JMenuBar{
 	
 	public Menu(){
 		this.exit.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(1);
@@ -113,7 +112,6 @@ public class Menu extends JMenuBar{
 			}
 		});
 		this.save.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Stub de la méthode généré automatiquement
@@ -135,14 +133,7 @@ public class Menu extends JMenuBar{
 				
 			}
 		});
-		this.request.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Stub de la méthode généré automatiquement
-				
-			}
-		});
+
 		
 		this.add.add(add_doctor);
 		this.add.add(add_nurse);
@@ -150,19 +141,7 @@ public class Menu extends JMenuBar{
 		this.add.add(add_appointment);
 		this.file.add(add);
 		this.file.add(research);
-		/*
-		 * private JMenuItem maaf = new JMenuItem("MAAF");
-	private JMenuItem night_nurse = new JMenuItem("Nurse working at night");
-	private JMenuItem service_description = new JMenuItem("service description");
-	private JMenuItem bed_in_building = new JMenuItem("Bed in building");
-	private JMenuItem nurse_salary_per_service = new JMenuItem("nurse salary per service");
-	private JMenuItem bed_average_in_service = new JMenuItem("bed avarage in service");
-	private JMenuItem bed_average_in_room = new JMenuItem("bed average in room");
-	private JMenuItem R7 = new JMenuItem("R7");
-	private JMenuItem R8 = new JMenuItem("R8");
-	private JMenuItem R9 = new JMenuItem("R9");
-	private JMenuItem R10 = new JMenuItem("R10");
-		 */
+
 		this.request.add(maaf);
 		this.request.add(night_nurse);
 		this.request.add(service_description);

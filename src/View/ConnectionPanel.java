@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -14,7 +13,7 @@ import javax.swing.JTextField;
 
 import connexion.Connexion;
 
-public class PopupConnection extends JDialog{
+public class ConnectionPanel extends JPanel{
 	//username pwd db username dbpws
 	private JLabel label_username=new JLabel("Ece username :");
 	private JLabel label_password = new JLabel("password :");
@@ -31,8 +30,9 @@ public class PopupConnection extends JDialog{
 	
 	private JButton local = new JButton("Local connection");
 	private JButton connect = new JButton("Connect");
-	
-	public PopupConnection(){
+	private Window input=null;
+	public ConnectionPanel(final Window input){
+		this.input=input;
 		this.setSize(600,300);
 		this.main.setLayout(new BoxLayout(this.main, BoxLayout.PAGE_AXIS));
 		this.second.setLayout(new BoxLayout(this.second, BoxLayout.LINE_AXIS));
@@ -48,6 +48,7 @@ public class PopupConnection extends JDialog{
 					e.printStackTrace();
 				}
 				setVisible(false);
+				input.showTableEmploye();
 			}
 		});
 		
@@ -77,6 +78,6 @@ public class PopupConnection extends JDialog{
 		this.add(main);
 		this.setVisible(true);
 	}
-
+		
 	
 }

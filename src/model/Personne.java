@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 // Objet Personne 
 public class Personne {
 private String nom;

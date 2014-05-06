@@ -1,12 +1,9 @@
 package View;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-
-import javax.activation.MailcapCommandMap;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +11,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import connexion.Connexion;
+import Recherche.Recherche;
 
 public class PopupResearch extends JDialog{
 	private JPanel main_panel=new JPanel();
@@ -63,6 +63,9 @@ public class PopupResearch extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				///todo recherche
 				//name.getText() pour avoir la string contenu dans le champ name
+				
+				Recherche current = new Recherche(Connexion.getInstance());
+				//current.rechercher(, 0)
 			}
 		});
 		this.main_panel.setLayout(new BoxLayout(this.main_panel,BoxLayout.PAGE_AXIS));
@@ -106,7 +109,8 @@ public class PopupResearch extends JDialog{
 		panel_patient.setVisible(false);
 	}
 	class ItemState implements ItemListener{
-	    public void itemStateChanged(ItemEvent e) {
+	    @Override
+		public void itemStateChanged(ItemEvent e) {
 	      System.out.println("événement déclenché sur : " + e.getItem());
 	    }               
 	  }

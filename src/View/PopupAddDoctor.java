@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import javax.activation.MailcapCommandMap;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
