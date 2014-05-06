@@ -2,8 +2,6 @@ package model;
 
 import java.util.Date;
 
-import connexion.Connexion;
-
 public class RendezVous {
 	private Date date;
 	private Doctor docteur;
@@ -29,7 +27,7 @@ public class RendezVous {
 
 	/**
 	 * Fonction qui historisera un rdv
-	 * @return la commande à exécuter dans le contrôleur
+	 * @return la commande ï¿½ exï¿½cuter dans le contrï¿½leur
 	 */
 	public String historise() {
 		return "UPDATE rdv "

@@ -17,10 +17,9 @@ public class Resultat {
 	
 	public Resultat(Connexion c, String requete) throws SQLException {
 		this.c = c;
-		Object data[][];
 		int nbLigne;
 		int j=0;
-		
+		titles=new ArrayList<String>();
 		stmt = c.getSqlConnection().createStatement();
 		rset = stmt.executeQuery(requete);
 		rsetMeta = rset.getMetaData();
@@ -28,17 +27,18 @@ public class Resultat {
 		rset.last();
 		nbLigne = rset.getRow()+1;
 		rset.beforeFirst();
-		data = new String[nbLigne][nbCol];
+		result=new Object[nbLigne][nbCol];
 
 		for(int i=0;i<nbCol;i++) {
-			titles.add(rsetMeta.getColumnLabel(i));
+			titles.add(rsetMeta.getColumnLabel(i+1));
 		}
 
 		do {
+			j++;
 			for(int i=0;i<nbCol;i++) {
-				result[j][i] = rset.getObject(i);
-				j++;
+				result[j][i] = rset.getObject(i+1);
 			}	
+
 		}while(rset.next());
 	}
 
@@ -54,9 +54,6 @@ public class Resultat {
 		rset.beforeFirst();
 		data = new String[nbLigne][nbCol];
 
-		for(int i=0;i<nbCol;i++) {
-			data[0][i] = rsetMeta.getColumnLabel(i);
-		}
 
 		do {
 			for(int i=0;i<nbCol;i++) {
@@ -71,8 +68,12 @@ public class Resultat {
 		return nbCol;
 	}
 
-	public ArrayList<String> getTitles() {
-		return titles;
+	public String[] getTitles() {
+		String [] retour=new String[titles.size()];
+		for(int i=0;i<titles.size();i++){
+			retour[i]=titles.get(i);
+		}
+		return retour;
 	}
 
 	public Object[][] getResult() {

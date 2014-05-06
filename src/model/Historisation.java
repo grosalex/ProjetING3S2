@@ -1,8 +1,6 @@
 package model;
 
 import java.sql.SQLException;
-import java.sql.Statement;
-
 import connexion.Connexion;
 
 public class Historisation {

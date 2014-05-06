@@ -4,20 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.JTextArea;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import model.Add;
-import model.Personne;
 import connexion.Connexion;
+import model.Personne;
+import model.Resultat;
 
 public class Window extends JFrame{
 	private JPanel left_panel=new JPanel();
@@ -26,6 +23,7 @@ public class Window extends JFrame{
 	private Menu menue = new Menu();
 
 	private Table main_table= null;
+	private Resultat main_resultat=null;
 	public Window(){
 
 		this.setTitle("Projet ING3 Semestre 2");
@@ -33,7 +31,7 @@ public class Window extends JFrame{
 		this.setJMenuBar(menue);
 		
 	    this.rightJPanel.setLayout(new BorderLayout());
-		this.rightJPanel.add(new ConnectionPanel());
+		this.rightJPanel.add(new ConnectionPanel(this));
 		this.main_split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,left_panel,rightJPanel);
 		this.add(main_split);
 		this.main_split.setResizeWeight(0.33);
@@ -66,7 +64,6 @@ public class Window extends JFrame{
 		this.main_split.setResizeWeight(0.33);
 
 */
-		this.setVisible(true);
 		
 		// pour fermer la fenetre
         addWindowListener(new WindowAdapter() {
@@ -75,6 +72,19 @@ public class Window extends JFrame{
                 System.exit(0); // tout fermer												System.exit(0); // tout fermer
             }
         });
+        
+	}
+	public void showTableEmploye(){
+		try {
+			this.main_resultat=new Resultat(Connexion.getInstance(), "SELECT * FROM employe");
+			this.main_table = new Table(this.main_resultat.getResult(),this.main_resultat.getTitles());
+			this.rightJPanel.add(new JScrollPane(main_table),BorderLayout.CENTER);
+			this.rightJPanel.setVisible(true);
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
+		
 	}
 
 	class MaTableModel extends DefaultTableModel {

@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -31,8 +30,9 @@ public class ConnectionPanel extends JPanel{
 	
 	private JButton local = new JButton("Local connection");
 	private JButton connect = new JButton("Connect");
-	
-	public ConnectionPanel(){
+	private Window input=null;
+	public ConnectionPanel(final Window input){
+		this.input=input;
 		this.setSize(600,300);
 		this.main.setLayout(new BoxLayout(this.main, BoxLayout.PAGE_AXIS));
 		this.second.setLayout(new BoxLayout(this.second, BoxLayout.LINE_AXIS));
@@ -48,6 +48,7 @@ public class ConnectionPanel extends JPanel{
 					e.printStackTrace();
 				}
 				setVisible(false);
+				input.showTableEmploye();
 			}
 		});
 		
