@@ -26,11 +26,11 @@ public class Resultat {
 		nbCol = rsetMeta.getColumnCount();
 		rset.last();
 		nbLigne = rset.getRow()+1;
-		rset.beforeFirst();
+		rset.first();
 		result=new Object[nbLigne][nbCol];
 
-		for(int i=0;i<nbCol;i++) {
-			titles.add(rsetMeta.getColumnLabel(i+1));
+		for(int i=1;i<=nbCol;i++) {
+			titles.add(rsetMeta.getColumnLabel(i));
 		}
 
 		do {
