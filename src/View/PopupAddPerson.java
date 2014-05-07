@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class PopupAddPerson extends JDialog{
+	Window current_window=null;
 	protected JPanel main_panel =  new JPanel();
 	protected JPanel second_panel = new JPanel();
 	
@@ -28,7 +29,8 @@ public class PopupAddPerson extends JDialog{
 	protected JButton cancel = new JButton("cancel");
 	protected JButton save = new JButton("save");
 	
-	public PopupAddPerson(){
+	public PopupAddPerson(Window current){
+		this.current_window=current;
 		this.setSize(600,300);
 		this.main_panel.setLayout(new BoxLayout(this.main_panel,BoxLayout.PAGE_AXIS));
 		this.second_panel.setLayout(new BoxLayout(this.second_panel, BoxLayout.LINE_AXIS));

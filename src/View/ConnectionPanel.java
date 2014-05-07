@@ -45,11 +45,6 @@ public class ConnectionPanel extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					new Connexion("wmarques", "Vi.Cati91", "wmarques-rw", "sEaDRBD2");
-					
-					//Testing addDoctor
-					Doctor d = new Doctor("bernard","michel","0123456789",
-			        		"10 avenue Coquelicots 75015 Paris","cardiologue");
-					Add.addDoctor(d);
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Bloc catch généré automatiquement
 					e.printStackTrace();
