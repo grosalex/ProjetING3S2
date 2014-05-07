@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import model.Add;
+import model.Doctor;
 import connexion.Connexion;
 
 public class ConnectionPanel extends JPanel{
@@ -42,7 +44,12 @@ public class ConnectionPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					new Connexion("abruneau", "ab[0AB05", "abruneau-rw", "SQ3EdSFm");
+					new Connexion("wmarques", "Vi.Cati91", "wmarques-rw", "sEaDRBD2");
+					
+					//Testing addDoctor
+					Doctor d = new Doctor("bernard","michel","0123456789",
+			        		"10 avenue Coquelicots 75015 Paris","cardiologue");
+					Add.addDoctor(d);
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Bloc catch généré automatiquement
 					e.printStackTrace();

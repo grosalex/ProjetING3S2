@@ -11,10 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
+
 import Recherche.Recherche;
 import model.Personne;
-
 import connexion.Connexion;
+import model.Add;
+import model.Doctor;
 import model.Personne;
 import model.Resultat;
 
@@ -74,6 +76,15 @@ public class Window extends JFrame{
                 System.exit(0); // tout fermer												System.exit(0); // tout fermer
             }
         });
+        
+        Doctor d = new Doctor("bernard","michel","0123456789",
+        		"10 avenue Coquelicots 75015 Paris","cardiologue");
+        try {
+			Add.addDoctor(d);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
 	}
 	public void showTableEmploye(){
