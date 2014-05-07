@@ -26,7 +26,7 @@ public class PopupAddDoctor extends PopupAddPerson{
 					//Doctor d = new Doctor("bernard","michel","0123456789","10 avenue Coquelicots 75015 Paris","cardiologue");
 					//Add.addDoctor(d);
 					setVisible(false);
-					current_window.showTableEmploye();
+					current_window.updateTableEmployee();
 				}catch(SQLException e){
 					System.out.println("SQL ISSU AT THE DOCTOR'S ADDITION");
 				}

@@ -6,6 +6,10 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import model.Resultat;
 
 public class Table extends JTable {
 	public Table(Object [][] data, String [] title) {
@@ -49,5 +53,6 @@ public class Table extends JTable {
 
 		this.updateUI();
 	}
+
 
 }
