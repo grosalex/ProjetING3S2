@@ -4,6 +4,8 @@ package model;
 import java.util.ArrayList;
 import java.sql.*;
 
+import javax.swing.JButton;
+
 import connexion.Connexion;
 
 public class Resultat {
@@ -27,7 +29,7 @@ public class Resultat {
 		rset.last();
 		nbLigne = rset.getRow()+1;
 		rset.first();
-		result=new Object[nbLigne][nbCol];
+		result=new Object[nbLigne][nbCol+2];
 
 		for(int i=1;i<=nbCol;i++) {
 			titles.add(rsetMeta.getColumnLabel(i));
@@ -37,7 +39,9 @@ public class Resultat {
 			j++;
 			for(int i=0;i<nbCol;i++) {
 				result[j][i] = rset.getObject(i+1);
-			}	
+			}
+			result[j][nbCol] = new JButton("Modify");
+			result[j][nbCol+1] = new JButton("Delete");
 
 		}while(rset.next());
 	}
