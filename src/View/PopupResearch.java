@@ -70,33 +70,40 @@ public class PopupResearch extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String requete=null;
+				String type=null;
 				String nom = surname.getText();
 				String prenom = name.getText();
 				String adresse = address.getText();
 				String tel= phone.getText();
+				
 				if(combo.getSelectedItem()=="Doctor"){
+					type="docteur";
 					String specialite = speciality.getText();
 					requete=("SELECT employe.numero ,nom, prenom, adresse, tel, specialite FROM employe,docteur WHERE "+
 							"employe.nom LIKE '%" + nom +  "%' AND employe.prenom LIKE '%" + prenom + "%' AND employe.adresse LIKE '%" + adresse +
 							 "%' AND employe.tel LIKE '%"+ tel +  "%' AND docteur.specialite LIKE '%" + specialite +"%' AND employe.numero=docteur.numero;");
 			      }
 			      else if(combo.getSelectedItem()=="Patient"){
-			    	  
+			    	  type="patient";
+
 			    	  requete=("SELECT* FROM malade WHERE numero LIKE '%"+ nom + "%' AND prenom LIKE '%" + prenom + "%' AND tel LIKE '%" + tel + "%' AND adresse LIKE '%" + adresse+";");
 			      }
 			      
 			      else if (combo.getSelectedItem()=="Nurse") {
+					type="infirmier";
+
 			    	 requete= ("SELECT employe.numero ,nom, prenom, adresse, tel, code_service,rotation,salaire FROM employe,infirmier WHERE "+
 								"employe.nom LIKE '%" + nom +  "%' AND employe.prenom LIKE '%" + prenom + "%' AND employe.adresse LIKE '%" + adresse +
 								 "%' AND employe.tel LIKE '%"+ tel +  "%' AND infirmier.code_service LIKE '%"+code_service+ "%' AND infirmier.rotation LIKE '%" + rotation+"%' AND infirmier.salaire LIKE '%"+ salaire +"%' AND employe.numero=infirmier.numero;");
 			    
 			      }
 				
-			      else if(combo.getSelectedItem()=="Hospitalisation")
+/*			      else if(combo.getSelectedItem()=="Hospitalisation")
 			      {
+			    	  String no_malade=
 			    	  requete=("SELECT* FROM hospitalisation WHERE no_malade LIKE '%"+no_malade+ "%' AND code_service LIKE '%"+code_service+  "%' AND no_chambre LIKE '%"+ no_chambre+ "%' AND lit LIKE '%"+ lit+";");
 			      }
-			      
+
 			      else if(combo.getSelectedItem()=="Service")
 			      {
 			    	  requete=("SELECT* FROM service WHERE code LIKE '%"+ code + "%' nom LIKE '%"+ nom + "%' batiment LIKE '%"+ batiment +"%' directeur LIKE '%"+ directeur +";");
@@ -115,15 +122,15 @@ public class PopupResearch extends JDialog{
 			      }
 			      else if(combo.getSelectedItem()=="Treatment")
 			      {
-			    	  requete=("SELECT* FROM soigne WHERE "
+			    	  requete=("SELECT* FROM soigne WHERE ");
 			      }
 				
-				
+				*/
 				
 				try {
 					System.out.println(requete);
 					try {
-						current_window.showResult(new Resultat(Connexion.getInstance(), requete));
+						current_window.showResult(new Resultat(Connexion.getInstance(), requete),type);
 					} catch (NoResultException e1) {
 						// TODO Bloc catch généré automatiquement
 						e1.printStackTrace();

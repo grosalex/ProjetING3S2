@@ -5,11 +5,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 import model.Resultat;
 
 //on a un problème pour les listeners 
@@ -24,7 +21,8 @@ public class Table extends JTable {
 		this.setIntercellSpacing(new Dimension(5,5));
 		Action modify = new AbstractAction()
 		{
-		    public void actionPerformed(ActionEvent e)
+		    @Override
+			public void actionPerformed(ActionEvent e)
 		    {
 		    	//
 		    }

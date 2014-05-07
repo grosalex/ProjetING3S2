@@ -4,24 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.util.LinkedList;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableModel;
-
-import org.omg.CORBA.FREE_MEM;
-
-import model.Personne;
 import connexion.Connexion;
-import model.Add;
-import model.Doctor;
 import model.NoResultException;
 import model.Resultat;
 
@@ -71,7 +59,7 @@ public class Window extends JFrame{
 	public void showTableEmploye(){
 		try {
 			try {
-				this.main_resultat=new Resultat(Connexion.getInstance(), "SELECT * FROM docteur");
+				this.main_resultat=new Resultat(Connexion.getInstance(), "SELECT employe.numero, nom, prenom, adresse, tel, specialite FROM docteur, employe WHERE docteur.numero = employe.numero");
 			} catch (NoResultException e) {
 				// TODO Bloc catch généré automatiquement
 				e.printStackTrace();
@@ -91,7 +79,7 @@ public class Window extends JFrame{
 	public void updateTableEmployee(){
 		Resultat resultat;
 		try {
-			resultat = new Resultat(Connexion.getInstance(), "SELECT * FROM employe");
+			resultat = new Resultat(Connexion.getInstance(), "SELECT employe.numero, nom, prenom, adresse, tel, specialite FROM docteur, employe WHERE docteur.numero = employe.numero");
 			this.main_table.setModel(new DefaultTableModel(resultat.getResult(), resultat.getTitles()));
 			this.main_table.updateUI();
 		} catch (SQLException | NoResultException e) {

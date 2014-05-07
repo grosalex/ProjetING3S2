@@ -4,8 +4,6 @@ package model;
 import java.util.ArrayList;
 import java.sql.*;
 
-import javax.swing.JButton;
-
 import connexion.Connexion;
 
 public class Resultat {

@@ -12,8 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedList;
-
 import connexion.Connexion;
 
 // creer l'objet personne et docteur avant . 
@@ -25,7 +23,7 @@ import connexion.Connexion;
  */
 public class Add {
 
-	// ce cons ne peut etre appleé
+	// ce cons ne peut etre appleï¿½
 
 	public Add() {
 	}

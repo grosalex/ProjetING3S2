@@ -119,6 +119,7 @@ public Object getCellEditorValue()
 //
 //Implement TableCellRenderer interface
 //
+@Override
 public Component getTableCellRendererComponent(
 	JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 {
@@ -168,6 +169,7 @@ public Component getTableCellRendererComponent(
 /*
  *	The button has been pressed. Stop editing and invoke the custom Action
  */
+@Override
 public void actionPerformed(ActionEvent e)
 {
 	int row = table.convertRowIndexToModel( table.getEditingRow() );
@@ -190,6 +192,7 @@ public void actionPerformed(ActionEvent e)
  *  the mouse to another cell before releasing it, the editor is still
  *  active. Make sure editing is stopped when the mouse is released.
  */
+@Override
 public void mousePressed(MouseEvent e)
 {
 	if (table.isEditing()
@@ -197,6 +200,7 @@ public void mousePressed(MouseEvent e)
 		isButtonColumnEditor = true;
 }
 
+@Override
 public void mouseReleased(MouseEvent e)
 {
 	if (isButtonColumnEditor
@@ -206,7 +210,10 @@ public void mouseReleased(MouseEvent e)
 	isButtonColumnEditor = false;
 }
 
+@Override
 public void mouseClicked(MouseEvent e) {}
+@Override
 public void mouseEntered(MouseEvent e) {}
+@Override
 public void mouseExited(MouseEvent e) {}
 }

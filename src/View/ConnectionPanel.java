@@ -11,8 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import model.Add;
-import model.Doctor;
 import connexion.Connexion;
 
 public class ConnectionPanel extends JPanel{
