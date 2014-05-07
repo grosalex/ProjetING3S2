@@ -15,7 +15,6 @@ public class Table extends JTable {
 	public Table(Object [][] data, String [] title) {
 		super(data,title);
 		
-	/*	
 		Action modify = new AbstractAction()
 		{
 		    public void actionPerformed(ActionEvent e)
@@ -23,8 +22,16 @@ public class Table extends JTable {
 
 		    }
 		};
-		ButtonColumn buttonColumn = new ButtonColumn(this, modify, title.length-1);
-*/
+		Action delete = new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Stub de la méthode généré automatiquement
+				
+			}
+		};
+		ButtonColumn deleteButtonColumn = new ButtonColumn(this, modify, title.length-2);
+		ButtonColumn modifyButtonColumn = new ButtonColumn(this, delete, title.length-1);
+
 		
 	}
 	public void hide(String title){

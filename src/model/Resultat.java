@@ -42,8 +42,8 @@ public class Resultat {
 			for(int i=0;i<nbCol;i++) {
 				result[j][i] = rset.getObject(i+1);
 			}
-			result[j][nbCol] = new JButton("Modify");
-			result[j][nbCol+1] = new JButton("Delete");
+			result[j][nbCol] = "Modify";
+			result[j][nbCol+1] = "Delete";
 
 		}while(rset.next());
 	}
