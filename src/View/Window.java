@@ -78,6 +78,7 @@ public class Window extends JFrame{
 		}
 		
 	}
+	
 	public void updateTable(String title, boolean action) {
 		if(action){//add
 			this.main_table.show(title);
