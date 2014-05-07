@@ -66,6 +66,15 @@ public class Connexion {
 		instance = this;
 		// initialise 
 	}
+	
+	public Connexion(String username, String pwd, String dbname) throws ClassNotFoundException, SQLException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		String url = "jdbc:mysql://localhost:3305/"+dbname;
+		conn = DriverManager.getConnection(url, username, pwd);
+		stmt = conn.createStatement();
+		instance = this;
+	}
 
 	/**
 	 * Méthode privée qui ajoute la requete de selection en parametre dans son ArrayList
