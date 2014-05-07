@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,7 +16,6 @@ import javax.swing.JTextField;
 import model.NoResultException;
 import model.Resultat;
 import connexion.Connexion;
-import Recherche.Recherche;
 
 public class PopupResearch extends JDialog{
 	private JPanel main_panel=new JPanel();
@@ -81,22 +78,25 @@ public class PopupResearch extends JDialog{
 					String specialite = speciality.getText();
 					requete=("SELECT employe.numero ,nom, prenom, adresse, tel, specialite FROM employe,docteur WHERE "+
 							"employe.nom LIKE '%" + nom +  "%' AND employe.prenom LIKE '%" + prenom + "%' AND employe.adresse LIKE '%" + adresse +
-							 "%' AND employe.tel LIKE '%"+ tel +  "%' AND docteur.specialite LIKE '%" + specialite +"%' AND employe.numero=docteur.numero;");
-			      }
-			      else if(combo.getSelectedItem()=="Patient"){
-			    	  type="patient";
+							"%' AND employe.tel LIKE '%"+ tel +  "%' AND docteur.specialite LIKE '%" + specialite +"%' AND employe.numero=docteur.numero;");
+				}
+				else if(combo.getSelectedItem()=="Patient"){
+					type="patient";
+					String mutuelle = mutual.getText();
+					requete=("SELECT* FROM malade WHERE numero LIKE '%"+ nom + "%' AND prenom LIKE '%" + prenom +
+							"%' AND tel LIKE '%" + tel + "%' AND adresse LIKE '%" + adresse+"%' AND mutuelle LIKE '%"+mutuelle+"%' ;");
+				}
 
-			    	  requete=("SELECT* FROM malade WHERE numero LIKE '%"+ nom + "%' AND prenom LIKE '%" + prenom + "%' AND tel LIKE '%" + tel + "%' AND adresse LIKE '%" + adresse+";");
-			      }
-			      
-			      else if (combo.getSelectedItem()=="Nurse") {
+				else if (combo.getSelectedItem()=="Nurse") {
 					type="infirmier";
 
-			    	 requete= ("SELECT employe.numero ,nom, prenom, adresse, tel, code_service,rotation,salaire FROM employe,infirmier WHERE "+
-								"employe.nom LIKE '%" + nom +  "%' AND employe.prenom LIKE '%" + prenom + "%' AND employe.adresse LIKE '%" + adresse +
-								 "%' AND employe.tel LIKE '%"+ tel +  "%' AND infirmier.code_service LIKE '%"+code_service+ "%' AND infirmier.rotation LIKE '%" + rotation+"%' AND infirmier.salaire LIKE '%"+ salaire +"%' AND employe.numero=infirmier.numero;");
-			    
-			      }
+					requete= ("SELECT employe.numero ,nom, prenom, adresse, tel, code_service,rotation,salaire FROM employe,infirmier WHERE "+
+							"employe.nom LIKE '%" + nom +  "%' AND employe.prenom LIKE '%" + prenom + "%' AND employe.adresse LIKE '%" + adresse +
+							"%' AND employe.tel LIKE '%"+ tel +  "%' AND infirmier.code_service LIKE '%"+code_service.getText()
+							+ "%' AND infirmier.rotation LIKE '%" + rotation.getText()+"%' AND infirmier.salaire LIKE '%"+ salaire.getText()
+							+ "%' AND employe.numero=infirmier.numero;");
+
+				}
 				
 /*			      else if(combo.getSelectedItem()=="Hospitalisation")
 			      {
