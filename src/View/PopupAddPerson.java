@@ -15,13 +15,11 @@ public class PopupAddPerson extends JDialog{
 	protected JPanel main_panel =  new JPanel();
 	protected JPanel second_panel = new JPanel();
 	
-	private JLabel label_id = new JLabel("id");
 	private JLabel label_surname = new JLabel("Surname:");
 	private JLabel label_name = new JLabel("Name:");
 	private JLabel label_phone = new JLabel("Phone:");
 	private JLabel label_address = new JLabel("address:");
 	
-	protected JTextField id=new JTextField();
 	protected JTextField surname= new JTextField();
 	protected JTextField name = new JTextField();
 	protected JTextField phone = new JTextField();
@@ -34,8 +32,7 @@ public class PopupAddPerson extends JDialog{
 		this.setSize(600,300);
 		this.main_panel.setLayout(new BoxLayout(this.main_panel,BoxLayout.PAGE_AXIS));
 		this.second_panel.setLayout(new BoxLayout(this.second_panel, BoxLayout.LINE_AXIS));
-		this.main_panel.add(label_id);
-		this.main_panel.add(id);
+
 		this.main_panel.add(label_surname);
 		this.main_panel.add(surname);
 		this.main_panel.add(label_name);
