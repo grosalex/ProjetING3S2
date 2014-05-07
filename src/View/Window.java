@@ -71,12 +71,12 @@ public class Window extends JFrame{
 	public void showTableEmploye(){
 		try {
 			try {
-				this.main_resultat=new Resultat(Connexion.getInstance(), "SELECT * FROM employe");
+				this.main_resultat=new Resultat(Connexion.getInstance(), "SELECT * FROM docteur");
 			} catch (NoResultException e) {
 				// TODO Bloc catch généré automatiquement
 				e.printStackTrace();
 			}
-			this.main_table = new Table(this.main_resultat.getResult(),this.main_resultat.getTitles());
+			this.main_table = new Table(this.main_resultat.getResult(),this.main_resultat.getTitles(),"Docteur");
 			this.rightJPanel.add(new JScrollPane(main_table),BorderLayout.CENTER);
 			this.rightJPanel.setVisible(true);
 			this.left_panel.add(new Selection(this.main_resultat.getTitles(), this));
@@ -99,9 +99,8 @@ public class Window extends JFrame{
 		}
 
 	}
-	public void showResult(Resultat resultat){
-		this.main_table.setModel(new DefaultTableModel(resultat.getResult(), resultat.getTitles()));
-		this.main_table.updateUI();
+	public void showResult(Resultat resultat, String type){
+		this.main_table.update(resultat, type);
 	}
 	public void updateTable(String title, boolean action) {
 		if(action){//add
@@ -113,56 +112,5 @@ public class Window extends JFrame{
 		
 	}
 
-	class MaTableModel extends DefaultTableModel {
-
-		private LinkedList<Personne> list;
-		private LinkedList<String> colonnes = new LinkedList<String>();
-		public MaTableModel(LinkedList<Personne> list){
-			this.list = list;
-			colonnes.add("Nom");
-			colonnes.add("Pr�nom");
-			colonnes.add("T�l�phone");
-			colonnes.add("Adresse");
-		}
-
-		@Override
-		public int getColumnCount() {
-			return colonnes.size();
-		}
-
-		@Override
-		public String getColumnName(int index) {
-			return colonnes.get(index);
-		}
-
-		@Override
-		public int getRowCount() {
-			if(list == null)
-				return 0;
-			return list.size();
-		}
-
-		@Override
-		public boolean isCellEditable(int ligne, int colonne) {
-			return false;
-		}
-
-		@Override
-		public Object getValueAt(int ligne, int colonne) {
-			Personne personne = list.get(ligne);
-			switch(colonne) {
-			case 0:
-				return personne.getNom();
-			case 1:
-				return personne.getPrenom();
-			case 2:
-				return personne.getTelephone();
-			case 3:
-				return personne.getAdresse();
-			}
-			return null;
-		}
-
-	}
-
+	
 }

@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -11,15 +12,21 @@ import javax.swing.table.TableModel;
 
 import model.Resultat;
 
+//on a un problème pour les listeners 
+/*
+ * deux solution je me fixe un attribut string qui contient le type et je creer l'objet qui va bien
+ */
 public class Table extends JTable {
-	public Table(Object [][] data, String [] title) {
+	private String type=null;
+	public Table(Object [][] data, String [] title,String type) {
 		super(data,title);
-		
+		this.type=type;
+		this.setIntercellSpacing(new Dimension(5,5));
 		Action modify = new AbstractAction()
 		{
 		    public void actionPerformed(ActionEvent e)
 		    {
-
+		    	//
 		    }
 		};
 		Action delete = new AbstractAction() {
@@ -60,6 +67,11 @@ public class Table extends JTable {
 
 		this.updateUI();
 	}
+	public void update(Resultat resultat, String type){
+		this.type=type;
+		this.setModel(new DefaultTableModel(resultat.getResult(), resultat.getTitles()));
+		this.updateUI();
 
+	}
 
 }
