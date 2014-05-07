@@ -170,7 +170,7 @@ public class Add {
 		insertSQL= "INSERT INTO employe"
 				+ "(NOM,PRENOM,TEL,ADRESSE) VALUES"
 				+ "(?,?,?,?)";
-		
+
 
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
@@ -193,8 +193,36 @@ public class Add {
 				preparedStatement.close();
 			}
 		}
-		
+
 		return id;
+
+	}
+	public static void addHop(Personne personne)throws SQLException {
+		PreparedStatement preparedStatement=null;
+		String insertSQL= "INSERT INTO HOSPITALISATION"
+				+ "(NO_MALADE,CODE_SERVICE,NO_CHAMBRE,LIT,PRESENT) VALUES"
+				+ "(?,?,?,?,?)";
+		try{
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement.setString(1, personne.getNom());
+			preparedStatement.setString(2, personne.getPrenom());
+			preparedStatement.setString(3, personne.getTelephone());
+			preparedStatement.setString(4, personne.getAdresse());
+
+			// Insertion de la ligne dans la table.
+			int id = preparedStatement.executeUpdate();
+			personne.setID(id); // on a l'ID de la table personne , � v�rifier.
+
+		}catch (SQLException e){
+			// A voir si on lance ou nouvelle exception
+			System.out.println(e.getMessage());
+		}
+		// meme en cas de pb on passe dans le finally
+		finally{
+			if (preparedStatement!=null){
+				preparedStatement.close();
+			}
+		}
 
 	}
 	public static void addPatient(Personne personne) throws SQLException {
