@@ -11,11 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
-import Recherche.Recherche;
 import model.Personne;
 
 import connexion.Connexion;
-import model.Personne;
 import model.Resultat;
 
 public class Window extends JFrame{
@@ -28,46 +26,14 @@ public class Window extends JFrame{
 	private Resultat main_resultat=null;
 	public Window(){
 
-		this.setTitle("Projet ING3 Semestre 2");
-		this.setSize(800,600);		
+		this.setMainProperties("Projet ING3 Semestre 2", 800, 600);
 		this.setJMenuBar(menue);
-		
-	    this.rightJPanel.setLayout(new BorderLayout());
-		this.rightJPanel.add(new ConnectionPanel(this));
-		this.main_split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,left_panel,rightJPanel);
-		this.add(main_split);
-		this.main_split.setResizeWeight(0.33);
+
+		this.initializePanels();
 
 
 		this.setVisible(true);
-		/*
-		try {
-			new Connexion("abruneau", "ab[0AB05", "abruneau-rw", "SQ3EdSFm");
-		} catch (ClassNotFoundException | SQLException e1) {
-			// TODO Bloc catch généré automatiquement
-			e1.printStackTrace();
-		}
 
-
-		Object[][] data;
-		try {
-			data = Connexion.getInstance().returnData("SELECT * FROM employe;");
-			String [] title = {data[0][1].toString(),data[0][2].toString(), data[0][3].toString(), data[0][4].toString()};
-			this.main_table = new Table(data, title);
-
-
-		} catch (SQLException e) {
-			// TODO Bloc catch généré automatiquement
-			e.printStackTrace();
-		}
-		this.rightJPanel.add(new JScrollPane(main_table),BorderLayout.CENTER);
-		this.main_split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,left_panel,rightJPanel);
-		this.add(main_split);
-		this.main_split.setResizeWeight(0.33);
-
-*/
-		
-		// pour fermer la fenetre
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent evt) {
@@ -76,6 +42,19 @@ public class Window extends JFrame{
         });
         
 	}
+	
+	public void setMainProperties(String title,int width, int height){
+		this.setTitle(title);
+		this.setSize(width,height);
+	}
+	public void initializePanels(){
+	    this.rightJPanel.setLayout(new BorderLayout());
+		this.rightJPanel.add(new ConnectionPanel(this));
+		this.main_split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,left_panel,rightJPanel);
+		this.add(main_split);
+		this.main_split.setResizeWeight(0.33);
+	}
+	
 	public void showTableEmploye(){
 		try {
 			this.main_resultat=new Resultat(Connexion.getInstance(), "SELECT * FROM employe");
