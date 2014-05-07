@@ -20,13 +20,14 @@ public class Window extends JFrame{
 	private JPanel left_panel=new JPanel();
 	private JPanel rightJPanel=new JPanel();
 	private JSplitPane main_split=null;
-	private Menu menue = new Menu();
+	private Menu menue = null;
 
 	private Table main_table= null;
 	private Resultat main_resultat=null;
 	public Window(){
 
 		this.setMainProperties("Projet ING3 Semestre 2", 800, 600);
+		this.menue=new Menu(this);
 		this.setJMenuBar(menue);
 
 		this.initializePanels();

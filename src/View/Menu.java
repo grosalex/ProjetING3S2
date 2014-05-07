@@ -8,6 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class Menu extends JMenuBar{
+	private  Window current_window=null;
 	private JMenu file=new JMenu("file");
 	
 	private JMenu add = new JMenu("add");
@@ -41,7 +42,45 @@ public class Menu extends JMenuBar{
 	private JMenuItem save_as=new JMenuItem("save_as");
 	private JMenuItem print = new JMenuItem("print");
 	
-	public Menu(){
+	public Menu(Window window){
+		
+		this.current_window = window;
+		this.initListener();
+		this.initItems();
+
+	}
+	public void initItems(){
+		
+		this.add.add(add_doctor);
+		this.add.add(add_nurse);
+		this.add.add(add_patient);
+		this.add.add(add_appointment);
+		this.file.add(add);
+		this.file.add(research);
+
+		this.request.add(maaf);
+		this.request.add(night_nurse);
+		this.request.add(service_description);
+		this.request.add(bed_in_building);
+		this.request.add(nurse_salary_per_service);
+		this.request.add(bed_average_in_service);
+		this.request.add(bed_average_in_room);
+		this.request.add(R7);
+		this.request.add(R8);
+		this.request.add(R9);
+		this.request.add(R10);
+		
+		this.file.add(request);
+		this.file.add(history);
+		this.file.add(personal_research);
+		this.file.add(exit);
+		this.add(file);
+		this.add(save);
+		this.add(save_as);
+		this.add(print);
+		
+	}
+	public void initListener(){
 		this.exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -133,35 +172,6 @@ public class Menu extends JMenuBar{
 				
 			}
 		});
-
-		
-		this.add.add(add_doctor);
-		this.add.add(add_nurse);
-		this.add.add(add_patient);
-		this.add.add(add_appointment);
-		this.file.add(add);
-		this.file.add(research);
-
-		this.request.add(maaf);
-		this.request.add(night_nurse);
-		this.request.add(service_description);
-		this.request.add(bed_in_building);
-		this.request.add(nurse_salary_per_service);
-		this.request.add(bed_average_in_service);
-		this.request.add(bed_average_in_room);
-		this.request.add(R7);
-		this.request.add(R8);
-		this.request.add(R9);
-		this.request.add(R10);
-		
-		this.file.add(request);
-		this.file.add(history);
-		this.file.add(personal_research);
-		this.file.add(exit);
-		this.add(file);
-		this.add(save);
-		this.add(save_as);
-		this.add(print);
 	}
 	
 
