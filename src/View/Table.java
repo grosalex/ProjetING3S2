@@ -1,11 +1,26 @@
 package View;
 
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JButton;
 import javax.swing.JTable;
 
 public class Table extends JTable {
 	public Table(Object [][] data, String [] title) {
 		super(data,title);
+		
+	/*	
+		Action modify = new AbstractAction()
+		{
+		    public void actionPerformed(ActionEvent e)
+		    {
 
+		    }
+		};
+		ButtonColumn buttonColumn = new ButtonColumn(this, modify, title.length-1);
+*/
 		
 	}
 	public void hide(String title){

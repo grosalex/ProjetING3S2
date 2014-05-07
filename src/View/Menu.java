@@ -123,7 +123,7 @@ public class Menu extends JMenuBar{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PopupResearch research=new PopupResearch();
+				PopupResearch research=new PopupResearch(current_window);
 				research.setVisible(true);
 			}
 		});
