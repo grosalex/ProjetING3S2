@@ -12,7 +12,7 @@ public class Table extends JTable {
 		for(int i=0;i<getColumnCount();i++){
 			if(this.getColumnName(i).equals(title)){
 				this.getColumnModel().getColumn(i).setMinWidth(0);
-				this.getColumnModel().getColumn(i).setWidth(0);
+				this.getColumnModel().getColumn(i).setMaxWidth(0);
 			}
 		}
 
@@ -22,7 +22,13 @@ public class Table extends JTable {
 	public void show(String title){
 		for(int i=0;i<getColumnCount();i++){
 			if(this.getColumnName(i).equals(title)){
-				this.getColumnModel().getColumn(i).setWidth(30);
+				this.getColumnModel().getColumn(i-1).setMinWidth(this.getColumnModel().getColumn(i-1).getWidth()-50);
+				this.getColumnModel().getColumn(i-1).setMaxWidth(this.getColumnModel().getColumn(i-1).getWidth()-50);
+				this.getColumnModel().getColumn(i+1).setMinWidth(this.getColumnModel().getColumn(i+1).getWidth()-50);
+				this.getColumnModel().getColumn(i+1).setMaxWidth(this.getColumnModel().getColumn(i+1).getWidth()-50);
+				this.getColumnModel().getColumn(i).setMinWidth(100);
+				this.getColumnModel().getColumn(i).setMaxWidth(100);
+				this.getColumnModel().getColumn(i).setWidth(80);
 			}
 		}
 

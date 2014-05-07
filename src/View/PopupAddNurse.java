@@ -12,7 +12,8 @@ public class PopupAddNurse extends PopupAddPerson{
 	
 	private JLabel label_salaire = new JLabel("salaire:");
 	private JTextField salaire = new JTextField();
-	public PopupAddNurse(){
+	public PopupAddNurse(Window current_window){
+		super(current_window);
 		this.main_panel.add(label_code_service);
 		this.main_panel.add(code_service);
 		this.main_panel.add(label_rotation);
