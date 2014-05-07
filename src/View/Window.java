@@ -11,13 +11,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableModel;
+
+import org.omg.CORBA.FREE_MEM;
 
 import model.Personne;
 import connexion.Connexion;
 import model.Add;
 import model.Doctor;
+import model.NoResultException;
 import model.Resultat;
 
 public class Window extends JFrame{
@@ -65,7 +70,12 @@ public class Window extends JFrame{
 	
 	public void showTableEmploye(){
 		try {
-			this.main_resultat=new Resultat(Connexion.getInstance(), "SELECT * FROM employe");
+			try {
+				this.main_resultat=new Resultat(Connexion.getInstance(), "SELECT * FROM employe");
+			} catch (NoResultException e) {
+				// TODO Bloc catch généré automatiquement
+				e.printStackTrace();
+			}
 			this.main_table = new Table(this.main_resultat.getResult(),this.main_resultat.getTitles());
 			this.rightJPanel.add(new JScrollPane(main_table),BorderLayout.CENTER);
 			this.rightJPanel.setVisible(true);
@@ -78,8 +88,19 @@ public class Window extends JFrame{
 		}
 		
 	}
+	public void updateTableEmployee(){
+		Resultat resultat;
+		try {
+			resultat = new Resultat(Connexion.getInstance(), "SELECT * FROM employe");
+			this.main_table.setModel(new DefaultTableModel(resultat.getResult(), resultat.getTitles()));
+			this.main_table.updateUI();
+		} catch (SQLException | NoResultException e) {
+			e.printStackTrace();
+		}
+
+	}
 	public void showResult(Resultat resultat){
-		this.main_table = new Table(resultat.getResult(), resultat.getTitles());
+		this.main_table.setModel(new DefaultTableModel(resultat.getResult(), resultat.getTitles()));
 		this.main_table.updateUI();
 	}
 	public void updateTable(String title, boolean action) {

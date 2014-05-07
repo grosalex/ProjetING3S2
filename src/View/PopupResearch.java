@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.NoResultException;
 import model.Resultat;
 import connexion.Connexion;
 import Recherche.Recherche;
@@ -88,7 +89,12 @@ public class PopupResearch extends JDialog{
 				
 				try {
 					System.out.println(requete);
-					current_window.showResult(new Resultat(Connexion.getInstance(), requete));
+					try {
+						current_window.showResult(new Resultat(Connexion.getInstance(), requete));
+					} catch (NoResultException e1) {
+						// TODO Bloc catch généré automatiquement
+						e1.printStackTrace();
+					}
 					setVisible(false);
 				} catch (SQLException e1) {
 					// TODO Bloc catch généré automatiquement
