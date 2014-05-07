@@ -100,8 +100,8 @@ public class Add {
 	public static void addNurse(Infirmier infirmier) throws SQLException {
 		int id = addEmploye(infirmier);
 		PreparedStatement preparedStatement=null;
-		String insertSQL= "INSERT INTO INFIRMIER " 
-				+ "(ID_PERSONNE, CODE_SERVICE,ROTATION,SALAIRE) VALUES"
+		String insertSQL= "INSERT INTO infirmier " 
+				+ "(numero, code_service,rotation,salaire) VALUES"
 				+ "(?,?,?,?)";
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL);
@@ -253,49 +253,6 @@ public class Add {
 			}
 		}
 
-	}
-
-	/**
-	 * Methode qui renvoie la liste des personnes
-	 * @return personnes
-	 * @throws SQLException
-	 */
-	public static /*Object [][]*/ LinkedList<Personne> selectAllPersonne() throws SQLException{
-		LinkedList<Personne> personnes=new LinkedList<Personne>();
-		Statement statement=null;
-		try {
-			statement = Connexion.getInstance().getSqlConnection().createStatement();
-			ResultSet result = statement.executeQuery("SELECT ID,NOM,PRENOM,ADRESSE,TELEPHONE FROM DOCTOR AND INFIRMIER WHERE DOCTOR_ID=INFIRMIER_ID"); // pour docteur on fait une jointure
-			while (result.next()){
-				int id=result.getInt("ID");
-				String nom=result.getString("NOM");
-				String prenom=result.getString("PRENOM");
-				String adresse=result.getString("ADRESSE");
-				String telephone=result.getString("TELEPHONE");
-				Personne p= new Personne(nom, prenom, telephone, adresse);// creer un obj avec le contenu de la table avec personne existante
-				p.setID(id);
-				personnes.add(p);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
-		finally {
-			if (statement!=null){
-				statement.close();
-			}
-		}
-		return personnes;
-		//	Object [][] data=new Object[personnes.size()][4];
-		//
-		//	for(int i=0;i<personnes.size();i++){
-		//		data[i][0]=personnes.get(i).getNom();
-		//		data[i][1]=personnes.get(i).getPrenom();
-		//		data[i][2]=personnes.get(i).getAdresse();
-		//		data[i][3]=personnes.get(i).getTelephone();
-		//	}
-		//	return data; // acces a toute la liste .
 	}
 
 }

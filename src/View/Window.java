@@ -6,16 +6,16 @@ import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.JTableHeader;
 
 import model.Personne;
 import connexion.Connexion;
-
 import model.Add;
 import model.Doctor;
 import model.Resultat;
@@ -47,14 +47,7 @@ public class Window extends JFrame{
             }
         });
         
-        Doctor d = new Doctor("bernard","michel","0123456789",
-        		"10 avenue Coquelicots 75015 Paris","cardiologue");
-        try {
-			Add.addDoctor(d);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
         
 	}
 	
@@ -85,9 +78,13 @@ public class Window extends JFrame{
 		}
 		
 	}
+	public void showResult(Resultat resultat){
+		this.main_table = new Table(resultat.getResult(), resultat.getTitles());
+		this.main_table.updateUI();
+	}
 	public void updateTable(String title, boolean action) {
 		if(action){//add
-			
+			this.main_table.show(title);
 		}
 		else {//remove
 			this.main_table.hide(title);

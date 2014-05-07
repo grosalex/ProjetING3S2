@@ -12,13 +12,6 @@ public class Hospitalisation {
 		this.chambre = chambre;
 		this.patient = patient;
 	}
-	
-	public String historise() {
-		return "UPDATE hospitalisation "
-				+ "SET present=FALSE "
-				+ "WHERE code_service=" + service.getCode() +" AND no_malade=" + patient.getID() + " AND no_chambre=" + chambre.getId()
-				+ " AND lit=" + lit.getId();
-	}
 
 	public Service getService() {
 		return service;

@@ -4,6 +4,8 @@ package model;
 import java.util.ArrayList;
 import java.sql.*;
 
+import javax.swing.JButton;
+
 import connexion.Connexion;
 
 public class Resultat {
@@ -15,29 +17,33 @@ public class Resultat {
 	private Statement stmt;
 	Connexion c;
 	
-	public Resultat(Connexion c, String requete) throws SQLException {
+	public Resultat(Connexion c, String requete) throws SQLException, NoResultException {
 		this.c = c;
 		int nbLigne;
 		int j=0;
 		titles=new ArrayList<String>();
 		stmt = c.getSqlConnection().createStatement();
 		rset = stmt.executeQuery(requete);
+		if (!rset.isBeforeFirst() ) throw new NoResultException(); 
 		rsetMeta = rset.getMetaData();
 		nbCol = rsetMeta.getColumnCount();
 		rset.last();
 		nbLigne = rset.getRow()+1;
 		rset.first();
-		result=new Object[nbLigne][nbCol];
+		result=new Object[nbLigne][nbCol+2];
 
 		for(int i=1;i<=nbCol;i++) {
 			titles.add(rsetMeta.getColumnLabel(i));
 		}
-
+		titles.add("Modify");
+		titles.add("Delete");
 		do {
 			j++;
 			for(int i=0;i<nbCol;i++) {
 				result[j][i] = rset.getObject(i+1);
-			}	
+			}
+			result[j][nbCol] = new JButton("Modify");
+			result[j][nbCol+1] = new JButton("Delete");
 
 		}while(rset.next());
 	}

@@ -3,8 +3,8 @@ package model;
 // Objet personnel héritant de personne
 public class Personnel extends Personne {
 	private String metier;
-	public Personnel(String nom,String prenom,String telephone,String adresse, String metier){
-		super (nom,prenom,telephone,adresse);
+	public Personnel(int id,String nom,String prenom,String telephone,String adresse, String metier){
+		super (id,nom,prenom,telephone,adresse);
 		this.metier=metier;
 	}
 	// Getter

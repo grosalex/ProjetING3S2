@@ -90,7 +90,7 @@ public class Menu extends JMenuBar{
 		this.add_doctor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PopupAddDoctor add_doctor = new PopupAddDoctor();
+				PopupAddDoctor add_doctor = new PopupAddDoctor(current_window);
 				add_doctor.setVisible(true);
 				
 			}
@@ -99,14 +99,14 @@ public class Menu extends JMenuBar{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PopupAddNurse add_nurse = new PopupAddNurse();
+				PopupAddNurse add_nurse = new PopupAddNurse(current_window);
 				add_nurse.setVisible(true);
 			}
 		});
 		this.add_patient.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PopupAddPatient add_patient = new PopupAddPatient();
+				PopupAddPatient add_patient = new PopupAddPatient(current_window);
 				add_patient.setVisible(true);
 			}
 		});
@@ -123,7 +123,7 @@ public class Menu extends JMenuBar{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PopupResearch research=new PopupResearch();
+				PopupResearch research=new PopupResearch(current_window);
 				research.setVisible(true);
 			}
 		});

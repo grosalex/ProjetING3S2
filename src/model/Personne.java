@@ -7,11 +7,18 @@ private String prenom;
 private String telephone;
 private String adresse;
 private int ID;
-public Personne(String nom,String prenom,String telephone,String adresse ){
+public Personne(int id,String nom,String prenom,String telephone,String adresse ){
+	this.ID = id;
 	this.nom=nom;
 	this.prenom=prenom;
 	this.telephone=telephone;
 	this.adresse=adresse;
+}
+public Personne(String nom, String prenom, String telephone, String adresse) {
+	this.nom = nom;
+	this.prenom = prenom;
+	this.telephone = telephone;
+	this.adresse = adresse;
 }
 // sert � lire le contenu
 public String getNom(){
