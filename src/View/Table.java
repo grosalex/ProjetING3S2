@@ -7,6 +7,8 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 import model.Resultat;
 
 //on a un problème pour les listeners 
@@ -15,7 +17,7 @@ import model.Resultat;
  */
 public class Table extends JTable {
 	private String type=null;
-	public Table(Object [][] data, String [] title,String type) {
+	public Table(Object [][] data, String [] title,final String type) {
 		super(data,title);
 		this.type=type;
 		this.setIntercellSpacing(new Dimension(5,5));
@@ -24,13 +26,22 @@ public class Table extends JTable {
 		    @Override
 			public void actionPerformed(ActionEvent e)
 		    {
-		    	//
+		    	int modelRow = Integer.valueOf(e.getActionCommand());
+		    	TableModel model = getModel();
+		    	if(type.equals("docteur")){
+		    		System.out.println("Docteur id = + "+ model.getValueAt(modelRow, 0));
+		    	}
+		    	else if(type.equals("infirmier")){
+		    		
+		    	}
+		    	else if(type.equals("malade")){
+		    		
+		    	}
 		    }
 		};
 		Action delete = new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Stub de la méthode généré automatiquement
 				
 			}
 		};
