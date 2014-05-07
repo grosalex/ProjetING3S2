@@ -17,13 +17,14 @@ public class Resultat {
 	private Statement stmt;
 	Connexion c;
 	
-	public Resultat(Connexion c, String requete) throws SQLException {
+	public Resultat(Connexion c, String requete) throws SQLException, NoResultException {
 		this.c = c;
 		int nbLigne;
 		int j=0;
 		titles=new ArrayList<String>();
 		stmt = c.getSqlConnection().createStatement();
 		rset = stmt.executeQuery(requete);
+		if (!rset.isBeforeFirst() ) throw new NoResultException(); 
 		rsetMeta = rset.getMetaData();
 		nbCol = rsetMeta.getColumnCount();
 		rset.last();
