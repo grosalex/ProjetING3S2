@@ -1,9 +1,6 @@
 package View;
 
-import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 public class Table extends JTable {
 	public Table(Object [][] data, String [] title) {

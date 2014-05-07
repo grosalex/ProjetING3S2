@@ -206,6 +206,10 @@ public class Connexion {
 	public void executeUpdate(String requeteMaj) throws SQLException {
 		stmt.executeUpdate(requeteMaj);
 	}
+	
+	public void executeQuery(String requete) throws SQLException {
+		stmt.executeQuery(requete);
+	}
 	// Recupere la connexion sql unique 
 	public Connection getSqlConnection() {
 		return conn;
