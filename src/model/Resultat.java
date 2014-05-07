@@ -35,7 +35,8 @@ public class Resultat {
 		for(int i=1;i<=nbCol;i++) {
 			titles.add(rsetMeta.getColumnLabel(i));
 		}
-
+		titles.add("Modify");
+		titles.add("Delete");
 		do {
 			j++;
 			for(int i=0;i<nbCol;i++) {

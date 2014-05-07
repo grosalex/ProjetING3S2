@@ -23,7 +23,7 @@ public class Selection extends JPanel{
 		this.bottom_panel.setLayout(new BoxLayout(bottom_panel, BoxLayout.PAGE_AXIS));
 		this.top_panel.add(new JLabel("Visible"));
 		this.bottom_panel.add(new JLabel("hide"));
-		for(int i=0;i<titles.length;i++){
+		for(int i=0;i<titles.length-2;i++){
 			this.button_list.add(new JButton(titles[i]));
 			this.button_list.get(i).addActionListener(new ActionListener() {
 				@Override
