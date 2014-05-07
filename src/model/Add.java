@@ -35,7 +35,7 @@ public class Add {
 	 * @throws SQLException
 	 */
 	public static void addDoctor(Doctor doctor) throws SQLException {
-		int id = addEmploye(doctor);
+		Personne p = addEmploye(doctor);
 		PreparedStatement preparedStatement=null;
 		String insertSQL= "INSERT INTO docteur " 
 				+ "(numero, specialite) VALUES"
@@ -44,7 +44,7 @@ public class Add {
 		//
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL);
-			preparedStatement.setInt(1, id); 
+			preparedStatement.setInt(1, p.getID()); 
 			preparedStatement.setString(2, doctor.getSpecialite());
 
 			// Insertion de la ligne dans la table.
@@ -98,14 +98,15 @@ public class Add {
 	 * @throws SQLException
 	 */
 	public static void addNurse(Infirmier infirmier) throws SQLException {
-		int id = addEmploye(infirmier);
+		Personne p = addEmploye(infirmier);
+		
 		PreparedStatement preparedStatement=null;
 		String insertSQL= "INSERT INTO infirmier " 
 				+ "(numero, code_service,rotation,salaire) VALUES"
 				+ "(?,?,?,?)";
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL);
-			preparedStatement.setInt(1, id); 
+			preparedStatement.setInt(1, p.getID()); 
 			preparedStatement.setInt(2, infirmier.getCode_Service());
 			preparedStatement.setString(3, infirmier.getRotation());
 			preparedStatement.setFloat(4, infirmier.getSalaire());
@@ -132,14 +133,14 @@ public class Add {
 	 * @throws SQLException
 	 */
 	public static void addPersonnel(Personnel personnel) throws SQLException {
-		int id = addEmploye(personnel);
+		Personne p = addEmploye(personnel);
 		PreparedStatement preparedStatement=null;
 		String insertSQL= "INSERT INTO PERSONNEL " 
 				+ "(ID_PERSONNE, METIER) VALUES"
 				+ "(?,?)";
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL);
-			preparedStatement.setInt(1, id); 
+			preparedStatement.setInt(1, p.getID()); 
 			preparedStatement.setString(2, personnel.getMetier());
 
 			// Insertion de la ligne dans la table.
@@ -163,7 +164,7 @@ public class Add {
 	 * @param personne
 	 * @throws SQLException
 	 */
-	public static int addEmploye(Personne personne) throws SQLException {
+	public static Personne addEmploye(Personne personne) throws SQLException {
 		PreparedStatement preparedStatement=null;
 		int id = 0;
 		String insertSQL="";
@@ -180,8 +181,13 @@ public class Add {
 			preparedStatement.setString(4, personne.getAdresse());
 
 			// Insertion de la ligne dans la table.
-			id = preparedStatement.executeUpdate();
-			//personne.setID(id); // on a l'ID de la table personne , � v�rifier.
+			preparedStatement.executeUpdate();
+			ResultSet keys = preparedStatement.getGeneratedKeys();
+			keys.next();
+			id = keys.getInt(1);
+			System.out.println(id);
+			
+			personne.setID(id); // on a l'ID de la table personne , � v�rifier.
 
 		}catch (SQLException e){
 			// A voir si on lance ou nouvelle exception
@@ -194,7 +200,7 @@ public class Add {
 			}
 		}
 		
-		return id;
+		return personne;
 
 	}
 	public static void addPatient(Personne personne) throws SQLException {
