@@ -4,14 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
-import connexion.Connexion;
+
 import model.NoResultException;
 import model.Resultat;
+import connexion.Connexion;
 
 public class Window extends JFrame{
 	private JPanel left_panel=new JPanel();
@@ -64,7 +66,7 @@ public class Window extends JFrame{
 				// TODO Bloc catch généré automatiquement
 				e.printStackTrace();
 			}
-			this.main_table = new Table(this.main_resultat.getResult(),this.main_resultat.getTitles(),"Docteur");
+			this.main_table = new Table(this.main_resultat.getResult(),this.main_resultat.getTitles(),"docteur");
 			this.rightJPanel.add(new JScrollPane(main_table),BorderLayout.CENTER);
 			this.rightJPanel.setVisible(true);
 			this.left_panel.add(new Selection(this.main_resultat.getTitles(), this));

@@ -21,11 +21,17 @@ public class Table extends JTable {
 		super(data,title);
 		this.type=type;
 		this.setIntercellSpacing(new Dimension(5,5));
+
+		this.addButton();
+		
+	}
+	public void addButton(){
 		Action modify = new AbstractAction()
 		{
 		    @Override
 			public void actionPerformed(ActionEvent e)
 		    {
+		    	System.out.println("test");
 		    	int modelRow = Integer.valueOf(e.getActionCommand());
 		    	TableModel model = getModel();
 		    	if(type.equals("docteur")){
@@ -45,10 +51,8 @@ public class Table extends JTable {
 				
 			}
 		};
-		ButtonColumn deleteButtonColumn = new ButtonColumn(this, modify, title.length-2);
-		ButtonColumn modifyButtonColumn = new ButtonColumn(this, delete, title.length-1);
-
-		
+		ButtonColumn deleteButtonColumn = new ButtonColumn(this, modify, this.getColumnCount()-2);
+		ButtonColumn modifyButtonColumn = new ButtonColumn(this, delete, this.getColumnCount()-1);
 	}
 	public void hide(String title){
 		for(int i=0;i<getColumnCount();i++){
@@ -79,6 +83,7 @@ public class Table extends JTable {
 	public void update(Resultat resultat, String type){
 		this.type=type;
 		this.setModel(new DefaultTableModel(resultat.getResult(), resultat.getTitles()));
+		this.addButton();
 		this.updateUI();
 
 	}
