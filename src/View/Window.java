@@ -23,6 +23,7 @@ public class Window extends JFrame{
 	private Menu menue = null;
 
 	private Table main_table= null;
+	private Selection select_panel=null;
 	private Resultat main_resultat=null;
 	public Window(){
 
@@ -62,9 +63,21 @@ public class Window extends JFrame{
 			this.main_table = new Table(this.main_resultat.getResult(),this.main_resultat.getTitles());
 			this.rightJPanel.add(new JScrollPane(main_table),BorderLayout.CENTER);
 			this.rightJPanel.setVisible(true);
+			this.left_panel.add(new Selection(this.main_resultat.getTitles(), this));
+			this.left_panel.setVisible(true);
+			
 		} catch (SQLException e) {
 			// TODO Bloc catch généré automatiquement
 			e.printStackTrace();
+		}
+		
+	}
+	public void updateTable(String title, boolean action) {
+		if(action){//add
+			
+		}
+		else {//remove
+			this.main_table.hide(title);
 		}
 		
 	}

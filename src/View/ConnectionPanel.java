@@ -61,6 +61,7 @@ public class ConnectionPanel extends JPanel{
 					
 				}
 				setVisible(false);
+				input.showTableEmploye();
 			}
 		});
 		this.second.add(this.local);
