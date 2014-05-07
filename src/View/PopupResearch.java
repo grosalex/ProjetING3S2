@@ -81,11 +81,44 @@ public class PopupResearch extends JDialog{
 							 "%' AND employe.tel LIKE '%"+ tel +  "%' AND docteur.specialite LIKE '%" + specialite +"%' AND employe.numero=docteur.numero;");
 			      }
 			      else if(combo.getSelectedItem()=="Patient"){
+			    	  
+			    	  requete=("SELECT* FROM malade WHERE numero LIKE '%"+ nom + "%' AND prenom LIKE '%" + prenom + "%' AND tel LIKE '%" + tel + "%' AND adresse LIKE '%" + adresse+";");
 			      }
 			      
 			      else if (combo.getSelectedItem()=="Nurse") {
-			    	
+			    	 requete= ("SELECT employe.numero ,nom, prenom, adresse, tel, code_service,rotation,salaire FROM employe,infirmier WHERE "+
+								"employe.nom LIKE '%" + nom +  "%' AND employe.prenom LIKE '%" + prenom + "%' AND employe.adresse LIKE '%" + adresse +
+								 "%' AND employe.tel LIKE '%"+ tel +  "%' AND infirmier.code_service LIKE '%"+code_service+ "%' AND infirmier.rotation LIKE '%" + rotation+"%' AND infirmier.salaire LIKE '%"+ salaire +"%' AND employe.numero=infirmier.numero;");
+			    
 			      }
+				
+			      else if(combo.getSelectedItem()=="Hospitalisation")
+			      {
+			    	  requete=("SELECT* FROM hospitalisation WHERE no_malade LIKE '%"+no_malade+ "%' AND code_service LIKE '%"+code_service+  "%' AND no_chambre LIKE '%"+ no_chambre+ "%' AND lit LIKE '%"+ lit+";");
+			      }
+			      
+			      else if(combo.getSelectedItem()=="Service")
+			      {
+			    	  requete=("SELECT* FROM service WHERE code LIKE '%"+ code + "%' nom LIKE '%"+ nom + "%' batiment LIKE '%"+ batiment +"%' directeur LIKE '%"+ directeur +";");
+			      }
+			     
+			      else if(combo.getSelectedItem()=="Room")
+			      {
+			    	  requete=("SELECT* FROM chambre WHERE no_chambre LIKE '%"+ no_chambre + "%' code_service LIKE '%"+ code_service + "%' surveillant LIKE '%"+ surveillant +"%' nb_lits LIKE '%"+ nb_lits +";");
+			      }
+				
+			      else if(combo.getSelectedItem()=="Personel")
+			      {
+			    	  requete=("SELECT* FROM employe WHERE nom LIKE '%" + nom +  "%' AND prenom LIKE '%" + prenom + "%' AND adresse LIKE '%" + adresse +
+								 "%' AND tel LIKE '%"+ tel+";");
+			   
+			      }
+			      else if(combo.getSelectedItem()=="Treatment")
+			      {
+			    	  requete=("SELECT* FROM soigne WHERE "
+			      }
+				
+				
 				
 				try {
 					System.out.println(requete);
