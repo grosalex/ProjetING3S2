@@ -1,6 +1,9 @@
 package connexion;
 
-import com.jcraft.jsch.*;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.UIKeyboardInteractive;
+import com.jcraft.jsch.UserInfo;
 
 /**
  * Etablit une connexion au serveur de la base de données via un tunnel SSH

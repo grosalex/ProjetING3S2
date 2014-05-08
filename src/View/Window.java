@@ -1,17 +1,20 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
-import connexion.Connexion;
+
 import model.NoResultException;
 import model.Resultat;
+import connexion.Connexion;
 
 public class Window extends JFrame{
 	private JPanel left_panel=new JPanel();
@@ -46,16 +49,17 @@ public class Window extends JFrame{
 	
 	public void setMainProperties(String title,int width, int height){
 		this.setTitle(title);
-		this.setSize(width,height);
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		
 	}
 	public void initializePanels(){
 	    this.rightJPanel.setLayout(new BorderLayout());
 		this.rightJPanel.add(new ConnectionPanel(this));
 		this.main_split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,left_panel,rightJPanel);
 		this.add(main_split);
-		this.main_split.setResizeWeight(0.33);
+		this.main_split.setResizeWeight(0.15);
 	}
-	
+
 	public void showTableEmploye(){
 		try {
 			try {
@@ -64,10 +68,11 @@ public class Window extends JFrame{
 				// TODO Bloc catch généré automatiquement
 				e.printStackTrace();
 			}
-			this.main_table = new Table(this.main_resultat.getResult(),this.main_resultat.getTitles(),"Docteur");
+			this.main_table = new Table(this.main_resultat.getResult(),this.main_resultat.getTitles(),"docteur");
 			this.rightJPanel.add(new JScrollPane(main_table),BorderLayout.CENTER);
 			this.rightJPanel.setVisible(true);
-			this.left_panel.add(new Selection(this.main_resultat.getTitles(), this));
+			this.select_panel = new Selection(this.main_resultat.getTitles(),this);
+			this.left_panel.add(this.select_panel);
 			this.left_panel.setVisible(true);
 			
 		} catch (SQLException e) {
@@ -87,8 +92,10 @@ public class Window extends JFrame{
 		}
 
 	}
+	
 	public void showResult(Resultat resultat, String type){
 		this.main_table.update(resultat, type);
+		this.select_panel.update(resultat.getTitles());
 	}
 	public void updateTable(String title, boolean action) {
 		if(action){//add

@@ -1,7 +1,8 @@
 package Recherche;
-import connexion.Connexion;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import connexion.Connexion;
 
 public class Recherche {
 
@@ -9,7 +10,7 @@ public class Recherche {
 	private Connexion c;
 	
     /**
-     * ArrayList public pour les requêtes de sélection
+     * ArrayList public pour les requï¿½tes de sï¿½lection
      */
 	
     public ArrayList<String> requetes = new ArrayList<String>();
@@ -91,7 +92,7 @@ public class Recherche {
        ArrayList<String> liste;
        liste = new ArrayList<String>();
        
-       /**récupérer le résultat de la requête*/
+       /**rï¿½cupï¿½rer le rï¿½sultat de la requï¿½te*/
 
            liste=c.remplirChampsRequete(sql);
       
@@ -200,14 +201,14 @@ public class Recherche {
     
     
     /**
-     * Méthode privée qui ajoute la requete de selection en parametre dans son ArrayList
+     * Mï¿½thode privï¿½e qui ajoute la requete de selection en parametre dans son ArrayList
      */
     private void ajouterRequete(String requete) {
         requetes.add(requete);
     }
 
     /**
-     * Méthode privée qui initialise la liste des requetes de selection
+     * Mï¿½thode privï¿½e qui initialise la liste des requetes de selection
      */
     private void remplirRequetes() {
         ajouterRequete("SELECT prenom, nom FROM malade WHERE mutuelle='MAAF' ORDER BY nom;");
