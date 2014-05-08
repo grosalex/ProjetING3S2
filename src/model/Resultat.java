@@ -61,8 +61,9 @@ public class Resultat {
 
 		do {
 			for(int i=0;i<nbCol;i++) {
-				j++;
+				
 				data[j][i] = rset.getObject(i);
+				j++;
 			}	
 		}while(rset.next());
 		return data;
