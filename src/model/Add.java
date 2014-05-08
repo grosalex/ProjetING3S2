@@ -249,7 +249,7 @@ public class Add {
 
 		}catch (SQLException e){
 			// A voir si on lance ou nouvelle exception
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		// meme en cas de pb on passe dans le finally
 		finally{
@@ -282,7 +282,7 @@ public class Add {
 
 		}catch (SQLException e){
 			// A voir si on lance ou nouvelle exception
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		// meme en cas de pb on passe dans le finally
 		finally{

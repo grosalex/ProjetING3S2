@@ -31,7 +31,6 @@ public class PopupAddHosp extends PopupAddPatient{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Patient current_patient = new Patient(name.getText(), surname.getText(), phone.getText(), address.getText(),0, speciality.getText());
-					Add.addPatient(current_patient);
 					Add.addHop(current_patient, Integer.parseInt(doctor_id.getText()), service_id.getText());
 /*					String requete_doc = "SELECT employe.numero ,nom, prenom, adresse, tel, specialite FROM employe,docteur WHERE employe.id="+doctor_id.getText();
 					String requete_service = "SELECT code ,nom, batiment, directeur FROM service WHERE code="+service_id.getText();
