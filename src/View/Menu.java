@@ -17,6 +17,8 @@ public class Menu extends JMenuBar{
 	private JMenuItem add_patient = new JMenuItem("patient");
 	private JMenuItem add_appointment = new JMenuItem("appointment");
 	private JMenuItem add_hosp = new JMenuItem("Hospitalization");
+	private JMenuItem add_room= new JMenuItem("Room");
+	private JMenuItem add_service = new JMenuItem("Service");
 	private JMenuItem research = new JMenuItem("research (readonly)");
 	private JMenu request = new JMenu("available request");
 	
@@ -57,6 +59,8 @@ public class Menu extends JMenuBar{
 		this.add.add(add_patient);
 		this.add.add(add_appointment);
 		this.add.add(add_hosp);
+		this.add.add(add_room);
+		this.add.add(add_service);
 		this.file.add(add);
 		this.file.add(research);
 
@@ -125,6 +129,22 @@ public class Menu extends JMenuBar{
 			public void actionPerformed(ActionEvent arg0) {
 				PopupAddHosp add_hosp = new PopupAddHosp(current_window);
 				add_hosp.setVisible(true);
+			}
+		});
+		this.add_room.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				PopupAddRoom add_room=new PopupAddRoom(current_window);
+				add_room.setVisible(true);
+			}
+		});
+		this.add_service.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PopupAddService add_service = new PopupAddService(current_window);
+				add_service.setVisible(true);
 			}
 		});
 		this.research.addActionListener(new ActionListener() {
