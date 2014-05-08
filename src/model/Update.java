@@ -117,6 +117,60 @@ public class Update {
 			}
 		}
 	}
+	
+	public static void Service(Service s) throws SQLException {
+		PreparedStatement preparedStatement=null;
+		String insertSQL="";
+		insertSQL= "update service set"
+				+ "batiment=?, directeur=? "
+				+ "WHERE code=?";
+		try{
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement.setString(1, s.getBatiment());
+			preparedStatement.setInt(2, s.getDirecteur());
+			preparedStatement.setString(3, s.getCode());
+			// Insertion de la ligne dans la table.
+			preparedStatement.executeUpdate();
+			//personne.setID(id); // on a l'ID de la table personne , � v�rifier.
+
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		// meme en cas de pb on passe dans le finally
+		finally{
+			if (preparedStatement!=null){
+				preparedStatement.close();
+			}
+		}
+	}
+	
+	public static void Chambre(Chambre c) throws SQLException {
+		PreparedStatement preparedStatement=null;
+		String insertSQL="";
+		insertSQL= "update chambre set surveillant=?, nb_lits=?,"
+				+ "lits_dispos=?"
+				+ "WHERE code_service=? AND no_chambre=?";
+		try{
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement.setInt(1, c.getId_surveillant());
+			preparedStatement.setInt(2, c.getNb_lits());
+			preparedStatement.setInt(3, c.getLits_dispos());
+			preparedStatement.setInt(4, c.getService());
+			preparedStatement.setInt(5, c.getId());
+			// Insertion de la ligne dans la table.
+			preparedStatement.executeUpdate();
+			//personne.setID(id); // on a l'ID de la table personne , � v�rifier.
+
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		// meme en cas de pb on passe dans le finally
+		finally{
+			if (preparedStatement!=null){
+				preparedStatement.close();
+			}
+		}
+	}
 }
 
 

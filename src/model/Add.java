@@ -51,7 +51,7 @@ public class Add {
 
 		}catch (SQLException e){
 			// A voir si on lance ou nouvelle exception
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		// meme en cas de pb on passe dans le finally
 		finally{
@@ -86,7 +86,7 @@ public class Add {
 
 		}catch (SQLException e){
 			// A voir si on lance ou nouvelle exception
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		// meme en cas de pb on passe dans le finally
 		finally{
@@ -118,7 +118,7 @@ public class Add {
 
 		}catch (SQLException e){
 			// A voir si on lance ou nouvelle exception
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		// meme en cas de pb on passe dans le finally
 		finally{
@@ -160,7 +160,7 @@ public class Add {
 
 		}catch (SQLException e){
 			// A voir si on lance ou nouvelle exception
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		// meme en cas de pb on passe dans le finally
 		finally{
@@ -182,7 +182,8 @@ public class Add {
 		try {
 			res = new Resultat(Connexion.getInstance(),"SELECT * FROM chambre WHERE lits_dispos=nb_lits AND code_service ='"+code_service+"'");
 			Object[][] data = res.getResult();
-			addPatient(p);
+			p =addPatient(p);
+			System.out.println(p.getID());
 			addSoigne(p, id_doc);
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(1, p.getID());
@@ -191,8 +192,8 @@ public class Add {
 			preparedStatement.setInt(4, 1);
 			preparedStatement.executeUpdate();
 			
-			Connexion.getInstance().executeUpdate("UPDATE chambre SET lits_dispos=lits_dispos-1 WHERE code_service="+code_service+
-					" AND no_chambre="+(int)data[0][1]);
+			Connexion.getInstance().executeUpdate("UPDATE chambre SET lits_dispos=lits_dispos-1 WHERE code_service='"+code_service+
+					"' AND no_chambre="+(int)data[0][1]);
 		}
 		catch(NoResultException e) {
 			try {
@@ -278,6 +279,7 @@ public class Add {
 			preparedStatement.executeUpdate();
 			ResultSet keys = preparedStatement.getGeneratedKeys();
 			keys.next();
+			System.out.println(keys.getInt(1));
 			newP.setID(keys.getInt(1));
 
 		}catch (SQLException e){
@@ -294,8 +296,68 @@ public class Add {
 
 	}
 	
-	public static void addService(Service s) {
-		
+	public static void addService(Service s, int id_doc) throws SQLException {
+		PreparedStatement preparedStatement=null;
+		String insertSQL= "INSERT INTO service"
+				+ "(code,nom,batiment,directeur) VALUES"
+				+ "(?,?,?,?)";
+
+		try{
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement.setString(1, s.getCode());
+			preparedStatement.setString(2, s.getNom());
+			preparedStatement.setString(3, s.getBatiment());
+			preparedStatement.setInt(4,id_doc);
+
+			// Insertion de la ligne dans la table.
+			preparedStatement.executeUpdate();
+
+		}catch (SQLException e){
+			// A voir si on lance ou nouvelle exception
+			e.printStackTrace();
+		}
+		// meme en cas de pb on passe dans le finally
+		finally{
+			if (preparedStatement!=null){
+				preparedStatement.close();
+			}
+		}
+	}
+	
+	public static void addChambre(Chambre c, String code_service, int surveillant) throws SQLException {
+		PreparedStatement preparedStatement=null;
+		String insertSQL= "INSERT INTO chambre"
+				+ "(code_service,no_chambre,surveillant,nb_lits,lits_dispos) VALUES"
+				+ "(?,?,?,?,?)";
+
+		try{
+			Resultat res = new Resultat(Connexion.getInstance(),"SELECT MAX(no_chambre) FROM chambre WHERE code_service='"+code_service+"'");
+			Object[][] data = res.getResult();
+			int no_chambre = (int)data[0][0]+1;
+			
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement.setString(1, code_service);
+			preparedStatement.setInt(2, no_chambre);
+			preparedStatement.setInt(3, surveillant);
+			preparedStatement.setInt(4,c.getNb_lits());
+			preparedStatement.setInt(5,c.getNb_lits());
+
+			// Insertion de la ligne dans la table.
+			preparedStatement.executeUpdate();
+
+		}catch (SQLException e){
+			// A voir si on lance ou nouvelle exception
+			e.printStackTrace();
+		} catch (NoResultException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// meme en cas de pb on passe dans le finally
+		finally{
+			if (preparedStatement!=null){
+				preparedStatement.close();
+			}
+		}
 	}
 
 }
