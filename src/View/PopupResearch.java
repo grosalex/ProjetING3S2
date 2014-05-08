@@ -82,7 +82,7 @@ public class PopupResearch extends JDialog{
 							"%' AND employe.tel LIKE '%"+ tel +  "%' AND docteur.specialite LIKE '%" + specialite +"%' AND employe.numero=docteur.numero;");
 				}
 				else if(combo.getSelectedItem()=="Patient"){
-					type="patient";
+					type="malade";
 					String mutuelle = mutual.getText();
 					requete=("SELECT* FROM malade WHERE numero LIKE '%"+ nom + "%' AND prenom LIKE '%" + prenom +
 							"%' AND tel LIKE '%" + tel + "%' AND adresse LIKE '%" + adresse+"%' AND mutuelle LIKE '%"+mutuelle+"%' ;");
