@@ -16,6 +16,7 @@ public class Menu extends JMenuBar{
 	private JMenuItem add_nurse = new JMenuItem("nurse");
 	private JMenuItem add_patient = new JMenuItem("patient");
 	private JMenuItem add_appointment = new JMenuItem("appointment");
+	private JMenuItem add_hosp = new JMenuItem("Hospitalization");
 	private JMenuItem research = new JMenuItem("research (readonly)");
 	private JMenu request = new JMenu("available request");
 	
@@ -55,6 +56,7 @@ public class Menu extends JMenuBar{
 		this.add.add(add_nurse);
 		this.add.add(add_patient);
 		this.add.add(add_appointment);
+		this.add.add(add_hosp);
 		this.file.add(add);
 		this.file.add(research);
 
@@ -118,7 +120,13 @@ public class Menu extends JMenuBar{
 				
 			}
 		});
-		
+		this.add_hosp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				PopupAddHosp add_hosp = new PopupAddHosp(current_window);
+				add_hosp.setVisible(true);
+			}
+		});
 		this.research.addActionListener(new ActionListener() {
 			
 			@Override

@@ -12,7 +12,6 @@ public class PopupAddPatient extends PopupAddDoctor{
 		super(current_window);
 		this.label_speciality.setText("mutual");
 		this.save.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
