@@ -13,6 +13,7 @@ public class Update {
 		String insertSQL="";
 		insertSQL= "update employe set nom=?, prenom=?, tel=?,adresse=? "
 				+ "WHERE numero=?";
+		System.out.println("telephone in update :"+newP.getTelephone());
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
 			preparedStatement.setString(1, newP.getNom());
@@ -20,7 +21,7 @@ public class Update {
 			preparedStatement.setString(3, newP.getTelephone());
 			preparedStatement.setString(4, newP.getAdresse());
 			preparedStatement.setInt(5, newP.getID());
-
+			
 			// Insertion de la ligne dans la table.
 			preparedStatement.executeUpdate();
 			//personne.setID(id); // on a l'ID de la table personne , � v�rifier.
