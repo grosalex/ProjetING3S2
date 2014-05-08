@@ -1,30 +1,39 @@
 package model;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import connexion.Connexion;
 
 public class Historisation {
-	
-	public static void hospitalisation(Connexion c, Hospitalisation h) {
+
+	public static void hospitalisation(Hospitalisation h) {
+		PreparedStatement preparedStatement=null;
+		String insertSQL= "INSERT INTO hospitalisation_old"
+				+ "(no_malade,code_service,no_chambre,lit) VALUES"
+				+ "(?,?,?,?)";
 		try {
-			c.executeUpdate("UPDATE hospitalisation "
-					+ "SET present=FALSE "
-					+ "WHERE code_service=" + h.getService().getCode() 
-					+" AND no_malade=" + h.getPatient().getID() 
-					+" AND no_chambre=" + h.getChambre().getId()
-					+" AND lit=" + h.getLit().getId());
-		} catch (SQLException e) {
-			System.out.println("SQL Exception while historizing");
-			e.printStackTrace();
-		}
-	}
-	
-	public static void rdv (Connexion c, RendezVous r) {
-		try {
-			c.executeUpdate("UPDATE rdv "
-					+ "SET present=FALSE "
-					+ "WHERE date=" + r.getDate() +" AND docteur=" + r.getDocteur().getID() + " AND patient=" + r.getPatient().getID());
+			
+			Connexion.getInstance().executeUpdate("UPDATE hospitalisation SET nb_lits_dispo=nb_lits_dispo+1 WHERE no_chambre="+h.getChambre().getId());
+			Connexion.getInstance().executeQuery("CREATE TABLE IF NOT EXISTS `hospitalisation_old` ("
+					+"`no_malade` int(11) NOT NULL,"
+					+"`code_service` char(3) NOT NULL,"
+					+"`no_chambre` int(11) NOT NULL,"
+					+"`lit` int(11) default NULL,"
+					+"PRIMARY KEY  (`no_malade`),"
+					+"UNIQUE KEY `code_service` (`code_service`,`no_chambre`,`lit`)"
+					+") ENGINE=MyISAM DEFAULT CHARSET=latin1");
+			
+			Connexion.getInstance().executeUpdate("DELETE FROM hospitalisation"
+					+ "WHERE no_malade="+h.getPatient().getID());
+			
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.setInt(1, h.getPatient().getID());
+			preparedStatement.setInt(2, h.getCode_service());
+			preparedStatement.setInt(3, h.getChambre().getId());
+			preparedStatement.setInt(4, h.getLit());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL Exception while historizing");
 			e.printStackTrace();
