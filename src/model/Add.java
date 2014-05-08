@@ -155,7 +155,6 @@ public class Add {
 			ResultSet keys = preparedStatement.getGeneratedKeys();
 			keys.next();
 			id = keys.getInt(1);
-			System.out.println(id);
 			
 			personne.setID(id); // on a l'ID de la table personne , � v�rifier.
 
@@ -181,7 +180,7 @@ public class Add {
 				+ "(?,?,?,?,1)";
 		
 		try {
-			res = new Resultat(Connexion.getInstance(),"SELECT * FROM chambre WHERE lits_dispos=nb_lits AND code_service ="+s.getCode());
+			res = new Resultat(Connexion.getInstance(),"SELECT * FROM chambre WHERE lits_dispos=nb_lits AND code_service ='"+s.getCode()+"'");
 			Object[][] data = res.getResult();
 			addPatient(p);
 			addSoigne(p, d);
@@ -197,12 +196,12 @@ public class Add {
 		}
 		catch(NoResultException e) {
 			try {
-				res = new Resultat(Connexion.getInstance(),"SELECT * FROM chambre WHERE lits_dispos>0 AND code_service ="+s.getCode());
+				res = new Resultat(Connexion.getInstance(),"SELECT * FROM chambre WHERE lits_dispos>0 AND code_service ='"+s.getCode()+"'");
 				Object[][] data = res.getResult();
 				int idChambre = (int)data[0][1];
 				int nb_lits_occupes = ((int)data[0][3] - (int)data[0][4]);
 				int idlit=1;
-				res = new Resultat(Connexion.getInstance(),"SELECT * FROM hospitalisation WHERE no_chambre=" + idChambre + " AND code_service ="+s.getCode());
+				res = new Resultat(Connexion.getInstance(),"SELECT * FROM hospitalisation WHERE no_chambre=" + idChambre + " AND code_service ='"+s.getCode()+"'");
 				Object[][] lits=res.getResult();
 				for(int i=0;i<nb_lits_occupes;i++) {
 					if(idlit==(int)lits[i][3]) {
@@ -210,7 +209,7 @@ public class Add {
 						idlit++;
 					}
 				}
-				addPatient(p);
+				p=addPatient(p);
 				addSoigne(p,d);
 				preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, p.getID());
@@ -219,8 +218,8 @@ public class Add {
 				preparedStatement.setInt(4, idlit);
 				preparedStatement.executeUpdate();
 				
-				Connexion.getInstance().executeUpdate("UPDATE chambre SET lits_dispos=lits_dispos-1 WHERE code_service="+s.getCode()+
-						" AND no_chambre="+(int)data[0][1]);
+				Connexion.getInstance().executeUpdate("UPDATE chambre SET lits_dispos=lits_dispos-1 WHERE code_service='"+s.getCode()+
+						"' AND no_chambre="+(int)data[0][1]);
 			} catch (NoResultException e1) {
 				e1.printStackTrace();
 			}
@@ -237,7 +236,7 @@ public class Add {
 	public static void addSoigne(Patient p, Doctor d) throws SQLException {
 		PreparedStatement preparedStatement=null;
 		String insertSQL= "INSERT INTO soigne"
-				+ "(no_docteur,no_soigne) VALUES"
+				+ "(no_docteur,no_malade) VALUES"
 				+ "(?,?)";
 
 		try{
@@ -260,7 +259,8 @@ public class Add {
 		}
 	}
 	
-	public static void addPatient(Patient p) throws SQLException {
+	public static Patient addPatient(Patient p) throws SQLException {
+		Patient newP = p;
 		PreparedStatement preparedStatement=null;
 		String insertSQL= "INSERT INTO malade"
 				+ "(nom,prenom,tel,adresse,mutuelle) VALUES"
@@ -276,6 +276,9 @@ public class Add {
 
 			// Insertion de la ligne dans la table.
 			preparedStatement.executeUpdate();
+			ResultSet keys = preparedStatement.getGeneratedKeys();
+			keys.next();
+			newP.setID(keys.getInt(1));
 
 		}catch (SQLException e){
 			// A voir si on lance ou nouvelle exception
@@ -287,6 +290,7 @@ public class Add {
 				preparedStatement.close();
 			}
 		}
+		return newP;
 
 	}
 

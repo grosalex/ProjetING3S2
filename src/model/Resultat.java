@@ -29,7 +29,7 @@ public class Resultat {
 		rsetMeta = rset.getMetaData();
 		nbCol = rsetMeta.getColumnCount();
 		rset.last();
-		nbLigne = rset.getRow()+1;
+		nbLigne = rset.getRow();
 		rset.first();
 		result=new Object[nbLigne][nbCol+2];
 
@@ -39,37 +39,16 @@ public class Resultat {
 		titles.add("Modify");
 		titles.add("Delete");
 		do {
-			j++;
+			
 			for(int i=0;i<nbCol;i++) {
 				result[j][i] = rset.getObject(i+1);
 			}
+			
 			result[j][nbCol] = "Modify";
 			result[j][nbCol+1] = "Delete";
+			j++;
 
 		}while(rset.next());
-	}
-
-	public Object[][] returnData(String requete) throws SQLException {
-		Object data[][];
-		int nbCol, nbLigne;
-		int j=0;
-		rset = stmt.executeQuery(requete);
-		rsetMeta = rset.getMetaData();
-		nbCol = rsetMeta.getColumnCount();
-		rset.last();
-		nbLigne = rset.getRow()+1;
-		rset.beforeFirst();
-		data = new String[nbLigne][nbCol];
-
-
-		do {
-			for(int i=0;i<nbCol;i++) {
-				
-				data[j][i] = rset.getObject(i);
-				j++;
-			}	
-		}while(rset.next());
-		return data;
 	}
 
 	public int getNbCol() {
