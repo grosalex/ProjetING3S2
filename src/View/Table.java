@@ -26,6 +26,7 @@ public class Table extends JTable {
 		
 	}
 	public void addButton(){
+		// comming from http://tips4java.wordpress.com/2009/07/12/table-button-column/
 		Action modify = new AbstractAction()
 		{
 		    @Override
