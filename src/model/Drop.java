@@ -1,47 +1,136 @@
 package model;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 
 import connexion.Connexion;
+/**
+ * 
+ * @author Marques William , Bruneau Alexandre , Bao Huanley , Bertrand Kevin
+ *
+ */
 public class Drop {
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	// Cette partie concerne uniquement les malades , et les hospitalisations
+	// Un malade ne peut etre hospitalisé 
+	// l'inverse l'est également.
+	/////////////////////////////////////////////////////////////////////////////////////////////
 	/**
-	 * Methode supprime une personne dans toutes les BD
-	 * @param personne
+	 * Methode qui supprime une ligne de la table malade 
+	 * @param numero
 	 * @throws SQLException
 	 */
-	public static int DropEmploye(Personne personne) throws SQLException {
+	public static void dropMalade(String numero, String no_malade) throws SQLException {
 		PreparedStatement preparedStatement=null;
-		int id = 0;
-		String dropSQL="";
-		dropSQL= "INSERT INTO employe"
-				+ "(NOM,PRENOM,TEL,ADRESSE) VALUES"
-				+ "(?,?,?,?)";
-		
-
+		String dropSQL="DELETE FROM malade WHERE numero="+numero+"";
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
-			preparedStatement.setString(1, personne.getNom());
-			preparedStatement.setString(2, personne.getPrenom());
-			preparedStatement.setString(3, personne.getTelephone());
-			preparedStatement.setString(4, personne.getAdresse());
-
-			// Insertion de la ligne dans la table.
-			id = preparedStatement.executeUpdate();
-			//personne.setID(id); // on a l'ID de la table personne , ï¿½ vï¿½rifier.
-
 		}catch (SQLException e){
-			// A voir si on lance ou nouvelle exception
 			System.out.println(e.getMessage());
 		}
-		// meme en cas de pb on passe dans le finally
+	}
+	/**
+	 * Methode qui supprime une hospitalisation, mais aussi un malade 
+	 * puique un malade non hospitalisé n'est plus un malade
+	 * @param no_malade
+	 * @param code_service
+	 * @param no_chambre
+	 * @param lit
+	 * @throws SQLException
+	 */
+	public static void dropHop(String no_malade,String numero,String nb_lits_dispo,String no_chambre)throws SQLException {
+		dropMalade(numero,no_malade);
+		PreparedStatement preparedStatement=null;
+		String dropSQL="DELETE FROM hospitalisation WHERE no_malade="+numero+" ";
+		String updateSQL="UPDATE hospitalisation SET nb_lits_dispo=nb_lits_dispo+1 WHERE no_chambre="+no_chambre+"";
+		try{
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(updateSQL, Statement.RETURN_GENERATED_KEYS); //
+
+		}catch (SQLException e){
+			System.out.println(e.getMessage());
+		}
 		finally{
 			if (preparedStatement!=null){
 				preparedStatement.close();
 			}
 		}
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// A partir d'ici cela concerne le staff de l'hopital , 
+	// à savoir les docteur, infirmier et le personnel
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Methode qui supprimer un employe dans la table employe
+	 * @param nom
+	 * @param prenom
+	 * @param adresse
+	 * @param telephone
+	 * @throws SQLException
+	 */
+	public static void dropEmploye(int numero) throws SQLException {
+		PreparedStatement preparedStatement=null;
+		String dropSQL="DELETE FROM employe WHERE numero="+numero+"";
+		try{
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
+		}catch (SQLException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	/**
+	 * Methode qui permet de supprimer un infirmier qui va etre supprimer aussi dans la table employee 
+	 * @param no_malade
+	 * @param code_service
+	 * @param no_chambre
+	 * @param lit
+	 * @throws SQLException
+	 */
+	public static void dropInf(int numero,String code_service,String rotation, float salaire)throws SQLException {
+		dropEmploye(numero);
+		PreparedStatement preparedStatement=null;
+		String dropSQL="DELETE FROM infirmier WHERE numero="+numero+"";
 		
-		return id;
-
+		try{
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
+		}catch (SQLException e){
+			System.out.println(e.getMessage());
+		}
+		finally{
+			if (preparedStatement!=null){
+				preparedStatement.close();
+			}
+		}
+	}
+	public static void dropPersonnel(int numero)throws SQLException {
+		dropEmploye(numero);
+		PreparedStatement preparedStatement=null;
+		String dropSQL="DELETE FROM personnel WHERE numero="+numero+"";
+		try{
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
+		}catch (SQLException e){
+			System.out.println(e.getMessage());
+		}
+		finally{
+			if (preparedStatement!=null){
+				preparedStatement.close();
+			}
+		}
+	}
+	public static void dropDoctor(int numero)throws SQLException {
+		dropEmploye(numero);
+		PreparedStatement preparedStatement=null;
+		String dropSQL="DELETE FROM doctor WHERE numero="+numero+"";
+		try{
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
+		}catch (SQLException e){
+			System.out.println(e.getMessage());
+		}
+		finally{
+			if (preparedStatement!=null){
+				preparedStatement.close();
+			}
+		}
 	}
 }

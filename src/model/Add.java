@@ -176,8 +176,8 @@ public class Add {
 		PreparedStatement preparedStatement=null;
 		Resultat res;
 		String insertSQL= "INSERT INTO hospitalisation"
-				+ "(no_malade,code_service,no_chambre,lit,present) VALUES"
-				+ "(?,?,?,?,1)";
+				+ "(no_malade,code_service,no_chambre,lit) VALUES"
+				+ "(?,?,?,?)";
 		
 		try {
 			res = new Resultat(Connexion.getInstance(),"SELECT * FROM chambre WHERE lits_dispos=nb_lits AND code_service ='"+code_service+"'");

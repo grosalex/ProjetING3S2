@@ -2,19 +2,16 @@ package model;
 
 public class Hospitalisation {
 	
-	private Service service;
+	private int code_service;
 	private Chambre chambre;
 	private Patient patient;
-	private Lit lit;
+	private int lit;
 	
-	public Hospitalisation(Service service, Chambre chambre, Patient patient) {
-		this.service = service;
+	public Hospitalisation(int code_service, Chambre chambre, Patient patient, int lit) {
+		this.code_service = code_service;
 		this.chambre = chambre;
 		this.patient = patient;
-	}
-
-	public Service getService() {
-		return service;
+		this.lit = lit;
 	}
 
 	public Chambre getChambre() {
@@ -25,8 +22,14 @@ public class Hospitalisation {
 		return patient;
 	}
 
-	public Lit getLit() {
+	public int getLit() {
 		return lit;
+	}
+
+
+
+	public int getCode_service() {
+		return code_service;
 	}
 
 }
