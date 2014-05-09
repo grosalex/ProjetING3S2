@@ -29,7 +29,7 @@ public class Drop {
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
 			preparedStatement.executeQuery();
 		}catch (SQLException e){
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	/**
@@ -50,7 +50,7 @@ public class Drop {
 			Connexion.getInstance().executeUpdate(dropSQL);
 			Connexion.getInstance().executeUpdate(updateSQL);
 		}catch (SQLException e){
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		finally{
 			if (preparedStatement!=null){
@@ -76,7 +76,7 @@ public class Drop {
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
 		}catch (SQLException e){
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	/**
@@ -96,7 +96,7 @@ public class Drop {
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.executeQuery();
 		}catch (SQLException e){
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		finally{
 			if (preparedStatement!=null){
@@ -111,7 +111,7 @@ public class Drop {
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
 		}catch (SQLException e){
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		finally{
 			if (preparedStatement!=null){
@@ -126,7 +126,7 @@ public class Drop {
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
 		}catch (SQLException e){
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		finally{
 			if (preparedStatement!=null){

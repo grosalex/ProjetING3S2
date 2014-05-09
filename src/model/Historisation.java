@@ -15,7 +15,7 @@ public class Historisation {
 				+ "(?,?,?,?)";
 		try {
 			
-			Connexion.getInstance().executeUpdate("UPDATE hospitalisation SET nb_lits_dispo=nb_lits_dispo+1 WHERE no_chambre="+h.getChambre().getId());
+			Connexion.getInstance().executeUpdate("UPDATE hospitalisation SET nb_lits_dispo=nb_lits_dispo+1 WHERE no_chambre="+h.getChambre());
 			Connexion.getInstance().executeQuery("CREATE TABLE IF NOT EXISTS `hospitalisation_old` ("
 					+"`no_malade` int(11) NOT NULL,"
 					+"`code_service` char(3) NOT NULL,"
@@ -30,8 +30,8 @@ public class Historisation {
 			
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(1, h.getPatient().getID());
-			preparedStatement.setInt(2, h.getCode_service());
-			preparedStatement.setInt(3, h.getChambre().getId());
+			preparedStatement.setString(2, h.getCode_service());
+			preparedStatement.setInt(3, h.getChambre());
 			preparedStatement.setInt(4, h.getLit());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
