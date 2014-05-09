@@ -11,12 +11,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import connexion.Connexion;
+import model.Chambre;
 import model.Doctor;
 import model.Drop;
 import model.Infirmier;
 import model.NoResultException;
 import model.Patient;
 import model.Resultat;
+import model.Service;
 import model.Update;
 
 /**
@@ -125,6 +127,45 @@ public class Table extends JTable {
 						e1.printStackTrace();
 					}
 		    	}
+		    	else if(type.equals("Room")){
+		    		String code_service = (String) model.getValueAt(modelRow, 0);
+		    		int surveillant = (int)model.getValueAt(modelRow,2);
+		    		int nb_lits = (int)model.getValueAt(modelRow, 3);
+		    		Chambre up_room = new Chambre(code_service, surveillant, nb_lits);
+		    		try {
+						Update.Chambre(up_room);
+						try {
+							update(new Resultat(Connexion.getInstance(), "SELECT * FROM chambre"), "Room");
+						} catch (NoResultException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    		}
+		    	
+		    	else if(type.equals("Service")){
+		    		String nom=(String)model.getValueAt(modelRow, 1);
+		    		String batiment=(String)model.getValueAt(modelRow, 2);
+		    		int doc_id = (int)model.getValueAt(modelRow, 3);
+		    		String code=(String)model.getValueAt(modelRow, 0);
+		    		Service up_service = new Service(nom, batiment, doc_id, code);
+		    		
+		    		try {
+						Update.Service(up_service);
+						try {
+							update(new Resultat(Connexion.getInstance(), "SELECT * FROM service"), "Service");
+						} catch (NoResultException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    	}
 		    }
 		};
 		Action delete = new AbstractAction() {
@@ -182,6 +223,13 @@ public class Table extends JTable {
 						// TODO Bloc catch généré automatiquement
 						e1.printStackTrace();
 					}
+		    		
+		    	}
+		    	else if(type.equals("")){
+		    		
+		    	}
+		    	else if(type.equals("")){
+		    		
 		    	}
 			}
 		};
