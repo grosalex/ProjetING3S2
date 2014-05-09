@@ -136,7 +136,6 @@ public class Table extends JTable {
 		    	if(type.equals("docteur")){
 		    		int id=(int) model.getValueAt(modelRow, 0);
 
-		    		Doctor upDoctor = new Doctor(id, nom, prenom, adresse, telephone, specialite);
 		    		try {
 						
 						Drop.dropDoctor(id);
@@ -170,16 +169,8 @@ public class Table extends JTable {
 		    	}
 		    	else if(type.equals("malade")){
 		    		int id=(int) model.getValueAt(modelRow, 0);
-		    		String nom=(String) model.getValueAt(modelRow, 1);
-		    		String prenom=(String) model.getValueAt(modelRow, 2);
-		    		String telephone=(String) model.getValueAt(modelRow, 3);
-		    		String adresse=(String) model.getValueAt(modelRow, 4);
-		    		String mutuelle=(String) model.getValueAt(modelRow, 5);
-		    		System.out.println("malade id =  "+ id + nom + prenom + telephone + adresse + mutuelle);
-
-		    		Patient up_patient = new Patient(nom, prenom, adresse, telephone, id, mutuelle);
+		    		
 		    		try {
-						Update.Patient(up_patient);
 						Drop.dropMalade(id);
 						try {
 							update(new Resultat(Connexion.getInstance(), "SELECT * FROM malade"), "malade");
