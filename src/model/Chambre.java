@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Chambre {
 
 	private int code_service;

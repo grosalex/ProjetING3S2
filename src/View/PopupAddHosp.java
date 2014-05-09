@@ -7,11 +7,8 @@ import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import connexion.Connexion;
 import model.Add;
-import model.NoResultException;
 import model.Patient;
-import model.Resultat;
 
 public class PopupAddHosp extends PopupAddPerson{
 	private JLabel mutuel_label = new JLabel("mutual");

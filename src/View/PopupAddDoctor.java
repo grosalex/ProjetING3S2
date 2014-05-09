@@ -9,10 +9,18 @@ import javax.swing.JTextField;
 
 import model.Add;
 import model.Doctor;
-
+/**
+ * 
+ * @author grosalex
+ * This is the popup where users will be able to add a doctor. It's extending the addPerson popup
+ */
 public class PopupAddDoctor extends PopupAddPerson{
 	protected JLabel label_speciality = new JLabel("speciality:");
 	protected JTextField speciality = new JTextField();
+	/**
+	 * Default constructor
+	 * @param current_window main window where the added information will be print
+	 */
 	public PopupAddDoctor(final Window current_window) {
 		super(current_window);
 		this.main_panel.add(label_speciality);

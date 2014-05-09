@@ -2,11 +2,16 @@ package View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.xml.ws.Service;
-
+/**
+ * 
+ * @author grosalex
+ *This is the popup where users will be able to add a doctor. It's extending the addPerson popup
+ */
 public class PopupAddService extends PopupAddPerson{
-
+	/**
+	 * Default constructor
+	 * @param current_window main window where the added information will be print
+	 */
 	public PopupAddService(Window window) {
 		super(window);
 		

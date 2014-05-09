@@ -6,8 +6,6 @@ public class main {
  * TODO 
  * Hospitalisation
  * toutes les recherches externes aux personnes
- * delete
- * modifier
  * rendre ça joli
  * javadocs
  */

@@ -9,7 +9,11 @@ import javax.swing.JTextField;
 
 import model.Add;
 import model.Infirmier;
-
+/**
+ * 
+ * @author grosalex
+ * This is the popup where users will be able to add a nurse. It's extending the addPerson popup
+ */
 public class PopupAddNurse extends PopupAddPerson{
 	private JLabel label_code_service = new JLabel("code service:");
 	private JTextField code_service = new JTextField();
@@ -19,6 +23,10 @@ public class PopupAddNurse extends PopupAddPerson{
 	
 	private JLabel label_salaire = new JLabel("salaire:");
 	private JTextField salaire = new JTextField();
+	/**
+	 * Default constructor
+	 * @param current_window main window where the added information will be print
+	 */
 	public PopupAddNurse(final Window current_window){
 		super(current_window);
 		this.save.addActionListener(new ActionListener() {

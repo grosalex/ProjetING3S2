@@ -9,9 +9,11 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import model.Chambre;
-
+/**
+ * 
+ * @author grosalex
+ * This is the popup where users will be able to add a room. It's extending the addPerson popup
+ */
 public class PopupAddRoom extends JDialog{
 	private Window current_window=null;
 	private JPanel main_panel=new JPanel();
@@ -25,7 +27,10 @@ public class PopupAddRoom extends JDialog{
 	
 	private JButton cancel=new JButton("cancel");
 	private JButton save = new JButton("save");
-	
+	/**
+	 * Default constructor
+	 * @param current_window main window where the added information will be print
+	 */
 	public PopupAddRoom(Window window) {
 		this.current_window=window;
 		this.setSize(600,300);

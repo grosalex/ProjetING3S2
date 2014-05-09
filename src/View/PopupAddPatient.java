@@ -6,8 +6,17 @@ import java.sql.SQLException;
 
 import model.Add;
 import model.Patient;
-
+/**
+ * 
+ * @author grosalex
+ * This is the popup where users will be able to add a patient. It's extending the addDoctor popup cause there is the same sort of information
+ *
+ */
 public class PopupAddPatient extends PopupAddDoctor{
+	/**
+	 * Default constructor
+	 * @param current_window main window where the added information will be print
+	 */
 	public PopupAddPatient(final Window current_window) {
 		super(current_window);
 		this.label_speciality.setText("mutual");
