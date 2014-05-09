@@ -156,7 +156,7 @@ public class Update {
 			preparedStatement.setInt(1, c.getId_surveillant());
 			preparedStatement.setInt(2, c.getNb_lits());
 			preparedStatement.setInt(3, c.getLits_dispos());
-			preparedStatement.setInt(4, c.getService());
+			preparedStatement.setString(4, c.getService());
 			preparedStatement.setInt(5, c.getId());
 			// Insertion de la ligne dans la table.
 			preparedStatement.executeUpdate();

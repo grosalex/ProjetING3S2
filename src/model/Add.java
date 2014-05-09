@@ -324,21 +324,21 @@ public class Add {
 		}
 	}
 	
-	public static void addChambre(Chambre c, String code_service, int surveillant) throws SQLException {
+	public static void addChambre(Chambre c) throws SQLException {
 		PreparedStatement preparedStatement=null;
 		String insertSQL= "INSERT INTO chambre"
 				+ "(code_service,no_chambre,surveillant,nb_lits,lits_dispos) VALUES"
 				+ "(?,?,?,?,?)";
 
 		try{
-			Resultat res = new Resultat(Connexion.getInstance(),"SELECT MAX(no_chambre) FROM chambre WHERE code_service='"+code_service+"'");
+			Resultat res = new Resultat(Connexion.getInstance(),"SELECT MAX(no_chambre) FROM chambre WHERE code_service='"+c.getService()+"'");
 			Object[][] data = res.getResult();
 			int no_chambre = (int)data[0][0]+1;
 			
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
-			preparedStatement.setString(1, code_service);
+			preparedStatement.setString(1, c.getService());
 			preparedStatement.setInt(2, no_chambre);
-			preparedStatement.setInt(3, surveillant);
+			preparedStatement.setInt(3, c.getId_surveillant());
 			preparedStatement.setInt(4,c.getNb_lits());
 			preparedStatement.setInt(5,c.getNb_lits());
 

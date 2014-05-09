@@ -146,7 +146,7 @@ public class PopupResearch extends JDialog{
 			     
 			      else if(combo.getSelectedItem()=="Room")
 			      {
-			    	  //requete=("SELECT* FROM chambre WHERE no_chambre LIKE '%"+ no_chambre + "%' code_service LIKE '%"+ code_service + "%' surveillant LIKE '%"+ surveillant +"%' nb_lits LIKE '%"+ nb_lits +";");
+			    	  requete=("SELECT* FROM chambre WHERE no_chambre LIKE '%"+ no_chambre + "%' code_service LIKE '%"+ code_service + "%' surveillant LIKE '%"+ surveillant +"%' nb_lits LIKE '%"+ nb_lits +";");
 			      }
 /*
 			      else if(combo.getSelectedItem()=="Personel")

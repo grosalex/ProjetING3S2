@@ -40,7 +40,6 @@ public class PopupAddHosp extends PopupAddPerson{
 					setVisible(false);
 					
 				} catch (SQLException e1) {
-					// TODO Bloc catch généré automatiquement
 					e1.printStackTrace();
 				}
 				

@@ -2,6 +2,7 @@ package View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -9,6 +10,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import model.Add;
+import model.Chambre;
 /**
  * 
  * @author grosalex
@@ -50,8 +54,11 @@ public class PopupAddRoom extends JDialog{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Stub de la méthode généré automatiquement
-				
+				try {
+					Add.addChambre(new Chambre(code.getText(),Integer.parseInt(surveilant.getText()),Integer.parseInt(bed.getText())));
+				} catch (NumberFormatException | SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		this.cancel.addActionListener(new ActionListener() {
