@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.Chambre;
 import model.NoResultException;
 import model.Resultat;
 import connexion.Connexion;
@@ -141,12 +142,14 @@ public class PopupResearch extends JDialog{
 */
 			      else if(combo.getSelectedItem()=="Service")
 			      {
-			    	  //requete=("SELECT* FROM service WHERE code LIKE '%"+ code + "%' nom LIKE '%"+ nom + "%' batiment LIKE '%"+ batiment +"%' directeur LIKE '%"+ directeur +";");
+			    	  type="Service";
+			    	  requete=("SELECT * FROM service WHERE code LIKE '%"+ code_service.getText() + "%' AND nom LIKE '%"+ service_nom.getText() + "%' AND batiment LIKE '%"+ service_batiment.getText() +"%' AND directeur LIKE '%"+ service_doc_id.getText() +"%';");
 			      }
 			     
 			      else if(combo.getSelectedItem()=="Room")
 			      {
-			    	  //requete=("SELECT* FROM chambre WHERE no_chambre LIKE '%"+ no_chambre + "%' code_service LIKE '%"+ code_service + "%' surveillant LIKE '%"+ surveillant +"%' nb_lits LIKE '%"+ nb_lits +";");
+			    	  type="Room";
+			    	  requete=("SELECT * FROM chambre WHERE code_service LIKE '%"+ room_code_service.getText() + "%' AND surveillant LIKE '%"+ room_surveillant.getText() +"%' AND nb_lits LIKE '%"+ room_bed_nb.getText() +"%';");
 			      }
 /*
 			      else if(combo.getSelectedItem()=="Personel")

@@ -12,12 +12,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 
-import model.Add;
-import model.Doctor;
 import model.Drop;
 import model.Hospitalisation;
 import model.Patient;
-import model.Service;
 import connexion.Connexion;
 /**
  * This is the panel of connection
