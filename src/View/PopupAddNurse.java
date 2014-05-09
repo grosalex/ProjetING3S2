@@ -15,13 +15,13 @@ import model.Infirmier;
  * This is the popup where users will be able to add a nurse. It's extending the addPerson popup
  */
 public class PopupAddNurse extends PopupAddPerson{
-	private JLabel label_code_service = new JLabel("code service:");
+	private JLabel label_code_service = new JLabel("Service Code");
 	private JTextField code_service = new JTextField();
 	
-	private JLabel label_rotation = new JLabel("rotation:");
+	private JLabel label_rotation = new JLabel("Rotation");
 	private JTextField rotation = new JTextField();
 	
-	private JLabel label_salaire = new JLabel("salaire:");
+	private JLabel label_salaire = new JLabel("Salary");
 	private JTextField salaire = new JTextField();
 	/**
 	 * Default constructor

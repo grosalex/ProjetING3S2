@@ -19,7 +19,7 @@ public class PopupAddPatient extends PopupAddDoctor{
 	 */
 	public PopupAddPatient(final Window current_window) {
 		super(current_window);
-		this.label_speciality.setText("mutual");
+		this.label_speciality.setText("Mutual Fund");
 		this.save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

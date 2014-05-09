@@ -24,7 +24,7 @@ public class Drop {
 		String dropSQL="DELETE FROM malade WHERE numero="+numero+"";
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
-			preparedStatement.executeQuery();
+			preparedStatement.executeUpdate();
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
@@ -43,6 +43,7 @@ public class Drop {
 		PreparedStatement preparedStatement=null;
 		String updateSQL= "UPDATE chambre SET lits_dispos=lits_dispos+1 WHERE no_chambre="+hospitalisation.getChambre()+"";
 		String dropSQL="DELETE FROM hospitalisation WHERE no_malade="+hospitalisation.getPatient().getID()+" ";
+		System.out.println(dropSQL);
 		try{
 			Connexion.getInstance().executeUpdate(dropSQL);
 			Connexion.getInstance().executeUpdate(updateSQL);
@@ -72,6 +73,7 @@ public class Drop {
 		String dropSQL="DELETE FROM employe WHERE numero="+numero+"";
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement.executeUpdate();
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
@@ -91,7 +93,7 @@ public class Drop {
 
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.executeQuery();
+			preparedStatement.executeUpdate();
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
@@ -119,9 +121,10 @@ public class Drop {
 	public static void dropDoctor(int numero)throws SQLException {
 		dropEmploye(numero);
 		PreparedStatement preparedStatement=null;
-		String dropSQL="DELETE FROM doctor WHERE numero="+numero+"";
+		String dropSQL="DELETE FROM docteur WHERE numero="+numero+"";
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement.executeUpdate();
 		}catch (SQLException e){
 			e.printStackTrace();
 		}

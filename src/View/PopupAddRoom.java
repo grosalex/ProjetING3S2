@@ -21,9 +21,9 @@ import model.Chambre;
 public class PopupAddRoom extends JDialog{
 	private Window current_window=null;
 	private JPanel main_panel=new JPanel();
-	private JLabel label_code=new JLabel("Code service :");
-	private JLabel label_surveillant = new JLabel("Surveilant");
-	private JLabel label_bed = new JLabel("Beds :");
+	private JLabel label_code=new JLabel("Service Code");
+	private JLabel label_surveillant = new JLabel("Supervisor ID");
+	private JLabel label_bed = new JLabel("Number of Beds");
 	
 	private JTextField code = new JTextField();
 	private JTextField surveilant = new JTextField();

@@ -19,10 +19,10 @@ public class PopupAddPerson extends JDialog{
 	protected JPanel main_panel =  new JPanel();
 	protected JPanel second_panel = new JPanel();
 	
-	protected JLabel label_surname = new JLabel("Surname:");
-	protected JLabel label_name = new JLabel("Name:");
-	protected JLabel label_phone = new JLabel("Phone:");
-	protected JLabel label_address = new JLabel("address:");
+	protected JLabel label_surname = new JLabel("Surname");
+	protected JLabel label_name = new JLabel("Name");
+	protected JLabel label_phone = new JLabel("Phone");
+	protected JLabel label_address = new JLabel("Address:");
 	
 	protected JTextField surname= new JTextField();
 	protected JTextField name = new JTextField();

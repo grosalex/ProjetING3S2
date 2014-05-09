@@ -32,36 +32,36 @@ public class PopupResearch extends JDialog{
 	private JPanel panel_service = new JPanel();
 	private JPanel panel_hospi = new JPanel();
 	//global
-	private JLabel label_surname=new JLabel("surname:");
+	private JLabel label_surname=new JLabel("Surname");
 	private JTextField surname=new JTextField();
-	private JLabel label_name = new JLabel("name");
+	private JLabel label_name = new JLabel("Name");
 	private JTextField name = new JTextField();
-	private JLabel label_phone = new JLabel("telephone");
+	private JLabel label_phone = new JLabel("Phone");
 	private JTextField phone = new JTextField();
-	private JLabel label_address = new JLabel("address:");
+	private JLabel label_address = new JLabel("Address");
 	private JTextField address = new JTextField();
 	//doctor
-	protected JLabel label_speciality = new JLabel("speciality:");
+	protected JLabel label_speciality = new JLabel("Speciality");
 	protected JTextField speciality = new JTextField();
 	//patient
-	protected JLabel label_mutual = new JLabel("mutual");
+	protected JLabel label_mutual = new JLabel("Mutual Fund");
 	protected JTextField mutual = new JTextField();
 	//infirmier
-	private JLabel label_code_service = new JLabel("code service:");
+	private JLabel label_code_service = new JLabel("Service Code");
 	private JTextField code_service = new JTextField();
-	private JLabel label_rotation = new JLabel("rotation:");
+	private JLabel label_rotation = new JLabel("Rotation");
 	private JTextField rotation = new JTextField();
-	private JLabel label_salaire = new JLabel("salaire:");
+	private JLabel label_salaire = new JLabel("Salary");
 	private JTextField salaire = new JTextField();
 	private JComboBox combo=new JComboBox();
-	private JButton cancel = new JButton("cancel");
-	private JButton search = new JButton("search");
+	private JButton cancel = new JButton("Cancel");
+	private JButton search = new JButton("Search");
 	
 	//room
-	private JLabel label_room_code_service= new JLabel("Code service :");
-	private JLabel label_surveillant_id = new JLabel("Surveillant id");
-	private JLabel label_nb_bed =  new JLabel("Bed number :");
-	private JLabel label_bed_available = new JLabel("Available bed number :");
+	private JLabel label_room_code_service= new JLabel("Service Code");
+	private JLabel label_surveillant_id = new JLabel("Supervisor ID");
+	private JLabel label_nb_bed =  new JLabel("Total bed number");
+	private JLabel label_bed_available = new JLabel("Number of available Beds");
 
 	private JTextField room_code_service=new JTextField();
 	private JTextField room_surveillant = new JTextField();
@@ -69,18 +69,25 @@ public class PopupResearch extends JDialog{
 	private JTextField room_bed_available=new JTextField();
 
 	//service
-	private JLabel label_service_nom=new JLabel("Nom :");
-	private JLabel label_service_batiment = new JLabel("Batiment :");
-	private JLabel label_sercice_doc_id = new JLabel("Doc_id :");
-	private JLabel label_service_code = new JLabel("Code : ");
+	private JLabel label_service_nom=new JLabel("Name");
+	private JLabel label_service_batiment = new JLabel("Building");
+	private JLabel label_sercice_doc_id = new JLabel("Director ID");
+	private JLabel label_service_code = new JLabel("Code");
 	
 	private JTextField service_nom = new JTextField();
 	private JTextField service_batiment= new JTextField();
 	private JTextField service_doc_id = new JTextField();
 	private JTextField service_code = new JTextField();
 
-	private 
-	
+	//hospitalisation
+	private JLabel label_num_malade = new JLabel("Patient ID");
+	private JLabel label__num_docteur = new JLabel("Doctor ID");
+	private JLabel label_num_chambre = new JLabel("Room Number");
+	private JLabel label_num_service = new JLabel("Service Code");
+	private JTextField hosp_num_malade = new JTextField();
+	private JTextField hosp_num_doctor = new JTextField();
+	private JTextField hosp_num_chambre = new JTextField();
+	private JTextField hosp_code_service = new JTextField();
 	private Window current_window=null;
 	/**
 	 * Constructo
@@ -141,7 +148,7 @@ public class PopupResearch extends JDialog{
 		      else if(combo.getSelectedItem()=="Hospitalisation")
 			      {
 			    	  
-			    	  //requete=("SELECT* FROM hospitalisation WHERE no_malade LIKE '%"+no_malade+ "%' AND code_service LIKE '%"+code_service+  "%' AND no_chambre LIKE '%"+ no_chambre+ "%' AND lit LIKE '%"+ lit+";");
+			    	  requete=("SELECT* FROM hospitalisation WHERE no_malade LIKE '%"+ hosp_num_malade.getText() + "%' AND code_service LIKE '%"+ hosp_code_service.getText() +  "%' AND no_chambre LIKE '%"+ hosp_num_chambre.getText() + "%';");
 			      }
 
 			      else if(combo.getSelectedItem()=="Service")
@@ -156,19 +163,7 @@ public class PopupResearch extends JDialog{
 			    	  requete=("SELECT * FROM chambre WHERE code_service LIKE '%"+ room_code_service.getText() + "%' AND surveillant LIKE '%"+ room_surveillant.getText() +"%' AND nb_lits LIKE '%"+ room_bed_nb.getText() +"%';");
 
 			      }
-/*
-			      else if(combo.getSelectedItem()=="Personel")
-			      {
-			    	  requete=("SELECT* FROM employe WHERE nom LIKE '%" + nom +  "%' AND prenom LIKE '%" + prenom + "%' AND adresse LIKE '%" + adresse +
-								 "%' AND tel LIKE '%"+ tel+";");
-			   
-			      }
-			      else if(combo.getSelectedItem()=="Treatment")
-			      {
-			    	  requete=("SELECT* FROM soigne WHERE ");
-			      }
-				
-				*/
+
 				
 				try {
 					System.out.println(requete);
@@ -237,12 +232,22 @@ public class PopupResearch extends JDialog{
 		this.panel_service.add(label_service_code);
 		this.panel_service.add(service_code);
 		
+		this.panel_hospi.setLayout(new BoxLayout(this.panel_hospi,BoxLayout.PAGE_AXIS));
+		this.panel_hospi.add(label_num_malade);
+		this.panel_hospi.add(hosp_num_malade);
+		this.panel_hospi.add(label__num_docteur);
+		this.panel_hospi.add(hosp_num_doctor);
+		this.panel_hospi.add(label_num_chambre);
+		this.panel_hospi.add(hosp_num_chambre);
+		this.panel_hospi.add(label_num_service);
+		this.panel_hospi.add(hosp_code_service);
 		
 		this.main_panel.add(panel_doctor);
 		this.main_panel.add(panel_nurse);
 		this.main_panel.add(panel_patient);
 		this.main_panel.add(panel_room);
 		this.main_panel.add(panel_service);
+		this.main_panel.add(panel_hospi);
 		this.main_panel.add(cancel);
 		this.main_panel.add(search);
 		this.add(main_panel);
@@ -252,6 +257,7 @@ public class PopupResearch extends JDialog{
 		panel_nurse.setVisible(false);
 		panel_patient.setVisible(false);
 		panel_service.setVisible(false);
+		panel_hospi.setVisible(false);
 	}
 	/**
 	 * This is where the event react to the combo box
@@ -268,6 +274,7 @@ public class PopupResearch extends JDialog{
 		    	  panel_patient.setVisible(false);
 		    	  panel_room.setVisible(false);
 		    	  panel_service.setVisible(false);
+		    	  panel_hospi.setVisible(false);
 		      }
 		      else if(combo.getSelectedItem()=="Patient"){
 		    	  panel_doctor.setVisible(false);
@@ -276,10 +283,14 @@ public class PopupResearch extends JDialog{
 		    	  panel_nurse.setVisible(false);
 		    	  panel_patient.setVisible(true);	
 		    	  panel_room.setVisible(false);
-		    	  panel_service.setVisible(false);}
+		    	  panel_service.setVisible(false);
+		    	  panel_hospi.setVisible(false);
+}
+
 		      else if (combo.getSelectedItem()=="Nurse") {
 		    	  panel_doctor.setVisible(false);		
 		    	  base.setVisible(true);
+		    	  panel_hospi.setVisible(false);
 
 		    	  panel_nurse.setVisible(true);
 		    	  panel_patient.setVisible(false);		
@@ -293,6 +304,7 @@ public class PopupResearch extends JDialog{
 		    	  panel_room.setVisible(true);
 		    	  panel_service.setVisible(false);
 		    	  base.setVisible(false);
+		    	  panel_hospi.setVisible(false);
 
 			}
 		      else if (combo.getSelectedItem()=="Service") {
@@ -302,7 +314,18 @@ public class PopupResearch extends JDialog{
 		    	  panel_room.setVisible(false);
 		    	  panel_service.setVisible(true);
 		    	  base.setVisible(false);
+		    	  panel_hospi.setVisible(false);
 
+			}
+		      else if (combo.getSelectedItem()=="Hospitalisation") {
+		    	  panel_doctor.setVisible(false);
+		    	  panel_nurse.setVisible(false);
+		    	  panel_patient.setVisible(false);		
+		    	  panel_room.setVisible(false);
+		    	  panel_service.setVisible(false);
+		    	  base.setVisible(false);
+		    	  panel_hospi.setVisible(true);
+				
 			}
 		}
 	}

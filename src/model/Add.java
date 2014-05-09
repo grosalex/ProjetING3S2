@@ -296,7 +296,7 @@ public class Add {
 
 	}
 	
-	public static void addService(Service s, int id_doc) throws SQLException {
+	public static void addService(Service s) throws SQLException {
 		PreparedStatement preparedStatement=null;
 		String insertSQL= "INSERT INTO service"
 				+ "(code,nom,batiment,directeur) VALUES"
@@ -307,7 +307,7 @@ public class Add {
 			preparedStatement.setString(1, s.getCode());
 			preparedStatement.setString(2, s.getNom());
 			preparedStatement.setString(3, s.getBatiment());
-			preparedStatement.setInt(4,id_doc);
+			preparedStatement.setInt(4,s.getDirecteur());
 
 			// Insertion de la ligne dans la table.
 			preparedStatement.executeUpdate();

@@ -54,7 +54,6 @@ public class Table extends JTable {
 		    @Override
 			public void actionPerformed(ActionEvent e)
 		    {
-		    	System.out.println("test");
 		    	int modelRow = Integer.valueOf(e.getActionCommand());
 		    	TableModel model = getModel();
 		    	if(type.equals("docteur")){
@@ -171,14 +170,13 @@ public class Table extends JTable {
 		Action delete = new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("test");
+				
 		    	int modelRow = Integer.valueOf(e.getActionCommand());
 		    	TableModel model = getModel();
 		    	if(type.equals("docteur")){
 		    		int id=(int) model.getValueAt(modelRow, 0);
 
 		    		try {
-						
 						Drop.dropDoctor(id);
 						try {
 							update(new Resultat(Connexion.getInstance(), "SELECT employe.numero, nom, prenom, adresse, tel, specialite FROM docteur, employe WHERE docteur.numero = employe.numero"), "docteur");

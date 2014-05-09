@@ -37,7 +37,7 @@ public class Window extends JFrame{
 	 */
 	public Window(){
 
-		this.setMainProperties("Projet ING3 Semestre 2", 800, 600);
+		this.setMainProperties("Projet ING3 Semestre 2 - Hospital Management", 800, 600);
 		this.menue=new Menu(this);
 		this.setJMenuBar(menue);
 

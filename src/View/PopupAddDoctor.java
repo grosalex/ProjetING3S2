@@ -15,7 +15,7 @@ import model.Doctor;
  * This is the popup where users will be able to add a doctor. It's extending the addPerson popup
  */
 public class PopupAddDoctor extends PopupAddPerson{
-	protected JLabel label_speciality = new JLabel("speciality:");
+	protected JLabel label_speciality = new JLabel("Speciality:");
 	protected JTextField speciality = new JTextField();
 	/**
 	 * Default constructor

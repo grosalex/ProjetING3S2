@@ -2,6 +2,10 @@ package View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+import model.Add;
+import model.Service;
 /**
  * 
  * @author grosalex
@@ -15,9 +19,9 @@ public class PopupAddService extends PopupAddPerson{
 	public PopupAddService(Window window) {
 		super(window);
 		
-		this.label_surname.setText("Nom :");
-		this.label_name.setText("Batiment :");
-		this.label_phone.setText("doc_id");
+		this.label_surname.setText("Name");
+		this.label_name.setText("Building");
+		this.label_phone.setText("Director ID (Must be a doctor)");
 		this.label_address.setText("Code");
 		this.main_panel.add(second_panel);
 		this.add(main_panel);
@@ -25,11 +29,14 @@ public class PopupAddService extends PopupAddPerson{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Stub de la méthode généré automatiquement
 				//Service current_service = new Service(nom, batiment, doc_id, code);
+				try {
+					Add.addService(new Service(surname.getText(),name.getText(),Integer.parseInt(phone.getText()),address.getText()));
+				} catch (NumberFormatException | SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		});
-		// TODO Stub du constructeur généré automatiquement
 	}
 
 }
