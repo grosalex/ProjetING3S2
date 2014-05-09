@@ -3,8 +3,6 @@ package View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.xml.ws.Service;
-
 public class PopupAddService extends PopupAddPerson{
 
 	public PopupAddService(Window window) {

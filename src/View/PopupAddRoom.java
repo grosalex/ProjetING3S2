@@ -10,8 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.Chambre;
-
 public class PopupAddRoom extends JDialog{
 	private Window current_window=null;
 	private JPanel main_panel=new JPanel();
