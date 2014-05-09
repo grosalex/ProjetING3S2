@@ -30,6 +30,7 @@ public class PopupResearch extends JDialog{
 	private JPanel panel_nurse=new JPanel();
 	private JPanel panel_room = new JPanel();
 	private JPanel panel_service = new JPanel();
+	private JPanel panel_hospi = new JPanel();
 	//global
 	private JLabel label_surname=new JLabel("surname:");
 	private JTextField surname=new JTextField();
@@ -78,6 +79,8 @@ public class PopupResearch extends JDialog{
 	private JTextField service_doc_id = new JTextField();
 	private JTextField service_code = new JTextField();
 
+	private 
+	
 	private Window current_window=null;
 	/**
 	 * Constructo
@@ -92,6 +95,7 @@ public class PopupResearch extends JDialog{
 		combo.addItem("Nurse");
 		combo.addItem("Service");
 		combo.addItem("Room");
+		combo.addItem("Hospitalisation");
 		
 		cancel.addActionListener(new ActionListener() {
 			@Override
@@ -134,12 +138,12 @@ public class PopupResearch extends JDialog{
 
 				}
 				
-/*			      else if(combo.getSelectedItem()=="Hospitalisation")
+		      else if(combo.getSelectedItem()=="Hospitalisation")
 			      {
-			    	  String no_malade=
-			    	  requete=("SELECT* FROM hospitalisation WHERE no_malade LIKE '%"+no_malade+ "%' AND code_service LIKE '%"+code_service+  "%' AND no_chambre LIKE '%"+ no_chambre+ "%' AND lit LIKE '%"+ lit+";");
+			    	  
+			    	  //requete=("SELECT* FROM hospitalisation WHERE no_malade LIKE '%"+no_malade+ "%' AND code_service LIKE '%"+code_service+  "%' AND no_chambre LIKE '%"+ no_chambre+ "%' AND lit LIKE '%"+ lit+";");
 			      }
-*/
+
 			      else if(combo.getSelectedItem()=="Service")
 			      {
 			    	  type="Service";
