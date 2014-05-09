@@ -18,12 +18,21 @@ import model.Patient;
 import model.Resultat;
 import model.Update;
 
-//on a un problème pour les listeners 
-/*
- * deux solution je me fixe un attribut string qui contient le type et je creer l'objet qui va bien
+/**
+ * 
+ * @author grosalex
+ *	This is the class that manage the output of the data in a Table.
+ *	It's extending JTable.
+ *
  */
 public class Table extends JTable {
 	private String type=null;
+	/**
+	 * 
+	 * @param data is the data going to feed the table
+	 * @param title is the titles of the columns
+	 * @param type is a string telling the type of data shown
+	 */
 	public Table(Object [][] data, String [] title,final String type) {
 		super(data,title);
 		this.type=type;
@@ -32,6 +41,9 @@ public class Table extends JTable {
 		this.addButton();
 		
 	}
+	/**
+	 * is an internal method to manage the button shown in the table
+	 */
 	public void addButton(){
 		// comming from http://tips4java.wordpress.com/2009/07/12/table-button-column/
 		Action modify = new AbstractAction()
@@ -123,6 +135,11 @@ public class Table extends JTable {
 		ButtonColumn deleteButtonColumn = new ButtonColumn(this, modify, this.getColumnCount()-2);
 		ButtonColumn modifyButtonColumn = new ButtonColumn(this, delete, this.getColumnCount()-1);
 	}
+	
+	/**
+	 * is the method wich hide the column named after "title" params
+	 * @param title title of the column which is going to be hidden
+	 */
 	public void hide(String title){
 		for(int i=0;i<getColumnCount();i++){
 			if(this.getColumnName(i).equals(title)){
@@ -134,6 +151,10 @@ public class Table extends JTable {
 		this.updateUI();
 		
 	}
+	/**
+	 * is the opposite method of hide
+	 * @param title of the column wich is going to come back from hidding
+	 */
 	public void show(String title){
 		for(int i=0;i<getColumnCount();i++){
 			if(this.getColumnName(i).equals(title)){
@@ -149,6 +170,12 @@ public class Table extends JTable {
 
 		this.updateUI();
 	}
+	
+	/**
+	 * is the way to update the content of the table
+	 * @param resultat class containing what is needed to feed the table see Resultat Javadoc for more info
+	 * @param type is the type of data shown
+	 */
 	public void update(Resultat resultat, String type){
 		this.type=type;
 		this.setModel(new DefaultTableModel(resultat.getResult(), resultat.getTitles()));

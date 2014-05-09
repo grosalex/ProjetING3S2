@@ -18,6 +18,11 @@ import model.NoResultException;
 import model.Resultat;
 import connexion.Connexion;
 
+/**
+ * This is the popup to make research
+ * @author grosalex
+ *
+ */
 public class PopupResearch extends JDialog{
 	private JPanel main_panel=new JPanel();
 	private JPanel base=new JPanel();
@@ -75,6 +80,10 @@ public class PopupResearch extends JDialog{
 	private JTextField service_code = new JTextField();
 
 	private Window current_window=null;
+	/**
+	 * Constructo
+	 * @param current is the window where results of the search are going to be print
+	 */
 	public PopupResearch(Window current) {
 		this.current_window=current;
 		this.setSize(400,400);
@@ -238,12 +247,11 @@ public class PopupResearch extends JDialog{
 		panel_patient.setVisible(false);
 		panel_service.setVisible(false);
 	}
-	class ItemState implements ItemListener{
-	    @Override
-		public void itemStateChanged(ItemEvent e) {
-	      System.out.println("événement déclenché sur : " + e.getItem());
-	    }               
-	  }
+	/**
+	 * This is where the event react to the combo box
+	 * @author grosalex
+	 *
+	 */
 	class ItemAction implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {

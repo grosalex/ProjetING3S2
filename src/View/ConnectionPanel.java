@@ -16,7 +16,11 @@ import model.Doctor;
 import model.Patient;
 import model.Service;
 import connexion.Connexion;
-
+/**
+ * This is the panel of connection
+ * @author grosalex
+ *
+ */
 public class ConnectionPanel extends JPanel{
 	//username pwd db username dbpws
 	private JLabel label_username=new JLabel("Ece username :");
@@ -35,6 +39,10 @@ public class ConnectionPanel extends JPanel{
 	private JButton local = new JButton("Local connection");
 	private JButton connect = new JButton("Connect");
 	private Window input=null;
+	/**
+	 * 
+	 * @param input window has to been send to update view after connection
+	 */
 	public ConnectionPanel(final Window input){
 		this.input=input;
 		this.setSize(600,300);

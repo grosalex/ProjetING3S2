@@ -9,13 +9,21 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * This is the left showed panel. it allow the user to choose the column printed
+ * @author grosalex
+ *
+ */
 public class Selection extends JPanel{
 	private Window current_window = null;
 	private ArrayList<JButton> button_list=new ArrayList<>();
 	private JPanel top_panel = new JPanel();
 	private JPanel bottom_panel = new JPanel(new BorderLayout());
-	
+	/**
+	 * Constructor of the class
+	 * @param titles all the titles of the column showed in the right part. The will be a button for each one
+	 * @param current the current window which will be updated by the action of the button
+	 */
 	public Selection(String [] titles, Window current) {
 		this.current_window=current;
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -52,7 +60,10 @@ public class Selection extends JPanel{
 		this.add(bottom_panel);
 		
 	}
-
+/**
+ * Use this method after changing the content of the table. It will update the control button.
+ * @param titles same things than the controller.
+ */
 	public void update(String [] titles){
 		this.button_list.clear();
 		this.top_panel.removeAll();

@@ -9,7 +9,11 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+/**
+ * this popup is used as a based to create add popup
+ * @author grosalex
+ *
+ */
 public class PopupAddPerson extends JDialog{
 	Window current_window=null;
 	protected JPanel main_panel =  new JPanel();
@@ -27,6 +31,10 @@ public class PopupAddPerson extends JDialog{
 	protected JButton cancel = new JButton("cancel");
 	protected JButton save = new JButton("save");
 	
+	/**
+	 * 
+	 * @param current is the main window. It's used to update view after adding the data
+	 */
 	public PopupAddPerson(Window current){
 		this.current_window=current;
 		this.setSize(600,300);

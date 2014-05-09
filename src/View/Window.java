@@ -15,7 +15,13 @@ import javax.swing.table.DefaultTableModel;
 import model.NoResultException;
 import model.Resultat;
 import connexion.Connexion;
-
+/**
+ * This is the class of the main window where there is the menu the selection panel and the results panel.
+ * In the menue you can call the elements to add content or make a search. In the selection place you can select column of the result
+ * There is a modify and deletion button in the results table
+ * @author grosalex
+ *
+ */
 public class Window extends JFrame{
 	private JPanel left_panel=new JPanel();
 	private JPanel rightJPanel=new JPanel();
@@ -25,6 +31,10 @@ public class Window extends JFrame{
 	private Table main_table= null;
 	private Selection select_panel=null;
 	private Resultat main_resultat=null;
+	
+	/**
+	 * The construct of the class
+	 */
 	public Window(){
 
 		this.setMainProperties("Projet ING3 Semestre 2", 800, 600);
@@ -47,11 +57,20 @@ public class Window extends JFrame{
         
 	}
 	
+	/**
+	 * this is a method to set the main properties of the window
+	 * @param title title of the window
+	 * @param width width of the window
+	 * @param height height of the window
+	 */
 	public void setMainProperties(String title,int width, int height){
 		this.setTitle(title);
 		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		
 	}
+	/**
+	 * Method initializing all panels of the window
+	 */
 	public void initializePanels(){
 	    this.rightJPanel.setLayout(new BorderLayout());
 		this.rightJPanel.add(new ConnectionPanel(this));
@@ -60,6 +79,9 @@ public class Window extends JFrame{
 		this.main_split.setResizeWeight(0.15);
 	}
 
+	/**
+	 * set the doctors in the table result
+	 */
 	public void showTableEmploye(){
 		try {
 			try {
@@ -81,6 +103,9 @@ public class Window extends JFrame{
 		}
 		
 	}
+	/**
+	 * Method to update the results table with the doctor
+	 */
 	public void updateTableEmployee(){
 		Resultat resultat;
 		try {
@@ -92,11 +117,20 @@ public class Window extends JFrame{
 		}
 
 	}
-	
+	/**
+	 * This method is used to set a new set of data in the table results
+	 * @param resultat class containing what is needed to feed the table see Resultat Javadoc for more info
+	 * @param type string containing the type showed
+	 */
 	public void showResult(Resultat resultat, String type){
 		this.main_table.update(resultat, type);
 		this.select_panel.update(resultat.getTitles());
 	}
+	/**
+	 * 
+	 * @param title title of the column to hide or show
+	 * @param action if true show the column else hide
+	 */
 	public void updateTable(String title, boolean action) {
 		if(action){//add
 			this.main_table.show(title);

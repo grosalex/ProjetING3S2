@@ -6,7 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+/**
+ * This the menu of the Window Class
+ * @author grosalex
+ *
+ */
 public class Menu extends JMenuBar{
 	private  Window current_window=null;
 	private JMenu file=new JMenu("file");
@@ -44,7 +48,10 @@ public class Menu extends JMenuBar{
 	
 	private JMenuItem save_as=new JMenuItem("save_as");
 	private JMenuItem print = new JMenuItem("print");
-	
+	/**
+	 * The constructor
+	 * @param window the main window containing the menu
+	 */
 	public Menu(Window window){
 		
 		this.current_window = window;
@@ -52,6 +59,9 @@ public class Menu extends JMenuBar{
 		this.initItems();
 
 	}
+	/**
+	 * It's an internal method to init content of the menu
+	 */
 	public void initItems(){
 		
 		this.add.add(add_doctor);
@@ -86,6 +96,9 @@ public class Menu extends JMenuBar{
 		this.add(print);
 		
 	}
+	/**
+	 * It's an internal method to add the listener of the menu
+	 */
 	public void initListener(){
 		this.exit.addActionListener(new ActionListener() {
 			@Override
