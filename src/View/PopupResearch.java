@@ -150,6 +150,7 @@ public class PopupResearch extends JDialog{
 			      {
 			    	  type="Room";
 			    	  requete=("SELECT * FROM chambre WHERE code_service LIKE '%"+ room_code_service.getText() + "%' AND surveillant LIKE '%"+ room_surveillant.getText() +"%' AND nb_lits LIKE '%"+ room_bed_nb.getText() +"%';");
+
 			      }
 /*
 			      else if(combo.getSelectedItem()=="Personel")
