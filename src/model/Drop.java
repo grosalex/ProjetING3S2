@@ -19,11 +19,12 @@ public class Drop {
 	 * @param numero
 	 * @throws SQLException
 	 */
-	public static void dropMalade(String numero, String no_malade) throws SQLException {
+	public static void dropMalade(String numero) throws SQLException {
 		PreparedStatement preparedStatement=null;
 		String dropSQL="DELETE FROM malade WHERE numero="+numero+"";
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement.executeQuery();
 		}catch (SQLException e){
 			System.out.println(e.getMessage());
 		}
@@ -40,13 +41,11 @@ public class Drop {
 	public static void dropHop(Hospitalisation hospitalisation)throws SQLException {
 
 		PreparedStatement preparedStatement=null;
-		String updateSQL= "UPDATE chambre SET nb_lits_dispo=nb_lits_dispo+1 WHERE no_chambre="+hospitalisation.getChambre()+"";
+		String updateSQL= "UPDATE chambre SET lits_dispos=lits_dispos+1 WHERE no_chambre="+hospitalisation.getChambre()+"";
 		String dropSQL="DELETE FROM hospitalisation WHERE no_malade="+hospitalisation.getPatient().getID()+" ";
 		try{
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.executeQuery();
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(updateSQL, Statement.RETURN_GENERATED_KEYS); //
-			preparedStatement.executeQuery();
+			Connexion.getInstance().executeUpdate(dropSQL);
+			Connexion.getInstance().executeUpdate(updateSQL);
 		}catch (SQLException e){
 			System.out.println(e.getMessage());
 		}
@@ -85,13 +84,14 @@ public class Drop {
 	 * @param lit
 	 * @throws SQLException
 	 */
-	public static void dropInf(int numero,String code_service,String rotation, float salaire)throws SQLException {
+	public static void dropInf(int numero)throws SQLException {
 		dropEmploye(numero);
 		PreparedStatement preparedStatement=null;
 		String dropSQL="DELETE FROM infirmier WHERE numero="+numero+"";
 
 		try{
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.executeQuery();
 		}catch (SQLException e){
 			System.out.println(e.getMessage());
 		}
