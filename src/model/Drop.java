@@ -40,15 +40,16 @@ public class Drop {
 	 * @param lit
 	 * @throws SQLException
 	 */
-	public static void dropHop(String no_malade,String numero,String nb_lits_dispo,String no_chambre)throws SQLException {
-		dropMalade(numero,no_malade);
-		PreparedStatement preparedStatement=null;
-		String dropSQL="DELETE FROM hospitalisation WHERE no_malade="+numero+" ";
-		String updateSQL="UPDATE hospitalisation SET nb_lits_dispo=nb_lits_dispo+1 WHERE no_chambre="+no_chambre+"";
-		try{
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(updateSQL, Statement.RETURN_GENERATED_KEYS); //
+	public static void dropHop(Hospitalisation hospitalisation)throws SQLException {
 
+		PreparedStatement preparedStatement=null;
+		String updateSQL= "UPDATE chambre SET nb_lits_dispo=nb_lits_dispo+1 WHERE no_chambre="+hospitalisation.getChambre()+"";
+		String dropSQL="DELETE FROM hospitalisation WHERE no_malade="+hospitalisation.getPatient().getID()+" ";
+		try{
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.executeQuery();
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(updateSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement.executeQuery();
 		}catch (SQLException e){
 			System.out.println(e.getMessage());
 		}
@@ -91,7 +92,7 @@ public class Drop {
 		dropEmploye(numero);
 		PreparedStatement preparedStatement=null;
 		String dropSQL="DELETE FROM infirmier WHERE numero="+numero+"";
-		
+
 		try{
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
 		}catch (SQLException e){

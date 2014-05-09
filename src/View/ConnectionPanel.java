@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 
 import model.Add;
 import model.Doctor;
+import model.Drop;
+import model.Hospitalisation;
 import model.Patient;
 import model.Service;
 import connexion.Connexion;
@@ -63,6 +65,12 @@ public class ConnectionPanel extends JPanel{
 					*/
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Bloc catch généré automatiquement
+					e.printStackTrace();
+				}
+				Hospitalisation h = new Hospitalisation("REA",101, new Patient(1),1);
+				try {
+					Drop.dropHop(h);
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 				setVisible(false);
