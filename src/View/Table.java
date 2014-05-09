@@ -12,6 +12,7 @@ import javax.swing.table.TableModel;
 
 import connexion.Connexion;
 import model.Doctor;
+import model.Drop;
 import model.Infirmier;
 import model.NoResultException;
 import model.Patient;
@@ -134,16 +135,11 @@ public class Table extends JTable {
 		    	TableModel model = getModel();
 		    	if(type.equals("docteur")){
 		    		int id=(int) model.getValueAt(modelRow, 0);
-		    		String nom=(String) model.getValueAt(modelRow, 1);
-		    		String prenom=(String) model.getValueAt(modelRow, 2);
-		    		String telephone=(String) model.getValueAt(modelRow, 3);
-		    		String adresse=(String) model.getValueAt(modelRow, 4);
-		    		String specialite=(String) model.getValueAt(modelRow, 5);
-		    		System.out.println("Docteur id =  "+ id + nom + prenom + telephone + adresse + specialite);
 
 		    		Doctor upDoctor = new Doctor(id, nom, prenom, adresse, telephone, specialite);
 		    		try {
-						Drop.Doctor(upDoctor);
+						
+						Drop.dropDoctor(id);
 						try {
 							update(new Resultat(Connexion.getInstance(), "SELECT employe.numero, nom, prenom, adresse, tel, specialite FROM docteur, employe WHERE docteur.numero = employe.numero"), "docteur");
 						} catch (NoResultException e1) {
@@ -157,17 +153,10 @@ public class Table extends JTable {
 		    	}
 		    	else if(type.equals("infirmier")){
 		    		int id= (int) model.getValueAt(modelRow, 0);
-		    		String nom = (String) model.getValueAt(modelRow, 1);
-		    		String prenom = (String) model.getValueAt(modelRow, 2);
-		    		String telephone = (String) model.getValueAt(modelRow, 3);
-		    		String adresse = (String) model.getValueAt(modelRow, 4);
-		    		String rotation = (String) model.getValueAt(modelRow, 5);
-		    		int code_Service = (int) model.getValueAt(modelRow, 6);
-		    		float salaire = (float) model.getValueAt(modelRow, 7);
-		    		Infirmier upInfirmier = new Infirmier(id, nom, prenom, telephone, adresse, rotation, code_Service, salaire);
+
 		    		try {
-						Update.Nurse(upInfirmier);
-						try {
+		    			Drop.dropInf(id);
+		    			try {
 							update(new Resultat(Connexion.getInstance(), "SELECT * FROM infirmier"), "infirmier");
 						} catch (NoResultException e1) {
 							// TODO Bloc catch généré automatiquement
@@ -191,6 +180,7 @@ public class Table extends JTable {
 		    		Patient up_patient = new Patient(nom, prenom, adresse, telephone, id, mutuelle);
 		    		try {
 						Update.Patient(up_patient);
+						Drop.dropMalade(id);
 						try {
 							update(new Resultat(Connexion.getInstance(), "SELECT * FROM malade"), "malade");
 						} catch (NoResultException e1) {

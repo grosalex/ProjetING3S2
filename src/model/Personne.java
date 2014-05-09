@@ -14,6 +14,13 @@ public Personne(int id,String nom,String prenom,String telephone,String adresse 
 	this.telephone=telephone;
 	this.adresse=adresse;
 }
+public Personne(int iD) {
+	ID = iD;
+	nom = "";
+	prenom="";
+	telephone="";
+	adresse="";
+}
 public Personne(String nom, String prenom, String telephone, String adresse) {
 	this.nom = nom;
 	this.prenom = prenom;

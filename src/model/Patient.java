@@ -13,6 +13,11 @@ public class Patient extends Personne {
 		this.mutuelle = mutuelle;
 	}
 
+	public Patient(int iD) {
+		super(iD);
+		this.mutuelle = "";
+	}
+
 	public Patient(String nom, String prenom, String telephone, String adresse,
 			String mutuelle) {
 		super(nom, prenom, telephone, adresse);
