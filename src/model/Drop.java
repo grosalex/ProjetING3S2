@@ -19,7 +19,7 @@ public class Drop {
 	 * @param numero
 	 * @throws SQLException
 	 */
-	public static void dropMalade(String numero) throws SQLException {
+	public static void dropMalade(int numero) throws SQLException {
 		PreparedStatement preparedStatement=null;
 		String dropSQL="DELETE FROM malade WHERE numero="+numero+"";
 		try{
