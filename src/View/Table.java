@@ -284,6 +284,10 @@ public class Table extends JTable {
 		this.addButton();
 		this.updateUI();
 		if(type.equals("Followup")) this.hide("Modify");
+		if(type.equals("Room")) {
+			this.hide("Delete");
+			this.hide("Modify");
+		}
 
 	}
 

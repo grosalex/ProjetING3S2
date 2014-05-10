@@ -14,6 +14,11 @@ public class Hospitalisation {
 		this.lit = lit;
 	}
 
+	public Hospitalisation(int id_chambre, Patient patient) {
+		this.id_chambre = id_chambre;
+		this.patient = patient;
+	}
+
 	public int getChambre() {
 		return id_chambre;
 	}

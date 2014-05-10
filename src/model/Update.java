@@ -34,7 +34,6 @@ public class Update {
 			
 			// Insertion de la ligne dans la table.
 			preparedStatement.executeUpdate();
-			//personne.setID(id); // on a l'ID de la table personne , � v�rifier.
 
 		}catch (SQLException e){
 			e.printStackTrace();
@@ -65,7 +64,7 @@ public class Update {
 
 			// Insertion de la ligne dans la table.
 			preparedStatement.executeUpdate();
-			//personne.setID(id); // on a l'ID de la table personne , � v�rifier.
+
 
 		}catch (SQLException e){
 			e.printStackTrace();
@@ -97,7 +96,7 @@ public class Update {
 			preparedStatement.setInt(4, n.getID());
 			// Insertion de la ligne dans la table.
 			preparedStatement.executeUpdate();
-			//personne.setID(id); // on a l'ID de la table personne , � v�rifier.
+
 
 		}catch (SQLException e){
 			e.printStackTrace();
@@ -131,7 +130,7 @@ public class Update {
 			preparedStatement.setInt(6, p.getID());
 			// Insertion de la ligne dans la table.
 			preparedStatement.executeUpdate();
-			//personne.setID(id); // on a l'ID de la table personne , � v�rifier.
+
 
 		}catch (SQLException e){
 			e.printStackTrace();
@@ -162,7 +161,6 @@ public class Update {
 			preparedStatement.setString(3, s.getCode());
 			// Insertion de la ligne dans la table.
 			preparedStatement.executeUpdate();
-			//personne.setID(id); // on a l'ID de la table personne , � v�rifier.
 
 		}catch (SQLException e){
 			e.printStackTrace();
@@ -195,12 +193,10 @@ public class Update {
 			preparedStatement.setInt(5, c.getId());
 			// Insertion de la ligne dans la table.
 			preparedStatement.executeUpdate();
-			//personne.setID(id); // on a l'ID de la table personne , � v�rifier.
 
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
-		// meme en cas de pb on passe dans le finally
 		finally{
 			if (preparedStatement!=null){
 				preparedStatement.close();

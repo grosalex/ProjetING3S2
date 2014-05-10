@@ -16,6 +16,7 @@ import connexion.Connexion;
  */
 public class Resultat {
 	private int nbCol;
+	private int nbLigne;
 	private ArrayList<String> titles;
 	private Object[][] result;
 	private ResultSet rset;
@@ -32,7 +33,6 @@ public class Resultat {
 	 */
 	public Resultat(Connexion c, String requete) throws SQLException, NoResultException {
 		this.c = c;
-		int nbLigne;
 		int j=0;
 		titles=new ArrayList<String>();
 		stmt = c.getSqlConnection().createStatement();
@@ -96,5 +96,9 @@ public class Resultat {
 
 	public Connexion getC() {
 		return c;
+	}
+
+	public int getNbLigne() {
+		return nbLigne;
 	}
 }

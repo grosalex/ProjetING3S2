@@ -20,11 +20,16 @@ public class Drop {
 	 */
 	public static void dropMalade(int numero) throws SQLException {
 		String dropSQL="DELETE FROM malade WHERE numero="+numero+"";
-		String dropFromHosp="DELETE FROM hospitalisation WHERE no_malade="+numero;
+		String dropFromSoigne="DELETE FROM soigne WHERE no_malade="+numero;
 		try{
+			Resultat res = new Resultat(Connexion.getInstance(),"SELECT * FROM hospitalisation WHERE no_malade="+numero);
+			Object[][] data = res.getResult();
+			for(int i=0;i<res.getNbLigne();i++) {
+				Drop.dropHop(new Hospitalisation((int)data[i][2], new Patient(numero)));
+			}
 			Connexion.getInstance().executeUpdate(dropSQL);
-			Connexion.getInstance().executeUpdate(dropFromHosp);
-		}catch (SQLException e){
+			Connexion.getInstance().executeUpdate(dropFromSoigne);
+		}catch (SQLException | NoResultException e){
 			e.printStackTrace();
 		}
 	}
@@ -87,36 +92,19 @@ public class Drop {
 	 */
 	public static void dropInf(int numero)throws SQLException {
 		dropEmploye(numero);
-		PreparedStatement preparedStatement=null;
-		String dropSQL="DELETE FROM infirmier WHERE numero="+numero+"";
+		String dropSQL="DELETE FROM infirmier WHERE numero="+numero;
 
 		try{
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.executeUpdate();
+			try {
+				Resultat res = new Resultat(Connexion.getInstance(),"SELECT * FROM chambre WHERE surveillant="+numero);
+			} catch (NoResultException e) {
+				Connexion.getInstance().executeUpdate(dropSQL);
+			}
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
-		finally{
-			if (preparedStatement!=null){
-				preparedStatement.close();
-			}
-		}
 	}
-	public static void dropPersonnel(int numero)throws SQLException {
-		dropEmploye(numero);
-		PreparedStatement preparedStatement=null;
-		String dropSQL="DELETE FROM personnel WHERE numero="+numero+"";
-		try{
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
-		}catch (SQLException e){
-			e.printStackTrace();
-		}
-		finally{
-			if (preparedStatement!=null){
-				preparedStatement.close();
-			}
-		}
-	}
+
 	public static void dropDoctor(int numero)throws SQLException {
 		dropEmploye(numero);
 		PreparedStatement preparedStatement=null;
