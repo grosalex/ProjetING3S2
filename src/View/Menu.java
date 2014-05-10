@@ -36,7 +36,6 @@ public class Menu extends JMenuBar{
 	private JMenuItem patients_three_doc = new JMenuItem("Patients with more than 3 doctors");
 	private JMenuItem nurses_patients_ratio = new JMenuItem("Nurses/Patients Ratio by Services");
 	private JMenuItem doc_without_patient = new JMenuItem("Doctor without patient");
-	/// TODO faire le menu deroulant qui va bien pour les requetes
 	private JMenuItem history = new JMenuItem("Historise");
 	
 	private JMenuItem exit = new JMenuItem("Exit");
@@ -64,6 +63,7 @@ public class Menu extends JMenuBar{
 		this.add.add(add_hosp);
 		this.add.add(add_room);
 		this.add.add(add_service);
+		this.add.add(add_soigne);
 		this.add(add);
 		this.add(research);
 
@@ -211,7 +211,16 @@ public class Menu extends JMenuBar{
 			}
 		});
 		
-		///TODO listener des requetes de huan lee
+		this.add_soigne.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				PopupAddFollowUp followup = new PopupAddFollowUp(current_window);
+				followup.setVisible(true);
+				
+			}
+		});
+		
 		this.nurse_salary_per_service.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -221,7 +230,7 @@ public class Menu extends JMenuBar{
 					current_window.updateTable("Modify", false);
 					current_window.updateTable("Delete", false);
 				} catch (SQLException | NoResultException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 			}

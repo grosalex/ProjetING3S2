@@ -11,8 +11,7 @@ import connexion.Connexion;
 public class Drop {
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	// Cette partie concerne uniquement les malades , et les hospitalisations
-	// Un malade ne peut etre hospitalisé 
-	// l'inverse l'est également.
+	// 
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * Methode qui supprime une ligne de la table malade 
@@ -20,18 +19,18 @@ public class Drop {
 	 * @throws SQLException
 	 */
 	public static void dropMalade(int numero) throws SQLException {
-		PreparedStatement preparedStatement=null;
 		String dropSQL="DELETE FROM malade WHERE numero="+numero+"";
+		String dropFromHosp="DELETE FROM hospitalisation WHERE no_malade="+numero;
 		try{
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
-			preparedStatement.executeUpdate();
+			Connexion.getInstance().executeUpdate(dropSQL);
+			Connexion.getInstance().executeUpdate(dropFromHosp);
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
 	}
 	/**
 	 * Methode qui supprime une hospitalisation, mais aussi un malade 
-	 * puique un malade non hospitalisé n'est plus un malade
+	 * 
 	 * @param no_malade
 	 * @param code_service
 	 * @param no_chambre
@@ -132,6 +131,15 @@ public class Drop {
 			if (preparedStatement!=null){
 				preparedStatement.close();
 			}
+		}
+	}
+	
+	public static void dropFollowUp(int doc_id, int pat_id) {
+		String dropSQL="DELETE FROM soigne WHERE no_docteur="+doc_id+" AND no_malade="+pat_id;
+		try {
+			Connexion.getInstance().executeUpdate(dropSQL);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -71,11 +71,11 @@ public class Table extends JTable {
 						try {
 							update(new Resultat(Connexion.getInstance(), "SELECT employe.numero, nom, prenom, adresse, tel, specialite FROM docteur, employe WHERE docteur.numero = employe.numero"), "docteur");
 						} catch (NoResultException e1) {
-							// TODO Bloc catch généré automatiquement
+							
 							e1.printStackTrace();
 						}
 					} catch (SQLException e1) {
-						// TODO Bloc catch généré automatiquement
+						
 						e1.printStackTrace();
 					}
 		    	}
@@ -94,12 +94,12 @@ public class Table extends JTable {
 						try {
 							update(new Resultat(Connexion.getInstance(), "SELECT * FROM infirmier"), "infirmier");
 						} catch (NoResultException e1) {
-							// TODO Bloc catch généré automatiquement
+						
 							e1.printStackTrace();
 						}
 
 					} catch (SQLException e1) {
-						// TODO Bloc catch généré automatiquement
+					
 						e1.printStackTrace();
 					}
 		    	}
@@ -118,11 +118,11 @@ public class Table extends JTable {
 						try {
 							update(new Resultat(Connexion.getInstance(), "SELECT * FROM malade"), "malade");
 						} catch (NoResultException e1) {
-							// TODO Bloc catch généré automatiquement
+						
 							e1.printStackTrace();
 						}
 					} catch (SQLException e1) {
-						// TODO Bloc catch généré automatiquement
+					
 						e1.printStackTrace();
 					}
 		    	}
@@ -136,11 +136,11 @@ public class Table extends JTable {
 						try {
 							update(new Resultat(Connexion.getInstance(), "SELECT * FROM chambre"), "Room");
 						} catch (NoResultException e1) {
-							// TODO Auto-generated catch block
+						
 							e1.printStackTrace();
 						}
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
+					
 						e1.printStackTrace();
 					}
 		    		}
@@ -157,11 +157,11 @@ public class Table extends JTable {
 						try {
 							update(new Resultat(Connexion.getInstance(), "SELECT * FROM service"), "Service");
 						} catch (NoResultException e1) {
-							// TODO Auto-generated catch block
+						
 							e1.printStackTrace();
 						}
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
+						
 						e1.printStackTrace();
 					}
 		    	}
@@ -181,11 +181,11 @@ public class Table extends JTable {
 						try {
 							update(new Resultat(Connexion.getInstance(), "SELECT employe.numero, nom, prenom, adresse, tel, specialite FROM docteur, employe WHERE docteur.numero = employe.numero"), "docteur");
 						} catch (NoResultException e1) {
-							// TODO Bloc catch généré automatiquement
+							
 							e1.printStackTrace();
 						}
 					} catch (SQLException e1) {
-						// TODO Bloc catch généré automatiquement
+						
 						e1.printStackTrace();
 					}
 		    	}
@@ -197,12 +197,10 @@ public class Table extends JTable {
 		    			try {
 							update(new Resultat(Connexion.getInstance(), "SELECT * FROM infirmier"), "infirmier");
 						} catch (NoResultException e1) {
-							// TODO Bloc catch généré automatiquement
 							e1.printStackTrace();
 						}
 
 					} catch (SQLException e1) {
-						// TODO Bloc catch généré automatiquement
 						e1.printStackTrace();
 					}
 		    	}
@@ -214,17 +212,22 @@ public class Table extends JTable {
 						try {
 							update(new Resultat(Connexion.getInstance(), "SELECT * FROM malade"), "malade");
 						} catch (NoResultException e1) {
-							// TODO Bloc catch généré automatiquement
 							e1.printStackTrace();
 						}
 					} catch (SQLException e1) {
-						// TODO Bloc catch généré automatiquement
 						e1.printStackTrace();
 					}
 		    		
 		    	}
-		    	else if(type.equals("")){
-		    		
+		    	else if(type.equals("Followup")){
+		    		int doc_id=(int) model.getValueAt(modelRow, 0);
+		    		int pat_id=(int) model.getValueAt(modelRow, 1);
+		    		Drop.dropFollowUp(doc_id, pat_id);
+		    		try {
+						update(new Resultat(Connexion.getInstance(),"SELECT * FROM soigne"), "Followup");
+					} catch (SQLException | NoResultException e1) {
+						e1.printStackTrace();
+					}
 		    	}
 		    	else if(type.equals("")){
 		    		
@@ -280,6 +283,7 @@ public class Table extends JTable {
 		this.setModel(new DefaultTableModel(resultat.getResult(), resultat.getTitles()));
 		this.addButton();
 		this.updateUI();
+		if(type.equals("Followup")) this.hide("Modify");
 
 	}
 

@@ -234,32 +234,6 @@ public class Add {
 
 	}
 	
-	public static void addSoigne(Patient p, int id_doc) throws SQLException {
-		PreparedStatement preparedStatement=null;
-		String insertSQL= "INSERT INTO soigne"
-				+ "(no_docteur,no_malade) VALUES"
-				+ "(?,?)";
-
-		try{
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
-			preparedStatement.setInt(1, id_doc);
-			preparedStatement.setInt(2, p.getID());
-
-			// Insertion de la ligne dans la table.
-			preparedStatement.executeUpdate();
-
-		}catch (SQLException e){
-			// A voir si on lance ou nouvelle exception
-			e.printStackTrace();
-		}
-		// meme en cas de pb on passe dans le finally
-		finally{
-			if (preparedStatement!=null){
-				preparedStatement.close();
-			}
-		}
-	}
-	
 	public static Patient addPatient(Patient p) throws SQLException {
 		Patient newP = p;
 		PreparedStatement preparedStatement=null;
@@ -350,6 +324,38 @@ public class Add {
 			e.printStackTrace();
 		} catch (NoResultException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// meme en cas de pb on passe dans le finally
+		finally{
+			if (preparedStatement!=null){
+				preparedStatement.close();
+			}
+		}
+	}
+	
+	public static void addFollowUp(int id_doc, int id_pat) throws SQLException {
+		PreparedStatement preparedStatement=null;
+		Resultat test=null;
+		String insertSQL= "INSERT INTO soigne"
+				+ "(no_docteur,no_malade) VALUES"
+				+ "(?,?)";
+
+		try{
+			test = new Resultat(Connexion.getInstance(),
+					"SELECT * FROM malade WHERE numero="+id_pat);
+			test = new Resultat(Connexion.getInstance(),
+					"SELECT * FROM docteur WHERE numero="+id_doc);
+			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
+			preparedStatement.setInt(1, id_doc);
+			preparedStatement.setInt(2, id_pat);
+
+			// Insertion de la ligne dans la table.
+			preparedStatement.executeUpdate();
+
+		}catch (SQLException e){
+			e.printStackTrace();
+		} catch (NoResultException e) {
 			e.printStackTrace();
 		}
 		// meme en cas de pb on passe dans le finally
