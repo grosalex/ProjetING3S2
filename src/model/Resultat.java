@@ -9,6 +9,11 @@ import java.util.ArrayList;
 
 import connexion.Connexion;
 
+/**
+ * Traitement d'une requete SQL SELECT
+ * @author BERTRAND , BRUNEAU , BAO , MARQUES
+ *
+ */
 public class Resultat {
 	private int nbCol;
 	private ArrayList<String> titles;
@@ -18,6 +23,13 @@ public class Resultat {
 	private Statement stmt;
 	Connexion c;
 	
+	/**
+	 * Recupere les titres et la data retournee dans la requete
+	 * @param c Objet Connexion, necessaire pour les requetes
+	 * @param requete Requete SQL
+	 * @throws SQLException En cas de pb de requete / de connexion
+	 * @throws NoResultException En cas de resultat vide
+	 */
 	public Resultat(Connexion c, String requete) throws SQLException, NoResultException {
 		this.c = c;
 		int nbLigne;

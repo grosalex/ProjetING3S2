@@ -6,8 +6,18 @@ import java.sql.Statement;
 
 import connexion.Connexion;
 
+/**
+ * Mise a jour de diverses donnees
+ * @author BERTRAND , BRUNEAU , BAO , MARQUES
+ *
+ */
 public class Update {
 
+	/**
+	 * Mise a jour d'un employe (doc ou inf)
+	 * @param newP Personne contenant les nouvelles donnees
+	 * @throws SQLException En cas de pb SQL/de Connexion
+	 */
 	public static void Employee(Personne newP) throws SQLException {
 		PreparedStatement preparedStatement=null;
 		String insertSQL="";
@@ -36,7 +46,12 @@ public class Update {
 			}
 		}
 	}
-
+	
+	/**
+	 * Mise a jour d'un docteur
+	 * @param d Docteur contenant les nouvelles donnees
+	 * @throws SQLException En cas de pb SQL/de Connexion
+	 */
 	public static void Doctor(Doctor d) throws SQLException {
 		Employee(d);
 		PreparedStatement preparedStatement=null;
@@ -62,7 +77,12 @@ public class Update {
 			}
 		}
 	}
-
+	
+	/**
+	 * Mise a jour d'un infirmier
+	 * @param n Infirmier contenant les nouvelles donnees
+	 * @throws SQLException En cas de pb SQL/de Connexion
+	 */
 	public static void Nurse(Infirmier n) throws SQLException {
 		Employee(n);
 		PreparedStatement preparedStatement=null;
@@ -90,6 +110,11 @@ public class Update {
 		}
 	}
 	
+	/**
+	 * Mise a jour d'un patient
+	 * @param p Patient contenant les nouvelles donnees
+	 * @throws SQLException En cas de pb SQL/de Connexion
+	 */
 	public static void Patient(Patient p) throws SQLException {
 		PreparedStatement preparedStatement=null;
 		String insertSQL="";
@@ -119,6 +144,11 @@ public class Update {
 		}
 	}
 	
+	/**
+	 * Mise a jour d'un service
+	 * @param s Service contenant les nouvelles donnees
+	 * @throws SQLException En cas de pb SQL/de Connexion
+	 */
 	public static void Service(Service s) throws SQLException {
 		PreparedStatement preparedStatement=null;
 		String insertSQL="";
@@ -145,6 +175,11 @@ public class Update {
 		}
 	}
 	
+	/**
+	 * Mise a jour d'une chambre
+	 * @param c Chambre contenant les nouvelles donnees
+	 * @throws SQLException En cas de pb SQL/de Connexion
+	 */
 	public static void Chambre(Chambre c) throws SQLException {
 		PreparedStatement preparedStatement=null;
 		String insertSQL="";

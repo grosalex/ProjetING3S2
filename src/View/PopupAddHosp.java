@@ -9,14 +9,14 @@ import javax.swing.JTextField;
 
 import connexion.Connexion;
 import model.Add;
+import model.NoResultException;
 import model.Patient;
+import model.Resultat;
 
 public class PopupAddHosp extends PopupAddPerson{
 	private JLabel mutuel_label = new JLabel("Mutual fund");
-	private JLabel doctor_id_label=new JLabel("Doctor ID");
 	private JLabel service_id_label = new JLabel("Service Code");
 	private JTextField mutuel = new JTextField();
-	private JTextField doctor_id = new JTextField();
 	private JTextField service_id = new JTextField();
 	public PopupAddHosp(Window current_window) {
 		super(current_window);
@@ -25,8 +25,6 @@ public class PopupAddHosp extends PopupAddPerson{
 		this.main_panel.remove(this.second_panel);
 		this.main_panel.add(mutuel_label);
 		this.main_panel.add(mutuel);
-		this.main_panel.add(doctor_id_label);
-		this.main_panel.add(doctor_id);
 		this.main_panel.add(service_id_label);
 		this.main_panel.add(service_id);
 		this.main_panel.add(this.second_panel);
@@ -37,10 +35,11 @@ public class PopupAddHosp extends PopupAddPerson{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Patient current_patient = new Patient(name.getText(), surname.getText(), phone.getText(), address.getText(),0, mutuel.getText());
-					//TODO Resultat testdoc = new Resultat(Connexion.getInstance(),"");
-					Add.addHop(current_patient, Integer.parseInt(doctor_id.getText()), service_id.getText());
+					Resultat testdoc = new Resultat(Connexion.getInstance(),
+							"SELECT * FROM malade WHERE numero="+current_patient.getID());
+					Add.addHop(current_patient, service_id.getText());
 					setVisible(false);
-				} catch (SQLException e1) {
+				} catch (SQLException | NoResultException e1) {
 					e1.printStackTrace();
 				}
 				

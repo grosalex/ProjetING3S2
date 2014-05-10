@@ -26,6 +26,7 @@ public class Menu extends JMenuBar{
 	private JMenuItem add_hosp = new JMenuItem("Hospitalisation");
 	private JMenuItem add_room= new JMenuItem("Room");
 	private JMenuItem add_service = new JMenuItem("Service");
+	private JMenuItem add_soigne = new JMenuItem("Follow-up");
 	private JMenuItem research = new JMenuItem("Research");
 	private JMenu request = new JMenu("Various Requests");
 	

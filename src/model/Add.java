@@ -172,7 +172,7 @@ public class Add {
 		return personne;
 
 	}
-	public static void addHop(Patient p, int id_doc, String code_service) throws SQLException {
+	public static void addHop(Patient p, String code_service) throws SQLException {
 		PreparedStatement preparedStatement=null;
 		Resultat res;
 		String insertSQL= "INSERT INTO hospitalisation"
@@ -182,9 +182,9 @@ public class Add {
 		try {
 			res = new Resultat(Connexion.getInstance(),"SELECT * FROM chambre WHERE lits_dispos=nb_lits AND code_service ='"+code_service+"'");
 			Object[][] data = res.getResult();
-			p =addPatient(p);
+			//p =addPatient(p);
 			System.out.println(p.getID());
-			addSoigne(p, id_doc);
+			//addSoigne(p, id_doc);
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(1, p.getID());
 			preparedStatement.setString(2, code_service);
@@ -210,8 +210,8 @@ public class Add {
 						idlit++;
 					}
 				}
-				p=addPatient(p);
-				addSoigne(p,id_doc);
+				//p=addPatient(p);
+				//addSoigne(p,id_doc);
 				preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, p.getID());
 				preparedStatement.setString(2, code_service);
