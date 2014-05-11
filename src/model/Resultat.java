@@ -38,7 +38,6 @@ public class Resultat {
 		stmt = c.getSqlConnection().createStatement();
 		rset = stmt.executeQuery(requete);
 		if (!rset.isBeforeFirst() ) {
-			System.out.println("Result vide !");
 			throw new NoResultException(); 
 		}
 		rsetMeta = rset.getMetaData();

@@ -198,7 +198,6 @@ public class PopupResearch extends JDialog{
 						current_window.showResult(new Resultat(Connexion.getInstance(), requete),type);
 						if(type.equals("Hospi")) {
 							current_window.updateTable("Modify", false);
-							current_window.updateTable("Delete", false);
 						}
 						if(type.equals("Followup")) {
 							current_window.updateTable("Modify", false);

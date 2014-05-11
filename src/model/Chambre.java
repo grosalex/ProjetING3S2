@@ -12,6 +12,9 @@ public class Chambre {
 		this.id_surveillant = surveillant;
 		this.nb_lits = nb_lits;
 	}
+	public Chambre(int id) {
+		this.id = id;
+	}
 	public int getId() {
 		return id;
 	}

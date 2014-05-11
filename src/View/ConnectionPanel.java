@@ -55,20 +55,8 @@ public class ConnectionPanel extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					new Connexion("wmarques", "Vi.Cati91", "wmarques-rw", "sEaDRBD2");
-					/* Test de la fonction addHop
-					Patient p = new Patient("bernard","jean","012456987","17 rue cassiope","LMDE");
-					Doctor d = new Doctor(19,"Safin","Marat","01 06 70 38 90","61 rue Fermee, 78430 Louveciennes","Traumatologue");
-					Service s = new Service("chirurgie","A",d,"CHG");
-					Add.addHop(p, d, s);
-					*/
 				} catch (ClassNotFoundException | SQLException e) {
-					// TODO Bloc catch généré automatiquement
-					e.printStackTrace();
-				}
-				Hospitalisation h = new Hospitalisation("REA",101, new Patient(1),1);
-				try {
-					Drop.dropHop(h);
-				} catch (SQLException e) {
+
 					e.printStackTrace();
 				}
 				setVisible(false);

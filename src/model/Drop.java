@@ -44,20 +44,13 @@ public class Drop {
 	 */
 	public static void dropHop(Hospitalisation hospitalisation)throws SQLException {
 
-		PreparedStatement preparedStatement=null;
 		String updateSQL= "UPDATE chambre SET lits_dispos=lits_dispos+1 WHERE no_chambre="+hospitalisation.getChambre()+"";
 		String dropSQL="DELETE FROM hospitalisation WHERE no_malade="+hospitalisation.getPatient().getID()+" ";
-		System.out.println(dropSQL);
 		try{
 			Connexion.getInstance().executeUpdate(dropSQL);
 			Connexion.getInstance().executeUpdate(updateSQL);
 		}catch (SQLException e){
 			e.printStackTrace();
-		}
-		finally{
-			if (preparedStatement!=null){
-				preparedStatement.close();
-			}
 		}
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,13 +98,30 @@ public class Drop {
 		}
 	}
 
+	public static void dropRoom(int id, String code_service) {
+		String dropSQL="DELETE FROM chambre WHERE no_chambre="+id+" AND code_service='"+code_service+"'";
+		try {
+			try{
+				Resultat res = new Resultat(Connexion.getInstance(),"SELECT * FROM hospitalisation WHERE no_chambre="+id+ " AND code_service='"+code_service+"'");
+			} catch (NoResultException e) {
+				Connexion.getInstance().executeUpdate(dropSQL);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void dropDoctor(int numero)throws SQLException {
 		dropEmploye(numero);
 		PreparedStatement preparedStatement=null;
 		String dropSQL="DELETE FROM docteur WHERE numero="+numero+"";
 		try{
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(dropSQL, Statement.RETURN_GENERATED_KEYS); //
-			preparedStatement.executeUpdate();
+			try {
+				Resultat res = new Resultat(Connexion.getInstance(), "SELECT * FROM soigne,service WHERE no_docteur="+numero);
+			} catch (NoResultException e) {
+				Connexion.getInstance().executeUpdate(dropSQL);
+			}
+
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
@@ -121,7 +131,7 @@ public class Drop {
 			}
 		}
 	}
-	
+
 	public static void dropFollowUp(int doc_id, int pat_id) {
 		String dropSQL="DELETE FROM soigne WHERE no_docteur="+doc_id+" AND no_malade="+pat_id;
 		try {

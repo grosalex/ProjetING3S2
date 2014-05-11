@@ -14,6 +14,7 @@ import connexion.Connexion;
 import model.Chambre;
 import model.Doctor;
 import model.Drop;
+import model.Hospitalisation;
 import model.Infirmier;
 import model.NoResultException;
 import model.Patient;
@@ -189,6 +190,33 @@ public class Table extends JTable {
 						e1.printStackTrace();
 					}
 		    	}
+		    	
+		    	else if(type.equals("Room")){
+		    		String code_service = (String) model.getValueAt(modelRow, 0);
+		    		int idroom = (int) model.getValueAt(modelRow, 1);
+		    		Drop.dropRoom(idroom, code_service);
+		    		try {
+						update(new Resultat(Connexion.getInstance(), "SELECT * FROM chambre"), "Room");
+					} catch (SQLException | NoResultException e1) {
+						e1.printStackTrace();
+					}
+		    	}
+		    	
+		    	else if(type.equals("Hospi")){
+		    		int idpat = (int) model.getValueAt(modelRow, 0);
+		    		int idroom = (int) model.getValueAt(modelRow, 2);
+		    		try {
+						Drop.dropHop(new Hospitalisation(idroom, new Patient(idpat)));
+						try {
+							update(new Resultat(Connexion.getInstance(), "SELECT * FROM hospitalisation"), "Hospi");
+						} catch (NoResultException e1) {
+							e1.printStackTrace();
+						}
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+		    	}
+		    	
 		    	else if(type.equals("infirmier")){
 		    		int id= (int) model.getValueAt(modelRow, 0);
 
@@ -283,9 +311,8 @@ public class Table extends JTable {
 		this.setModel(new DefaultTableModel(resultat.getResult(), resultat.getTitles()));
 		this.addButton();
 		this.updateUI();
-		if(type.equals("Followup")) this.hide("Modify");
+		if(type.equals("Followup") || type.equals("Hospi")) this.hide("Modify");
 		if(type.equals("Room")) {
-			this.hide("Delete");
 			this.hide("Modify");
 		}
 

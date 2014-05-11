@@ -30,9 +30,6 @@ public class PopupAddDoctor extends PopupAddPerson{
 			public void actionPerformed(ActionEvent arg0) {
 				try{
 					Add.addDoctor(new Doctor(surname.getText(), name.getText(), phone.getText(), address.getText(), speciality.getText()));
-					//Testing addDoctor
-					//Doctor d = new Doctor("bernard","michel","0123456789","10 avenue Coquelicots 75015 Paris","cardiologue");
-					//Add.addDoctor(d);
 					setVisible(false);
 					current_window.updateTableEmployee();
 				}catch(SQLException e){

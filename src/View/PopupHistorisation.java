@@ -17,9 +17,9 @@ public class PopupHistorisation extends JDialog {
 	private JPanel main_panel=new JPanel();
 	private JPanel second_panel = new JPanel();
 	private JLabel label_id = new JLabel("Patient ID");
-	private JTextField id = new JTextField();
+	protected JTextField id = new JTextField();
 	private JButton cancel = new JButton("Cancel");
-	private JButton save = new JButton("Save");
+	protected JButton save = new JButton("Save");
 	private Window current_window=null;
 	public PopupHistorisation(Window window){
 		this.current_window=window;

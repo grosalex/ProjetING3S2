@@ -98,38 +98,6 @@ public class Add {
 	}
 
 	/**
-	 * Methode qui ajoute les champs d'un membre du personnel dans la table personnel extends personne 
-	 * @param personnel
-	 * @throws SQLException
-	 */
-	public static void addPersonnel(Personnel personnel) throws SQLException {
-		Personne p = addEmploye(personnel);
-		PreparedStatement preparedStatement=null;
-		String insertSQL= "INSERT INTO PERSONNEL " 
-				+ "(ID_PERSONNE, METIER) VALUES"
-				+ "(?,?)";
-		try{
-			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL);
-			preparedStatement.setInt(1, p.getID()); 
-			preparedStatement.setString(2, personnel.getMetier());
-
-			// Insertion de la ligne dans la table.
-			preparedStatement.executeUpdate();
-
-		}catch (SQLException e){
-			// A voir si on lance ou nouvelle exception
-			e.printStackTrace();
-		}
-		// meme en cas de pb on passe dans le finally
-		finally{
-			if (preparedStatement!=null){
-				preparedStatement.close();
-			}
-		}
-
-	}
-
-	/**
 	 * Methode qui ajoute une personne dans la BD personne
 	 * @param personne
 	 * @throws SQLException
@@ -156,10 +124,9 @@ public class Add {
 			keys.next();
 			id = keys.getInt(1);
 			
-			personne.setID(id); // on a l'ID de la table personne , � v�rifier.
+			personne.setID(id);
 
 		}catch (SQLException e){
-			// A voir si on lance ou nouvelle exception
 			e.printStackTrace();
 		}
 		// meme en cas de pb on passe dans le finally
@@ -180,11 +147,9 @@ public class Add {
 				+ "(?,?,?,?)";
 		
 		try {
+			res = new Resultat(Connexion.getInstance(), "SELECT * FROM malade WHERE numero="+p.getID());
 			res = new Resultat(Connexion.getInstance(),"SELECT * FROM chambre WHERE lits_dispos=nb_lits AND code_service ='"+code_service+"'");
 			Object[][] data = res.getResult();
-			//p =addPatient(p);
-			System.out.println(p.getID());
-			//addSoigne(p, id_doc);
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(1, p.getID());
 			preparedStatement.setString(2, code_service);
@@ -277,6 +242,7 @@ public class Add {
 				+ "(?,?,?,?)";
 
 		try{
+			Resultat res = new Resultat(Connexion.getInstance(),"SELECT * FROM docteur WHERE numero="+s.getDirecteur());
 			preparedStatement = Connexion.getInstance().getSqlConnection().prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS); //
 			preparedStatement.setString(1, s.getCode());
 			preparedStatement.setString(2, s.getNom());
@@ -288,6 +254,8 @@ public class Add {
 
 		}catch (SQLException e){
 			// A voir si on lance ou nouvelle exception
+			e.printStackTrace();
+		} catch (NoResultException e) {
 			e.printStackTrace();
 		}
 		// meme en cas de pb on passe dans le finally
@@ -305,7 +273,8 @@ public class Add {
 				+ "(?,?,?,?,?)";
 
 		try{
-			Resultat res = new Resultat(Connexion.getInstance(),"SELECT MAX(no_chambre) FROM chambre WHERE code_service='"+c.getService()+"'");
+			Resultat res = new Resultat(Connexion.getInstance(),"SELECT * FROM infirmier WHERE numero="+c.getId_surveillant());
+			res = new Resultat(Connexion.getInstance(),"SELECT MAX(no_chambre) FROM chambre WHERE code_service='"+c.getService()+"'");
 			Object[][] data = res.getResult();
 			int no_chambre = (int)data[0][0]+1;
 			
@@ -323,7 +292,6 @@ public class Add {
 			// A voir si on lance ou nouvelle exception
 			e.printStackTrace();
 		} catch (NoResultException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// meme en cas de pb on passe dans le finally
