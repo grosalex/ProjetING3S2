@@ -84,13 +84,14 @@ public class Drop {
 	 * @throws SQLException
 	 */
 	public static void dropInf(int numero)throws SQLException {
-		dropEmploye(numero);
+		
 		String dropSQL="DELETE FROM infirmier WHERE numero="+numero;
 
 		try{
 			try {
 				Resultat res = new Resultat(Connexion.getInstance(),"SELECT * FROM chambre WHERE surveillant="+numero);
 			} catch (NoResultException e) {
+				dropEmploye(numero);
 				Connexion.getInstance().executeUpdate(dropSQL);
 			}
 		}catch (SQLException e){
@@ -112,13 +113,14 @@ public class Drop {
 	}
 
 	public static void dropDoctor(int numero)throws SQLException {
-		dropEmploye(numero);
+		
 		PreparedStatement preparedStatement=null;
 		String dropSQL="DELETE FROM docteur WHERE numero="+numero+"";
 		try{
 			try {
 				Resultat res = new Resultat(Connexion.getInstance(), "SELECT * FROM soigne,service WHERE no_docteur="+numero);
 			} catch (NoResultException e) {
+				dropEmploye(numero);
 				Connexion.getInstance().executeUpdate(dropSQL);
 			}
 
